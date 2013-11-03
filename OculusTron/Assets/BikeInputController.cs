@@ -22,10 +22,12 @@ public class BikeInputController : MonoBehaviour {
 			//rotation
 			rotation = Quaternion.AngleAxis(-90, Vector3.up) * rotation;
 		} else if(Input.GetKeyDown ("right")){
-			rotation = Quaternion.AngleAxis(-90, Vector3.up) * rotation;
+			rotation = Quaternion.AngleAxis(90, Vector3.up) * rotation;
 			//movementDirection.Rotate(new Vector3(0, 90, 0));	
 		}
-		modelTransform.rotation = Quaternion.Euler(rotation);
+		float rotadiff = Vector3.Dot(rotation.normalized, this.modelTransform.right.normalized);
+		rotadiff *= deltaT * rotationSpeed;
+		this.modelTransform.rotation *= Quaternion.AngleAxis(rotadiff * 180, Vector3.up);
 		
 		//rotationSpeed*hori
 		float vert = Input.GetAxis("Vertical");

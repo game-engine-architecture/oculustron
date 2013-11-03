@@ -387,6 +387,7 @@ GameObject:
   - 4: {fileID: 1029377296}
   - 33: {fileID: 1029377295}
   - 23: {fileID: 1029377293}
+  - 65: {fileID: 1029377294}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -412,6 +413,18 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
+--- !u!65 &1029377294
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1029377292}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &1029377295
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -554,7 +567,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1753767467}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: .0087265363, y: 0, z: 0, w: .999961913}
   m_LocalPosition: {x: .928606033, y: -2.58058691, z: 5.86179447}
   m_LocalScale: {x: 4.03136873, y: 4.03136873, z: 4.03136873}
   m_Children: []
