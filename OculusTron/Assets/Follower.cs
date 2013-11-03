@@ -16,10 +16,10 @@ public class Follower : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		float deltaT = Time.deltaTime;
-		cameraTransform.rotation.SetFromToRotation(trans.position, followedTransform.forward);
 		//Vector3 rot = (cameraTransform.rotation.eulerAngles - followedTransform.rotation.eulerAngles) * rotationSmoothness * deltaT;
-		Vector3 rot = followedTransform.rotation.eulerAngles;
-		//Quaternion.
+		
+		Quaternion q = Quaternion.AngleAxis(Vector3.Dot(followedTransform.forward, cameraTransform.forward), Vector3.up);
+		cameraTransform.rotation = cameraTransform.rotation * q;
 		//Vector3 camoffset = trans.position;
 		//cameraTransform.rotation = Quaternion.Euler(camoffset * rot);
 		//cameraTransform.Rotate(rot);

@@ -7,6 +7,7 @@ public class BikeInputController : MonoBehaviour {
 	Transform modelTransform;
 	public float movementSpeed = 1;
 	public float rotationSpeed = 130;
+	Vector3 rotation = new Vector3(1,0,0);
 	
 	// Use this for initialization
 	void Start () {
@@ -18,16 +19,18 @@ public class BikeInputController : MonoBehaviour {
 		float deltaT = Time.deltaTime;
 		float hori = Input.GetAxis("Horizontal");
 		if (Input.GetKeyDown ("left")){
-			modelTransform.Rotate(new Vector3(0, -90, 0));	
+			//rotation
+			rotation = Quaternion.AngleAxis(-90, Vector3.up) * rotation;
 		} else if(Input.GetKeyDown ("right")){
-			modelTransform.Rotate(new Vector3(0, 90, 0));	
+			rotation = Quaternion.AngleAxis(-90, Vector3.up) * rotation;
+			//movementDirection.Rotate(new Vector3(0, 90, 0));	
 		}
-		
+		modelTransform.rotation = Quaternion.Euler(rotation);
 		
 		//rotationSpeed*hori
 		float vert = Input.GetAxis("Vertical");
 		Vector3 movement = new Vector3(0,0,0);
-		movement += this.modelTransform.forward * vert * movementSpeed;
+		movement += rotation * vert * movementSpeed;
 		//deltaT*movementSpeed
 		characterController.Move(movement);
 	}
