@@ -32,6 +32,9 @@ public class BikeInputController : MonoBehaviour {
 		float rotadiff = Vector3.Dot(rotation.normalized, this.modelTransform.right.normalized);
 		rotadiff *= deltaT * rotationSpeed;
 		this.modelTransform.rotation *= Quaternion.AngleAxis(rotadiff * 180, Vector3.up);
+		Vector3 pos = this.modelTransform.position;
+		pos.y = 0;
+		this.modelTransform.position = pos;
 		
 		//rotationSpeed*hori
 		float vert = Input.GetAxis("Vertical");

@@ -21,23 +21,31 @@ public class gamelogic : MonoBehaviour {
 	void Start () {
 		Transform b1Trans = bike1.GetComponent<Transform>();
 		b1Controller = bike1.GetComponent<BikeInputController>();
-		bike1lastPos = b1Trans.position;
+		bike1lastPos = currentBikePos();
 		bike1wallcontainer = new GameObject();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		Transform b1Trans = bike1.GetComponent<Transform>();
-		Vector3 currPos = b1Trans.position;
+		Vector3 currPos = currentBikePos();
 		//check if bike was rotated
 		if(bike1lastDirectionIndex != b1Controller.getDirectionIndex()){
-			bike1lastCreatedWall = createWall(bike1lastPos, b1Controller.getDirectionIndex());	
-			bike1lastPos = b1Trans.position;
+			if(bike1lastCreatedWall != null){
+				//make sure wall is closed in the corners
+				extendWall(bike1lastCreatedWall, bike1lastPos, currPos);
+			}
+			bike1lastCreatedWall = createWall(currPos, b1Controller.getDirectionIndex());	
+			bike1lastPos = currPos;
 			bike1lastDirectionIndex = b1Controller.getDirectionIndex();
 		} else {
 			extendWall(bike1lastCreatedWall, bike1lastPos, currPos);
 		}
-		
+	}
+	
+	Vector3 currentBikePos(){
+		Transform b1Trans = bike1.GetComponent<Transform>();
+		return b1Trans.position;
 	}
 	
 	GameObject createWall(Vector3 start, int direction){
@@ -57,7 +65,7 @@ public class gamelogic : MonoBehaviour {
 		Vector3 wallDir = end - start;
 		float length = Vector3.Distance(start, end);
 		Vector3 offset = wallDir.normalized * bikeWallOffset;
-		wall.transform.position = ((start+end-offset)/2.0f) + offset;
+		wall.transform.position = ((start+end)/2.0f) + new Vector3(0, wallHeight/2.0f, 0);
 		Vector3 scale = wall.transform.localScale;
 		scale.y = wallHeight;
 		scale.z = wallWidth;
