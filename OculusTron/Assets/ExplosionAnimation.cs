@@ -5,7 +5,8 @@ public class ExplosionAnimation : MonoBehaviour {
 	
 	float explodingSince = 0;
 	bool isExploding = false;
-	float explosionSpeed = 1f;
+	ParticleSystem particles;
+	float explosionSpeed = 2f;
 	Color origColor;
 	Color endColor = new Color(50,50,50,0);
 	Light lightobj;
@@ -14,6 +15,8 @@ public class ExplosionAnimation : MonoBehaviour {
 		this.lightobj = this.gameObject.GetComponent<Light>();
 		this.origColor = this.lightobj.color;
 		this.lightobj.enabled = false;
+		particles = GameObject.Find("ExplosionParticles").GetComponent<ParticleSystem>();
+		particles.Stop();
 	}
 	
 	// Update is called once per frame
@@ -38,6 +41,7 @@ public class ExplosionAnimation : MonoBehaviour {
 	}
 	
 	public ExplosionAnimation explode(){
+		particles.Play();	
 		this.lightobj.enabled = true;
 		this.isExploding = true;
 		return this;
