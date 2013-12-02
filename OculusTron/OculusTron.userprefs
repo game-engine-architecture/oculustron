@@ -1,20 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/gamelogic.cs">
+    <Files>
+      <File FileName="Assets/Editor/Image Effects/CameraMotionBlurEditor.js" Line="58" Column="63" />
+      <File FileName="Assets/gamelogic.cs" Line="68" Column="84" />
+      <File FileName="Assets/BikeInputController.cs" Line="37" Column="38" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Assets" expanded="True">
-              <Node name="OVR" expanded="True" />
-              <Node name="BikeHotkeyController.cs" selected="True" />
-            </Node>
-          </Node>
-          <Node name="Assembly-UnityScript-Editor" expanded="True">
-            <Node name="Assets" expanded="True">
-              <Node name="Editor" expanded="True">
-                <Node name="Image Effects" expanded="True" />
-              </Node>
+              <Node name="gamelogic.cs" selected="True" />
             </Node>
           </Node>
         </State>

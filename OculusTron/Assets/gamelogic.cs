@@ -12,7 +12,7 @@ public class gamelogic : MonoBehaviour {
 	GameObject bike1lastCreatedWall;
 	GameObject bike1wallcontainer;
 	
-	float wallHeight = 1f;
+	float wallHeight = 0.6f;
 	float wallWidth = 0.05f;
 	float bikeWallOffset = 0.3f;
 	
@@ -65,7 +65,8 @@ public class gamelogic : MonoBehaviour {
 		Vector3 wallDir = end - start;
 		float length = Vector3.Distance(start, end);
 		Vector3 offset = wallDir.normalized * bikeWallOffset;
-		wall.transform.position = ((start+end)/2.0f) + new Vector3(0, wallHeight/2.0f, 0);
+		Vector3 wallpos = ((start+end)/2.0f);
+		wall.transform.position = new Vector3(wallpos.x, wallHeight/2.0f, wallpos.z);
 		Vector3 scale = wall.transform.localScale;
 		scale.y = wallHeight;
 		scale.z = wallWidth;

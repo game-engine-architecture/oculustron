@@ -38,7 +38,7 @@ public class OVRCameraController : OVRComponent
 	// the cameras to follow a set forward facing orientation.
 	private Quaternion OrientationOffset = Quaternion.identity;	
 	// Set Y rotation here; this will offset the y rotation of the cameras. 
-	private float   YRotation = 0.0f;
+	public float YRotation = 1.0f;
 	
 	// PUBLIC MEMBERS
 	
