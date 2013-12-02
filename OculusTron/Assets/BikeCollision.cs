@@ -12,9 +12,11 @@ public class BikeCollision : MonoBehaviour {
 	void Update () {
 	
 	}
-	void OnTriggerEnter(Collider other){
+	
+	void OnControllerColliderHit(ControllerColliderHit hit) {
 	   	GameObject go = GameObject.Find("Explosion");
 		go.transform.position = this.gameObject.transform.position;
 		go.GetComponent<ExplosionAnimation>().reset().explode();
+		this.gameObject.SetActive(false);
 	}
 }
