@@ -35,8 +35,6 @@ public class gamelogic : MonoBehaviour {
 			if(bike1lastCreatedWall != null){
 				//make sure wall is closed in the corners
 				extendWall(bike1lastCreatedWall, bike1lastPos, currPos);
-				//activate Trigger for last wall
-				bike1lastCreatedWall.GetComponent<MeshCollider>().isTrigger = true;
 			}
 			bike1lastCreatedWall = createWall(currPos, b1Controller.getDirectionIndex());	
 			bike1lastPos = currPos;
@@ -61,10 +59,9 @@ public class gamelogic : MonoBehaviour {
 		//add wall to bike wall container
 		wall.transform.parent = bike1wallcontainer.transform;
 		MeshCollider collider = wall.AddComponent<MeshCollider>();
-		Vector3 colliderScale = collider.transform.localScale;
-		colliderScale.y *= 3;
-		collider.transform.localScale = colliderScale;
-		wall.name = "bike1wall";
+		collider.isTrigger = true;
+		
+		wall.name = "bike1_wall";
 		b1Controller.currentWall = wall;
 		return wall;
 	}
