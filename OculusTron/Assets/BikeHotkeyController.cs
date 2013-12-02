@@ -3,11 +3,28 @@ using System.Collections;
 
 public class BikeHotkeyController : MonoBehaviour {
 	
-	Component oculusCam = null;
+	GameObject oculusCam = null;
+	GameObject normalCam = null;
+	bool ovr = false;
 	
-	void Start () {
-	
+	void Start () {		
+		oculusCam = GameObject.FindWithTag("Respawn");
+		normalCam = GameObject.FindWithTag("MainCamera");
+		
+		Debug.Log("test");
+		setOVR(ovr);
+		
+		/*if (OVRDevice.SensorCount > 0)
+        {
+            normalCamera.SetActive(false);
+            riftCamera.SetActive(true); // OVRCameraController
+        }*/
 	}
+	
+	void setOVR (bool on){
+		oculusCam.SetActive(on);
+		normalCam.SetActive(!on);
+	} 
 	
 	void Update () {
 		checkHotKey();
@@ -15,20 +32,8 @@ public class BikeHotkeyController : MonoBehaviour {
 	
 	void checkHotKey(){
 		if(Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.O)){
-			
-			
-			if (oculusCam==null){
-				Debug.Log("add ovr controller");
-				//oculusCam = this.gameObject.AddComponent("OVRCameraController");
-				oculusCam = this.gameObject.AddComponent("OVRPlayerController");
-				//Debug.Log("add ovr controller");
-			}else{
-				Debug.Log("remove ovr controller");
-				Destroy(oculusCam);
-				oculusCam = null;	
-			}
-			
-			
+			ovr = !ovr;
+			setOVR(ovr);
 		}	
 	}
 }
