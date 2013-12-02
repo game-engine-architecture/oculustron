@@ -9,6 +9,7 @@ public class BikeInputController : MonoBehaviour {
 	public float rotationSpeed = 9.4f;
 	Vector3 rotation = new Vector3(1,0,0);
 	int directionIndex = 0;
+	public GameObject currentWall;
 
 	// Use this for initialization
 	void Start () {

@@ -23,6 +23,7 @@ public class gamelogic : MonoBehaviour {
 		b1Controller = bike1.GetComponent<BikeInputController>();
 		bike1lastPos = currentBikePos();
 		bike1wallcontainer = new GameObject();
+		bike1wallcontainer.name = "bike1wallcontainer";
 	}
 	
 	// Update is called once per frame
@@ -54,10 +55,14 @@ public class gamelogic : MonoBehaviour {
 		//set matrial
 		MeshRenderer renderer = wall.GetComponent<MeshRenderer>();
 		renderer.material = wall1Material;
+		
 		//add wall to bike wall container
 		wall.transform.parent = bike1wallcontainer.transform;
-		wall.AddComponent<MeshCollider>();
+		MeshCollider collider = wall.AddComponent<MeshCollider>();
+		collider.isTrigger = true;
 		
+		wall.name = "bike1_wall";
+		b1Controller.currentWall = wall;
 		return wall;
 	}
 	
@@ -66,12 +71,12 @@ public class gamelogic : MonoBehaviour {
 		float length = Vector3.Distance(start, end);
 		Vector3 offset = wallDir.normalized * bikeWallOffset;
 		Vector3 wallpos = ((start+end)/2.0f);
-		wall.transform.position = new Vector3(wallpos.x, wallHeight/2.0f, wallpos.z);
 		Vector3 scale = wall.transform.localScale;
 		scale.y = wallHeight;
 		scale.z = wallWidth;
 		scale.x = length;
 		wall.transform.localScale = scale;
+		wall.transform.position = new Vector3(wallpos.x, wallHeight/2.0f, wallpos.z);
 	
 		return wall;
 	}
