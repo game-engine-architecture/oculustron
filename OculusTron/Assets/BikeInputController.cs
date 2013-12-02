@@ -5,10 +5,11 @@ public class BikeInputController : MonoBehaviour {
 	
 	public CharacterController characterController;
 	Transform modelTransform;
-	public float movementSpeed = 1;
-	public float rotationSpeed = 130;
+	public float movementSpeed = 1f;
+	public float rotationSpeed = 9.4f;
 	Vector3 rotation = new Vector3(1,0,0);
-	
+	int directionIndex = 0;
+
 	// Use this for initialization
 	void Start () {
 		this.modelTransform = this.GetComponent<Transform>();
@@ -21,9 +22,12 @@ public class BikeInputController : MonoBehaviour {
 		if (Input.GetKeyDown ("left")){
 			//rotation
 			rotation = Quaternion.AngleAxis(-90, Vector3.up) * rotation;
+			directionIndex += 1;
+			directionIndex %= 4;
 		} else if(Input.GetKeyDown ("right")){
 			rotation = Quaternion.AngleAxis(90, Vector3.up) * rotation;
-			//movementDirection.Rotate(new Vector3(0, 90, 0));	
+			directionIndex += 3;
+			directionIndex %= 4;
 		}
 		float rotadiff = Vector3.Dot(rotation.normalized, this.modelTransform.right.normalized);
 		rotadiff *= deltaT * rotationSpeed;
@@ -35,5 +39,9 @@ public class BikeInputController : MonoBehaviour {
 		movement += rotation * vert * movementSpeed;
 		//deltaT*movementSpeed
 		characterController.Move(movement);
+	}
+	
+	public int getDirectionIndex(){
+		return this.directionIndex;
 	}
 }

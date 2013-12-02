@@ -224,13 +224,53 @@ Transform:
   m_GameObject: {fileID: 382732556}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 4, y: 2, z: 4}
   m_Children:
   - {fileID: 1753767471}
   - {fileID: 1073461431}
   - {fileID: 1779176406}
   - {fileID: 1895845768}
   - {fileID: 113242033}
+  m_Father: {fileID: 0}
+--- !u!1 &598351109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 598351111}
+  - 114: {fileID: 598351110}
+  m_Layer: 0
+  m_Name: GameLogic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &598351110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 598351109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2281105edd9114354aac071b6148f640, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bike1: {fileID: 922813926}
+  wall1Material: {fileID: 2100000, guid: 902713d3d027b4e62bd3a52d9dc7de46, type: 2}
+--- !u!4 &598351111
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 598351109}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.30864239, y: -1.94005585, z: 4.03448439}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
   m_Father: {fileID: 0}
 --- !u!1001 &752878551
 Prefab:
@@ -245,7 +285,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 670aa9c4bf28e4b448257e194fe35d33, type: 3}
       propertyPath: m_LocalPosition.y
-      value: .431137532
+      value: .71662426
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 670aa9c4bf28e4b448257e194fe35d33, type: 3}
       propertyPath: m_LocalPosition.z
@@ -322,6 +362,7 @@ GameObject:
   - 81: {fileID: 863864791}
   - 114: {fileID: 863864796}
   - 114: {fileID: 863864797}
+  - 114: {fileID: 863864798}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -437,6 +478,24 @@ MonoBehaviour:
   jitter: .0500000007
   showVelocity: 0
   showVelocityScale: 1
+--- !u!114 &863864798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 863864790}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d1352984e3c6465088f6cc7c4ce6e22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glowIntensity: 1.5
+  blurIterations: 3
+  blurSpread: .699999988
+  glowTint: {r: 1, g: 1, b: 1, a: 0}
+  compositeShader: {fileID: 4800000, guid: 96ca71e39c7b6fb4f9bec2c5bf331349, type: 3}
+  blurShader: {fileID: 4800000, guid: fb52973118cf00648825ced2fcca240c, type: 3}
+  downsampleShader: {fileID: 4800000, guid: b14b79b8936134d3f8238f0c2d40d634, type: 3}
 --- !u!1 &922813926
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,6 +509,7 @@ GameObject:
   - 114: {fileID: 922813930}
   - 198: {fileID: 922813932}
   - 199: {fileID: 922813931}
+  - 20: {fileID: 922813934}
   m_Layer: 0
   m_Name: bike
   m_TagString: Untagged
@@ -464,7 +524,7 @@ Transform:
   m_PrefabInternal: {fileID: 752878551}
   m_GameObject: {fileID: 922813926}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.07394028, y: .431137532, z: 3.89591122}
+  m_LocalPosition: {x: -2.07394028, y: .71662426, z: 3.89591122}
   m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
   m_Children:
   - {fileID: 249679248}
@@ -1592,6 +1652,34 @@ ParticleSystem:
     subEmitterCollision1: {fileID: 0}
     subEmitterDeath: {fileID: 0}
     subEmitterDeath1: {fileID: 0}
+--- !u!20 &922813934
+Camera:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 922813926}
+  m_Enabled: 0
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: .300000012
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 100
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_HDR: 0
 --- !u!1 &1029377292
 GameObject:
   m_ObjectHideFlags: 0
@@ -1656,6 +1744,32 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.96794033, y: .760175705, z: 5.40126419}
   m_LocalScale: {x: 2.94339418, y: .886994064, z: .514687181}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!1 &1071538659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1071538660}
+  m_Layer: 0
+  m_Name: bike1walls
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1071538660
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1071538659}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!1 &1073461427
