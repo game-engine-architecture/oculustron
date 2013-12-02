@@ -1,16 +1,22 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Menu\MenuBox.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/gamelogic.cs">
     <Files>
-      <File FileName="Assets\Menu\MenuBox.cs" Line="26" Column="3" />
+      <File FileName="Assets/Editor/Image Effects/CameraMotionBlurEditor.js" Line="58" Column="63" />
+      <File FileName="Assets/gamelogic.cs" Line="9" Column="4" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Assets" expanded="True">
-              <Node name="Menu" expanded="True">
-                <Node name="MenuBox.cs" selected="True" />
+              <Node name="gamelogic.cs" selected="True" />
+            </Node>
+          </Node>
+          <Node name="Assembly-UnityScript-Editor" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Editor" expanded="True">
+                <Node name="Image Effects" expanded="True" />
               </Node>
             </Node>
           </Node>
