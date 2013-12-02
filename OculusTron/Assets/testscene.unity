@@ -416,9 +416,9 @@ MonoBehaviour:
   YRotation: 0
   ipd: .064000003
   verticalFOV: 90
-  CameraRootPosition: {x: 0, y: 0, z: 0}
+  CameraRootPosition: {x: 0, y: 2, z: 0}
   NeckPosition: {x: 0, y: 0, z: 0}
-  EyeCenterPosition: {x: 0, y: .150000006, z: .0900000036}
+  EyeCenterPosition: {x: 0, y: .300000012, z: .800000012}
   UsePlayerEyeHeight: 0
   FollowOrientation: {fileID: 922813927}
   TrackerRotatesY: 0
@@ -2041,7 +2041,7 @@ GameObject:
   - 114: {fileID: 1576842083}
   m_Layer: 8
   m_Name: CameraLeft
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2161,7 +2161,7 @@ GameObject:
   - 114: {fileID: 1680638712}
   m_Layer: 8
   m_Name: CameraRight
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2471,6 +2471,26 @@ Prefab:
       propertyPath: FollowOrientation
       value: 
       objectReference: {fileID: 922813927}
+    - target: {fileID: 11400004, guid: 9da535ecc7e009544bd58323d6696a4d, type: 2}
+      propertyPath: CameraRootPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 9da535ecc7e009544bd58323d6696a4d, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 9da535ecc7e009544bd58323d6696a4d, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 9da535ecc7e009544bd58323d6696a4d, type: 2}
+      propertyPath: EyeCenterPosition.y
+      value: .300000012
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 9da535ecc7e009544bd58323d6696a4d, type: 2}
+      propertyPath: EyeCenterPosition.z
+      value: .800000012
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9da535ecc7e009544bd58323d6696a4d, type: 2}
   m_RootGameObject: {fileID: 852646874}
