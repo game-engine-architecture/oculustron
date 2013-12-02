@@ -16,7 +16,7 @@ public class gamelogic : MonoBehaviour {
 	void Update () {
 		Transform b1Trans = bike1.GetComponent<Transform>();
 		Vector3 currPos = b1Trans.position;
-		createWall(bike1lastPos, currPos);
+		createWall(bike1lastPos, currPos, b1Trans.rotation.eulerAngles);
 		bike1lastPos = b1Trans.position;
 	}
 	
@@ -27,7 +27,7 @@ public class gamelogic : MonoBehaviour {
 		Vector3 wallDir = end - start;
 		float length = Vector3.Distance(start, end);
 		wall.transform.position = ((start+end)/2.0f) + new Vector3(0, 1, 0);
-		wall.transform.Rotate(new Vector3(90, 0, 0));
+		wall.transform.Rotate(new Vector3(90, rotation.y*90, 0));
 		Vector3 scale = wall.transform.localScale;
 		scale.z = 0.1f;
 		scale.x = length;
