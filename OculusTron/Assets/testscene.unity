@@ -488,7 +488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9f338034892c44ebb62d97894772f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  YRotation: 0
+  YRotation: 1
   ipd: .064000003
   verticalFOV: 90
   CameraRootPosition: {x: 0, y: 2, z: 0}
@@ -3151,7 +3151,7 @@ GameObject:
   - 114: {fileID: 1576842083}
   m_Layer: 8
   m_Name: CameraLeft
-  m_TagString: Untagged
+  m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3333,7 +3333,7 @@ GameObject:
   - 114: {fileID: 1680638712}
   m_Layer: 8
   m_Name: CameraRight
-  m_TagString: Untagged
+  m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3649,11 +3649,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: 9da535ecc7e009544bd58323d6696a4d, type: 2}
       propertyPath: m_TagString
-      value: Untagged
+      value: Respawn
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 9da535ecc7e009544bd58323d6696a4d, type: 2}
       propertyPath: m_TagString
-      value: Untagged
+      value: Respawn
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 9da535ecc7e009544bd58323d6696a4d, type: 2}
       propertyPath: EyeCenterPosition.y

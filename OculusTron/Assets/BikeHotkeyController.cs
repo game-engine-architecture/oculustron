@@ -3,15 +3,18 @@ using System.Collections;
 
 public class BikeHotkeyController : MonoBehaviour {
 	
+	GameObject[] oculusCamElements = null;
 	GameObject oculusCam = null;
 	GameObject normalCam = null;
 	bool ovr = false;
 	
-	void Start () {		
+	void Start () {	
+		
+		oculusCamElements = GameObject.FindGameObjectsWithTag("Respawn");
 		oculusCam = GameObject.FindWithTag("Respawn");
 		normalCam = GameObject.FindWithTag("MainCamera");
 		
-		Debug.Log("test");
+		Debug.Log(oculusCamElements.Length);
 		setOVR(ovr);
 		
 		/*if (OVRDevice.SensorCount > 0)
@@ -22,7 +25,11 @@ public class BikeHotkeyController : MonoBehaviour {
 	}
 	
 	void setOVR (bool on){
-		oculusCam.SetActive(on);
+		//oculusCam.SetActive(on);
+		foreach(GameObject go in oculusCamElements){
+			go.SetActive(on);
+		}
+		
 		normalCam.SetActive(!on);
 	} 
 	
