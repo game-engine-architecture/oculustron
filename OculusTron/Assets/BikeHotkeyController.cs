@@ -11,7 +11,7 @@ public class BikeHotkeyController : MonoBehaviour {
 	void Start () {	
 		
 		oculusCamElements = GameObject.FindGameObjectsWithTag("Respawn");
-		oculusCam = GameObject.FindWithTag("Respawn");
+		//oculusCam = GameObject.FindWithTag("Respawn");
 		normalCam = GameObject.FindWithTag("MainCamera");
 		
 		Debug.Log(oculusCamElements.Length);

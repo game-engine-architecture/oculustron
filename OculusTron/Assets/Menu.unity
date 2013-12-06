@@ -126,7 +126,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 4f68f3c9e1c6d4693be525e3c9ab4437, type: 3}
+  - {fileID: 2100000, guid: ccf783f40e00b4a24b6a448e6f1df836, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -177,10 +177,9 @@ GameObject:
   - 33: {fileID: 671383155}
   - 65: {fileID: 671383154}
   - 23: {fileID: 671383153}
-  - 114: {fileID: 671383157}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: MenuCube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -233,17 +232,6 @@ Transform:
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!114 &671383157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 671383152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e91d82794fcbf4fda910019776404787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1010882696
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,7 +307,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 4f68f3c9e1c6d4693be525e3c9ab4437, type: 3}
+  - {fileID: 2100000, guid: ccf783f40e00b4a24b6a448e6f1df836, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -349,6 +337,7 @@ GameObject:
   - 124: {fileID: 1593959762}
   - 81: {fileID: 1593959761}
   - 114: {fileID: 1593959766}
+  - 114: {fileID: 1593959767}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -434,6 +423,17 @@ MonoBehaviour:
   compositeShader: {fileID: 4800000, guid: 96ca71e39c7b6fb4f9bec2c5bf331349, type: 3}
   blurShader: {fileID: 4800000, guid: fb52973118cf00648825ced2fcca240c, type: 3}
   downsampleShader: {fileID: 4800000, guid: b14b79b8936134d3f8238f0c2d40d634, type: 3}
+--- !u!114 &1593959767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1593959760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e91d82794fcbf4fda910019776404787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1701926702
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,7 +509,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 4f68f3c9e1c6d4693be525e3c9ab4437, type: 3}
+  - {fileID: 2100000, guid: ccf783f40e00b4a24b6a448e6f1df836, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -601,7 +601,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 4f68f3c9e1c6d4693be525e3c9ab4437, type: 3}
+  - {fileID: 2100000, guid: ccf783f40e00b4a24b6a448e6f1df836, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
