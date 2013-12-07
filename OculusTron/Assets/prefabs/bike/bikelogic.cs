@@ -23,6 +23,7 @@ public class bikelogic : MonoBehaviour {
 		lastCornerPos = currentBikePos();
 		wallcontainer = new GameObject();
 		wallcontainer.name = "bike_wall_container";
+		lastDirectionIndex = inputController.getDirectionIndex();
 	}
 	
 	// Update is called once per frame
@@ -63,6 +64,7 @@ public class bikelogic : MonoBehaviour {
 		//collider.isTrigger = true;
 		
 		wall.name = "bike_wall"+wallnumber;
+		wallnumber++;
 		return wall;
 	}
 	
