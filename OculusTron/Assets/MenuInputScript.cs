@@ -3,19 +3,23 @@ using System.Collections;
 
 public class MenuInputScript : MonoBehaviour {
 	
-	GameObject menuCube = null;
-	Transform menuCubeTransform = null;
+
+	public float rotation_speed;
+	
+	private float current = 1f;
 	
 	void Start () {
-		menuCube = GameObject.FindWithTag("MenuCube");
-		menuCubeTransform = menuCube.transform;
-		
+	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		transform.LookAt(menuCubeTransform);
-    	transform.Translate(Vector3.right * Time.deltaTime);
+		GameObject stateGO = GameObject.Find("MenuState");
+		MenuState state = stateGO.GetComponent<MenuState>();
+		float goal = state.currentState;
+		current -= ((current-goal)*Time.deltaTime)*rotation_speed;
+		this.gameObject.transform.eulerAngles = new Vector3(0, current*90, 0);
+
 		
 		//if (Input.GetKeyDown ("left")){
 		//	Debug.Log("left");

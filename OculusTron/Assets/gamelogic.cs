@@ -14,12 +14,10 @@ public class gamelogic : MonoBehaviour {
 	
 	float wallHeight = 0.6f;
 	float wallWidth = 0.05f;
-	float bikeWallOffset = 0.3f;
 	
 	
 	// Use this for initialization
 	void Start () {
-		Transform b1Trans = bike1.GetComponent<Transform>();
 		b1Controller = bike1.GetComponent<BikeInputController>();
 		bike1lastPos = currentBikePos();
 		bike1wallcontainer = new GameObject();
@@ -28,7 +26,6 @@ public class gamelogic : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Transform b1Trans = bike1.GetComponent<Transform>();
 		Vector3 currPos = currentBikePos();
 		//check if bike was rotated
 		if(bike1lastDirectionIndex != b1Controller.getDirectionIndex()){
@@ -62,14 +59,11 @@ public class gamelogic : MonoBehaviour {
 		collider.isTrigger = true;
 		
 		wall.name = "bike1_wall";
-		b1Controller.currentWall = wall;
 		return wall;
 	}
 	
 	GameObject extendWall(GameObject wall, Vector3 start, Vector3 end){
-		Vector3 wallDir = end - start;
 		float length = Vector3.Distance(start, end);
-		Vector3 offset = wallDir.normalized * bikeWallOffset;
 		Vector3 wallpos = ((start+end)/2.0f);
 		Vector3 scale = wall.transform.localScale;
 		scale.y = wallHeight;

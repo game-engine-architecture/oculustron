@@ -3,6 +3,8 @@ using System.Collections;
 
 public class MenuElementControll : MonoBehaviour {
 	
+	public int thisMenuState;
+	
 	void OnMouseEnter() {
 		renderer.material.color = new Color(0.6f,0.6f,0.6f,0.6f);
  
@@ -17,7 +19,10 @@ public class MenuElementControll : MonoBehaviour {
 		//Application.Quit();	
 		 //Debug.Log(" click");
 		
-		Application.LoadLevel(1);
+		//Application.LoadLevel(1);
+		GameObject stateGO = GameObject.Find("MenuState");
+		MenuState state = stateGO.GetComponent<MenuState>();
+		state.currentState = thisMenuState;
 	}
 		
 }

@@ -1,12 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/MenuInputScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/gamelogic.cs">
     <Files>
-      <File FileName="Assets/gamelogic.cs" Line="1" Column="1" />
-      <File FileName="Assets/BikeInputController.cs" Line="22" Column="3" />
-      <File FileName="Assets/BikeHotkeyController.cs" Line="14" Column="15" />
-      <File FileName="Assets/MenuInputScript.cs" Line="17" Column="39" />
-      <File FileName="Assets/MenuTextShader.shader" Line="18" Column="2" />
+      <File FileName="Assets/MenuInputScript.cs" Line="19" Column="34" />
+      <File FileName="Assets/MenuNetworkManager.cs" Line="6" Column="2" />
+      <File FileName="Assets/GameStateManager.cs" Line="18" Column="37" />
+      <File FileName="Assets/MenuElementControll.cs" Line="14" Column="41" />
+      <File FileName="Assets/MenuState.cs" Line="4" Column="41" />
+      <File FileName="Assets/prefabs/bike/BikeCollision.cs" Line="20" Column="5" />
+      <File FileName="Assets/InitScript.cs" Line="8" Column="29" />
+      <File FileName="Assets/NetworkManagement.cs" Line="65" Column="83" />
+      <File FileName="Assets/gamelogic.cs" Line="31" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,7 +20,10 @@
               <Node name="OVR" expanded="True">
                 <Node name="Scripts" expanded="True" />
               </Node>
-              <Node name="MenuInputScript.cs" selected="True" />
+              <Node name="prefabs" expanded="True">
+                <Node name="bike" expanded="True" />
+              </Node>
+              <Node name="gamelogic.cs" selected="True" />
             </Node>
           </Node>
           <Node name="Assembly-UnityScript-Editor" expanded="True">
