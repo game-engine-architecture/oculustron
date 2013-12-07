@@ -573,6 +573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wall1Material: {fileID: 0}
+  wallPrefab: {fileID: 100000, guid: 2256ccea5998c4a60b36e0a1259de8c5, type: 2}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
