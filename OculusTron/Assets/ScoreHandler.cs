@@ -4,6 +4,8 @@ using System.Collections;
 public class ScoreHandler : MonoBehaviour {
 	
 	public int score = 0;
+	GameStateManager gameState;
+	TextMesh text;
 	
 	// Use this for initialization
 	void Start () {
@@ -12,7 +14,7 @@ public class ScoreHandler : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		renderScore();
 	}
 	
 	public void lost(){
@@ -26,7 +28,16 @@ public class ScoreHandler : MonoBehaviour {
 	}
 	
 	void renderScore(){
-		TextMesh text = GameObject.Find("ScoreText").GetComponent<TextMesh>();
-		text.text = "Score: "+score;
+		if(gameState == null || text == null){
+			gameState = GameObject.Find("GameState").GetComponent<GameStateManager>();
+			text = GameObject.Find("ScoreText").GetComponent<TextMesh>();	
+		}
+		if(gameState.getGameState().Equals(GameStateManager.GamesState.GAME_RUNNING)){
+			text.text = "Score: "+score;			
+		} else {
+			if(text.text.Length > 0){
+				text.text = "";	
+			}
+		}
 	}
 }

@@ -1,16 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/gamelogic.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/CountDownActivator.cs">
     <Files>
-      <File FileName="Assets/MenuInputScript.cs" Line="19" Column="34" />
-      <File FileName="Assets/MenuNetworkManager.cs" Line="6" Column="2" />
-      <File FileName="Assets/GameStateManager.cs" Line="18" Column="37" />
-      <File FileName="Assets/MenuElementControll.cs" Line="14" Column="41" />
-      <File FileName="Assets/MenuState.cs" Line="4" Column="41" />
-      <File FileName="Assets/prefabs/bike/BikeCollision.cs" Line="20" Column="5" />
-      <File FileName="Assets/InitScript.cs" Line="8" Column="29" />
-      <File FileName="Assets/NetworkManagement.cs" Line="65" Column="83" />
-      <File FileName="Assets/gamelogic.cs" Line="31" Column="1" />
+      <File FileName="Assets/MenuInputScript.cs" Line="19" Column="38" />
+      <File FileName="Assets/CameraEffectController.cs" Line="25" Column="4" />
+      <File FileName="Assets/ScoreManager.cs" Line="3" Column="33" />
+      <File FileName="Assets/NetworkManagement.cs" Line="15" Column="24" />
+      <File FileName="Assets/prefabs/bike/BikeInputController.cs" Line="32" Column="101" />
+      <File FileName="Assets/ScoreHandler.cs" Line="13" Column="1" />
+      <File FileName="Assets/GameStateManager.cs" Line="35" Column="74" />
+      <File FileName="Assets/prefabs/bike/bikelogic.cs" Line="35" Column="39" />
+      <File FileName="Assets/CountDownActivator.cs" Line="17" Column="111" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -23,7 +23,7 @@
               <Node name="prefabs" expanded="True">
                 <Node name="bike" expanded="True" />
               </Node>
-              <Node name="gamelogic.cs" selected="True" />
+              <Node name="CountDownActivator.cs" selected="True" />
             </Node>
           </Node>
           <Node name="Assembly-UnityScript-Editor" expanded="True">

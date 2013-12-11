@@ -16,6 +16,8 @@ public class bikelogic : MonoBehaviour {
 	float wallWidth = 0.05f;
 	int wallnumber = 0;
 	
+	GameStateManager gameState;
+	
 	// Use this for initialization
 	void Start () {
 		bike1 = this.gameObject;
@@ -24,25 +26,28 @@ public class bikelogic : MonoBehaviour {
 		wallcontainer = new GameObject();
 		wallcontainer.name = "bike_wall_container";
 		lastDirectionIndex = inputController.getDirectionIndex();
+		gameState = GameObject.Find("GameState").GetComponent<GameStateManager>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Vector3 currPos = currentBikePos();
-		//check if bike was rotated
-		if(lastDirectionIndex != inputController.getDirectionIndex()){
-			if(lastCreatedWall != null){
-				//make sure wall is closed in the corners
-				extendWall(lastCreatedWall, lastCornerPos, inputController.getLastCorner());
+		if(gameState.getGameState().Equals(GameStateManager.GamesState.GAME_RUNNING)){
+			Vector3 currPos = currentBikePos();
+			//check if bike was rotated
+			if(lastDirectionIndex != inputController.getDirectionIndex()){
+				if(lastCreatedWall != null){
+					//make sure wall is closed in the corners
+					extendWall(lastCreatedWall, lastCornerPos, inputController.getLastCorner());
+				}
+				if(networkView.isMine){
+					networkView.RPC("createWall", RPCMode.All, inputController.getLastCorner(), inputController.getDirectionIndex());
+				}
+				lastCreatedWall = createWall(inputController.getLastCorner(), inputController.getDirectionIndex());	
+				lastCornerPos = inputController.getLastCorner();
+				lastDirectionIndex = inputController.getDirectionIndex();
+			} else {
+				extendWall(lastCreatedWall, lastCornerPos, currPos);
 			}
-			if(networkView.isMine){
-				networkView.RPC("createWall", RPCMode.All, inputController.getLastCorner(), inputController.getDirectionIndex());
-			}
-			lastCreatedWall = createWall(inputController.getLastCorner(), inputController.getDirectionIndex());	
-			lastCornerPos = inputController.getLastCorner();
-			lastDirectionIndex = inputController.getDirectionIndex();
-		} else {
-			extendWall(lastCreatedWall, lastCornerPos, currPos);
 		}
 	}
 	

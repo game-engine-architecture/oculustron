@@ -1,16 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class NetworkManagement : MonoBehaviour {
  
 	private MenuState menuState;
+	private GameStateManager gameState;
 	private const string typeName = "Tronculus";
 	private const string gameName = "DeathMatch";
 	public GameObject playerPrefab;
+	private Dictionary<string, GameObject> players;
+	
+	public int currentPlayerCount(){
+		return players.Count;
+	}
 	
 	// Use this for initialization
 	void Start () {
 		this.menuState = GameObject.Find("MenuState").GetComponent<MenuState>();
+		this.gameState = GameObject.Find("GameState").GetComponent<GameStateManager>();
+		players = new Dictionary<string, GameObject>();
 	}
 	
 	//Server
@@ -28,10 +37,9 @@ public class NetworkManagement : MonoBehaviour {
 	private int game_room_height = 50;
 	
 	void OnGUI() {
-		if(menuState.currentState == 1){ //play menu
+		if(menuState.currentMenuState == 1){ //play menu
 		    if (GUI.Button(new Rect(start_refresh_left, top, start_refresh_width, start_refresh_height), "Start Server")){
 	            StartServer();
-				menuState.currentState = 0;			
 			}
 	 
 	        if (GUI.Button(new Rect(start_refresh_left, top+start_refresh_height+padding, start_refresh_width, start_refresh_height), "Refresh Hosts")){
@@ -52,18 +60,25 @@ public class NetworkManagement : MonoBehaviour {
 	
 	void OnServerInitialized() {
 		Debug.Log("Server Initialized");
-	    SpawnPlayer();
+		initializeGame();
 	}
 	 
 	void OnConnectedToServer() {
 		Debug.Log("Server Joined");
-	    SpawnPlayer();
+		initializeGame();
+	}
+	
+	void initializeGame(){
+		gameState.setState(GameStateManager.GamesState.WAITING_FOR_PLAYERS);
+		menuState.currentMenuState = 0;
+	    players.Add(Network.player.ToString(), SpawnPlayer());
 	}
 	 
-	private void SpawnPlayer() {
+	private GameObject SpawnPlayer() {
 		GameObject spawnpoints = GameObject.Find("Spawnpoints");
 		Transform spawnpoint = spawnpoints.transform.GetChild(Network.connections.Length);
-	    Network.Instantiate(playerPrefab, spawnpoint.position, spawnpoint.rotation, 0);
+	    GameObject bike = Network.Instantiate(playerPrefab, spawnpoint.position, spawnpoint.rotation, 0) as GameObject;
+		return bike;
 	}
 	
 	//Client

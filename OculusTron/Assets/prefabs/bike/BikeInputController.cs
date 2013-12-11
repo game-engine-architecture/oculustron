@@ -10,6 +10,7 @@ public class BikeInputController : MonoBehaviour {
 	Vector3 rotation = new Vector3(1,0,0);
 	int directionIndex = 0;
 	Vector3 lastCorner;
+	GameStateManager gameState;
 
 	// Use this for initialization
 	void Start () {
@@ -23,11 +24,12 @@ public class BikeInputController : MonoBehaviour {
 			}
 		}
 		this.modelTransform = this.GetComponent<Transform>();
+		gameState = GameObject.Find("GameState").GetComponent<GameStateManager>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (networkView.isMine) {
+		if (networkView.isMine && gameState.getGameState().Equals(GameStateManager.GamesState.GAME_RUNNING)) {
 			float deltaT = Time.deltaTime;
 			if (Input.GetKeyDown ("left")){
 				//rotation

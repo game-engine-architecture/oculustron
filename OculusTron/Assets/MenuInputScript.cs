@@ -16,7 +16,7 @@ public class MenuInputScript : MonoBehaviour {
 	void Update () {
 		GameObject stateGO = GameObject.Find("MenuState");
 		MenuState state = stateGO.GetComponent<MenuState>();
-		float goal = state.currentState;
+		float goal = state.currentMenuState;
 		current -= ((current-goal)*Time.deltaTime)*rotation_speed;
 		this.gameObject.transform.eulerAngles = new Vector3(0, current*90, 0);
 

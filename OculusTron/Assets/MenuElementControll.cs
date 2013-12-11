@@ -22,7 +22,7 @@ public class MenuElementControll : MonoBehaviour {
 		//Application.LoadLevel(1);
 		GameObject stateGO = GameObject.Find("MenuState");
 		MenuState state = stateGO.GetComponent<MenuState>();
-		state.currentState = thisMenuState;
+		state.currentMenuState = thisMenuState;
 	}
 		
 }

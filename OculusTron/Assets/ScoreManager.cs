@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class MenuState : MonoBehaviour {
+public class ScoreManager : MonoBehaviour {
 	
-	public int currentMenuState;
+	Dictionary<string, int> score = new Dictionary<string, int>();
 	
 	// Use this for initialization
 	void Start () {
-		currentMenuState = 0;
+	
 	}
 	
 	// Update is called once per frame
