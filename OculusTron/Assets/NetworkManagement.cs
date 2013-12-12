@@ -29,7 +29,7 @@ public class NetworkManagement : MonoBehaviour {
 	}
 	
 	private int top = 100;
-	private int start_refresh_left = 250;
+	//private int start_refresh_left = 250;
 	private int start_refresh_width = 150;
 	private int start_refresh_height = 100;
 	private int padding = 10;
@@ -37,6 +37,12 @@ public class NetworkManagement : MonoBehaviour {
 	private int game_room_height = 50;
 	
 	void OnGUI() {
+		
+		
+		int screenWidth = Screen.width;
+		
+		int start_refresh_left = screenWidth/3;
+		
 		if(menuState.currentMenuState == 1){ //play menu
 		    if (GUI.Button(new Rect(start_refresh_left, top, start_refresh_width, start_refresh_height), "Start Server")){
 	            StartServer();

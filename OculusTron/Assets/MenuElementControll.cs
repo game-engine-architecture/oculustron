@@ -20,6 +20,14 @@ public class MenuElementControll : MonoBehaviour {
 		 //Debug.Log(" click");
 		
 		//Application.LoadLevel(1);
+		
+		//Debug.Log(thisMenuState);
+		if(thisMenuState==4){
+			Application.Quit();
+			return;
+		}
+		
+		
 		GameObject stateGO = GameObject.Find("MenuState");
 		MenuState state = stateGO.GetComponent<MenuState>();
 		state.currentMenuState = thisMenuState;
