@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class NetworkManagement : MonoBehaviour {
  
@@ -35,15 +36,17 @@ public class NetworkManagement : MonoBehaviour {
 	private int start_refresh_width = 150;
 	private int start_refresh_height = 100;
 	private int padding = 10;
-	
 	private int game_room_height = 50;
+	
+	//setup
+	private string playerCountEditStr = "2";
 	
 	void OnGUI() {
 		
 		
 		int screenWidth = Screen.width;
-		
-		int start_refresh_left = screenWidth/3;
+		int screenHeight = Screen.height;
+		int start_refresh_left = screenWidth/2-(screenHeight/3)-20;
 		
 		if(menuState.currentMenuState == 1){ //play menu
 		    if (GUI.Button(new Rect(start_refresh_left, top, start_refresh_width, start_refresh_height), "Start Server")){
@@ -58,11 +61,27 @@ public class NetworkManagement : MonoBehaviour {
 	        {
 	            for (int i = 0; i < hostList.Length; i++)
 	            {
-	                if (GUI.Button(new Rect(start_refresh_left+start_refresh_width+padding, top + ((game_room_height+padding) * i), 300, game_room_height), hostList[i].gameName)){
+	                
+					
+					if (GUI.Button(new Rect(start_refresh_left+start_refresh_width+padding, top + ((game_room_height+padding) * i), 300, game_room_height), hostList[i].gameName)){
 						JoinServer(hostList[i]);
 					}
 	            }
 	        }
+		}else if(menuState.currentMenuState == 2){ //setup menu
+			GUI.Label (new Rect (start_refresh_left, top-20,100,20), "Player Count:");
+			string tempCount = GUI.TextField (new Rect (start_refresh_left, top, 200, 20), playerCountEditStr, 25);
+			
+			int numValue;
+			bool parsed = Int32.TryParse(tempCount, out numValue);
+
+			if (parsed){
+				playerCountEditStr = tempCount;
+				gameState.playersNeededForGame = numValue;
+				
+			}
+			
+			//gameState.playersNeededForGame = Convert.ToInt32(playerCountEditStr);
 		}
 	}
 	
