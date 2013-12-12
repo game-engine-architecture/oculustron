@@ -6,10 +6,11 @@ public class NetworkManagement : MonoBehaviour {
  
 	private MenuState menuState;
 	private GameStateManager gameState;
+	private ScoreManager scoreManager;
 	private const string typeName = "Tronculus";
 	private const string gameName = "DeathMatch";
 	public GameObject playerPrefab;
-	private Dictionary<string, GameObject> players;
+	private List<string> players;
 	
 	public int currentPlayerCount(){
 		return players.Count;
@@ -19,7 +20,8 @@ public class NetworkManagement : MonoBehaviour {
 	void Start () {
 		this.menuState = GameObject.Find("MenuState").GetComponent<MenuState>();
 		this.gameState = GameObject.Find("GameState").GetComponent<GameStateManager>();
-		players = new Dictionary<string, GameObject>();
+		players = new List<string>();
+		scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
 	}
 	
 	//Server
@@ -77,8 +79,19 @@ public class NetworkManagement : MonoBehaviour {
 	void initializeGame(){
 		gameState.setState(GameStateManager.GamesState.WAITING_FOR_PLAYERS);
 		menuState.currentMenuState = 0;
-	    players.Add(Network.player.ToString(), SpawnPlayer());
+		
+		//instantiate player on current connection
+		GameObject playerbike = SpawnPlayer();
+		addPlayerToGame(Network.player.ToString());
+		//tell everybody else that i'm there.
+		networkView.RPC("addPlayerToGame", RPCMode.OthersBuffered, Network.player.ToString());
 	}
+	
+	[RPC]
+	void addPlayerToGame(string playerid){
+		scoreManager.addPlayer(playerid);	
+    	players.Add(playerid);
+	}	
 	 
 	private GameObject SpawnPlayer() {
 		GameObject spawnpoints = GameObject.Find("Spawnpoints");
