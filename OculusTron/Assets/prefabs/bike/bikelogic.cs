@@ -38,9 +38,8 @@ public class bikelogic : MonoBehaviour {
 				if(lastCreatedWall != null){
 					//make sure wall is closed in the corners
 					extendWall(lastCreatedWall, lastCornerPos, inputController.getLastCorner());
-				}
-				if(networkView.isMine){
-					networkView.RPC("createWall", RPCMode.All, inputController.getLastCorner(), inputController.getDirectionIndex());
+				} else {
+					
 				}
 				lastCreatedWall = createWall(inputController.getLastCorner(), inputController.getDirectionIndex());	
 				lastCornerPos = inputController.getLastCorner();
@@ -60,8 +59,9 @@ public class bikelogic : MonoBehaviour {
 	GameObject createWall(Vector3 start, int direction){
 		GameObject wall = Network.Instantiate(wallPrefab, start, Quaternion.Euler(new Vector3(0, direction*90, 0)), 0) as GameObject;
 		//set matrial
-		//MeshRenderer renderer = wall.GetComponent<MeshRenderer>();
-		//renderer.material = wall1Material;
+		MeshRenderer renderer = wall.GetComponent<MeshRenderer>();
+		Material wallmaterial = wall.GetComponent<WallMaterials>().wallMaterials[int.Parse(Network.player.ToString())];
+		renderer.material = wallmaterial;
 		
 		//add wall to bike wall container
 		wall.transform.parent = wallcontainer.transform;
@@ -72,6 +72,10 @@ public class bikelogic : MonoBehaviour {
 		wallnumber++;
 		return wall;
 	}
+	
+	void OnNetworkInstantiate(NetworkMessageInfo info) {
+        Debug.Log("New object instantiated by " + info.sender);
+    }
 	
 	GameObject extendWall(GameObject wall, Vector3 start, Vector3 end){
 		float length = Vector3.Distance(start, end);

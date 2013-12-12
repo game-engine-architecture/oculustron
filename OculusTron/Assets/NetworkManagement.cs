@@ -100,7 +100,7 @@ public class NetworkManagement : MonoBehaviour {
 		menuState.currentMenuState = 0;
 		
 		//instantiate player on current connection
-		GameObject playerbike = SpawnPlayer();
+		SpawnPlayer();
 		addPlayerToGame(Network.player.ToString());
 		//tell everybody else that i'm there.
 		networkView.RPC("addPlayerToGame", RPCMode.OthersBuffered, Network.player.ToString());
@@ -110,6 +110,7 @@ public class NetworkManagement : MonoBehaviour {
 	void addPlayerToGame(string playerid){
 		scoreManager.addPlayer(playerid);	
     	players.Add(playerid);
+		Debug.Log("players in game:"+players.Count);
 	}	
 	 
 	private GameObject SpawnPlayer() {

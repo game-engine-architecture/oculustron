@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: CountDownTextAnimation
+  m_Name: CountDownAnimation
   serializedVersion: 3
   m_AnimationType: 1
   m_Compressed: 0
@@ -16,14 +16,14 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: {x: 0, y: 100, z: 44.3187218}
-        inSlope: {x: 0, y: 0, z: -164.817169}
-        outSlope: {x: 0, y: 0, z: -164.817169}
+        value: {x: 0, y: 100, z: 46.304348}
+        inSlope: {x: 0, y: 0, z: -.52757287}
+        outSlope: {x: 0, y: 0, z: -.52757287}
         tangentMode: -559038737
-      - time: 1
-        value: {x: 0, y: 100, z: 2.94447088}
-        inSlope: {x: 0, y: 0, z: -41.3742523}
-        outSlope: {x: 0, y: 0, z: -41.3742523}
+      - time: .666666627
+        value: {x: 0, y: 100, z: 5}
+        inSlope: {x: 0, y: 0, z: -.383690327}
+        outSlope: {x: 0, y: 0, z: -.383690327}
         tangentMode: -559038737
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -35,14 +35,14 @@ AnimationClip:
       m_Curve:
       - time: 0
         value: 1
-        inSlope: -1.01694918
-        outSlope: -1.01694918
+        inSlope: -1
+        outSlope: -1
         tangentMode: 10
-      - time: .983333349
+      - time: 1
         value: 0
-        inSlope: -3.80068874
-        outSlope: -3.80068874
-        tangentMode: 0
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: _Color.a
@@ -74,18 +74,18 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      - time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
+        value: 46.304348
+        inSlope: -.52757287
+        outSlope: -.52757287
+        tangentMode: 0
+      - time: .666666627
+        value: 5
+        inSlope: -.383690327
+        outSlope: -.383690327
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
-    attribute: m_LocalPosition.x
+    attribute: m_LocalPosition.z
     path: 
     classID: 4
     script: {fileID: 0}
@@ -97,7 +97,7 @@ AnimationClip:
         inSlope: 0
         outSlope: 0
         tangentMode: 10
-      - time: 1
+      - time: .666666627
         value: 100
         inSlope: 0
         outSlope: 0
@@ -112,18 +112,18 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: 44.3187218
-        inSlope: -164.817169
-        outSlope: -164.817169
-        tangentMode: 0
-      - time: 1
-        value: 2.94447088
-        inSlope: -41.3742523
-        outSlope: -41.3742523
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: .666666627
+        value: 0
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
-    attribute: m_LocalPosition.z
+    attribute: m_LocalPosition.x
     path: 
     classID: 4
     script: {fileID: 0}
@@ -132,14 +132,14 @@ AnimationClip:
       m_Curve:
       - time: 0
         value: 1
-        inSlope: -1.01694918
-        outSlope: -1.01694918
+        inSlope: -1
+        outSlope: -1
         tangentMode: 10
-      - time: .983333349
+      - time: 1
         value: 0
-        inSlope: -3.80068874
-        outSlope: -3.80068874
-        tangentMode: 0
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: _Color.a

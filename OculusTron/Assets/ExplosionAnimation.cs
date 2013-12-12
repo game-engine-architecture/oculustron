@@ -16,7 +16,7 @@ public class ExplosionAnimation : MonoBehaviour {
 		this.origColor = this.lightobj.color;
 		this.lightobj.enabled = false;
 		particles = GameObject.Find("ExplosionParticles").GetComponent<ParticleSystem>();
-		particles.Stop();
+		explode();
 	}
 	
 	// Update is called once per frame
