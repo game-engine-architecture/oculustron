@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: FX-Refractive
-  m_Shader: {fileID: 4800000, guid: 963484209d11fd7f110076aa44295342, type: 3}
+  m_Shader: {fileID: 6, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
   m_SavedProperties:
     serializedVersion: 2
@@ -29,21 +29,25 @@ Material:
     m_Floats:
       data:
         first:
-          name: _Shininess
-        second: 1
-      data:
-        first:
           name: _BumpAmt
         second: 128
+      data:
+        first:
+          name: _Shininess
+        second: 1
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: .423392087, g: .423392087, b: .423392087, a: 0}
+        second: {r: .808823526, g: .570934236, b: .570934236, a: 0}
       data:
         first:
           name: _SpecColor
         second: {r: .981927693, g: .963855445, b: 1, a: 1}
+      data:
+        first:
+          name: _Emission
+        second: {r: .698529422, g: .210586071, b: .210586071, a: 0}
 --- !u!1002 &2100001
 EditorExtensionImpl:
   serializedVersion: 6
