@@ -1,19 +1,15 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-<<<<<<< HEAD
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/tronculus/ingame/prefabs/bike/BikeInputController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/tronculus/GameStateManager.cs">
     <Files>
-      <File FileName="Assets/tronculus/ingame/prefabs/bike/BikeInputController.cs" Line="148" Column="1" />
-      <File FileName="Assets/tronculus/GameStateManager.cs" Line="18" Column="22" />
-      <File FileName="Assets/tronculus/ingame/network/NetworkManagement.cs" Line="127" Column="28" />
+      <File FileName="Assets/tronculus/ingame/prefabs/bike/BikeInputController.cs" Line="22" Column="45" />
+      <File FileName="Assets/tronculus/GameStateManager.cs" Line="21" Column="1" />
+      <File FileName="Assets/tronculus/ingame/network/NetworkManagement.cs" Line="91" Column="3" />
       <File FileName="Assets/tronculus/menu/MenuState.cs" Line="1" Column="1" />
-      <File FileName="Assets/tronculus/ingame/prefabs/bike/BikeCollision.cs" Line="6" Column="2" />
-      <File FileName="Assets/tronculus/ingame/prefabs/bike/bikelogic.cs" Line="59" Column="19" />
-      <File FileName="Assets/AIDodge.cs" Line="24" Column="36" />
+      <File FileName="Assets/tronculus/ingame/prefabs/bike/bikelogic.cs" Line="51" Column="8" />
+      <File FileName="Assets/tronculus/ingame/prefabs/bike/AIDodge.cs" Line="23" Column="29" />
+      <File FileName="Assets/tronculus/ingame/effects/CountDownActivator.cs" Line="29" Column="7" />
     </Files>
-=======
-  <MonoDevelop.Ide.Workbench>
->>>>>>> 679470189104cbff1a6164626f248815e9a5e315
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
@@ -21,15 +17,23 @@
             <Node name="Assets" expanded="True">
               <Node name="tronculus" expanded="True">
                 <Node name="ingame" expanded="True">
+                  <Node name="effects" expanded="True" />
                   <Node name="network" expanded="True" />
-<<<<<<< HEAD
                   <Node name="prefabs" expanded="True">
-                    <Node name="bike" expanded="True">
-                      <Node name="BikeInputController.cs" selected="True" />
-                    </Node>
+                    <Node name="bike" expanded="True" />
                   </Node>
                 </Node>
                 <Node name="menu" expanded="True" />
+                <Node name="GameStateManager.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+          <Node name="Assembly-CSharp-firstpass" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Standard Assets" expanded="True">
+                <Node name="Scripts" expanded="True">
+                  <Node name="Utility Scripts" expanded="True" />
+                </Node>
               </Node>
             </Node>
           </Node>
@@ -38,11 +42,6 @@
               <Node name="Standard Assets" expanded="True">
                 <Node name="Scripts" expanded="True">
                   <Node name="Camera Scripts" expanded="True" />
-=======
-                </Node>
-                <Node name="menu" expanded="True">
-                  <Node name="StateFullMenuElement.cs" selected="True" />
->>>>>>> 679470189104cbff1a6164626f248815e9a5e315
                 </Node>
               </Node>
             </Node>

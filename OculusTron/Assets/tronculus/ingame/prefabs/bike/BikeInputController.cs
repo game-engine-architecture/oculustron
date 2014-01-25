@@ -101,12 +101,12 @@ public class BikeInputController : MonoBehaviour {
 			}
 		}
 		if(turnNow){
+			aiLastTurn = Time.time;
 			if(Random.value > 0.5f){
 				return Direction.LEFT;
 			} else {
 				return Direction.RIGHT;
 			}
-			aiLastTurn = Time.time;
 		}
 		return Direction.FORWARD;
 	}
