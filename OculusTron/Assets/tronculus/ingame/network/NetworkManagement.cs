@@ -124,7 +124,7 @@ public class NetworkManagement : MonoBehaviour {
 	
 	private HostData[] hostList;
  
-	private void RefreshHostList() {
+	public void RefreshHostList() {
 	    MasterServer.RequestHostList(typeName);
 	}
 	 
