@@ -13,7 +13,7 @@ public class CountDownActivator : MonoBehaviour {
 		gameState = GameObject.Find("GameState").GetComponent<GameStateManager>();
 		countDownTextGo = GameObject.Find("CountDownText");
 		countDownText = countDownTextGo.GetComponent<TextMesh>();
-		countDownTextAni = countDownTextGo.GetComponent<Animation>();
+		//countDownTextAni = countDownTextGo.GetComponent<Animation>();
 	}
 	
 	// Update is called once per frame
@@ -25,8 +25,8 @@ public class CountDownActivator : MonoBehaviour {
 			int currsec = (int)(gameState.gameStartsInSeconds-(Time.fixedTime - gameState.getLastChanged())+1);
 			if(lastsecond != currsec){
 				lastsecond = currsec;
-				countDownTextAni.Stop();
-				countDownTextAni.Play("CountDownAnimation");
+				//countDownTextAni.Stop();
+				//countDownTextAni.Play("CountDownAnimation");
 			}
 			countDownText.text = ""+currsec;
 		} else {

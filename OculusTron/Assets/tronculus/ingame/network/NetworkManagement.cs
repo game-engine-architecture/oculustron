@@ -99,11 +99,13 @@ public class NetworkManagement : MonoBehaviour {
 		gameState.setState(GameStateManager.GamesState.WAITING_FOR_PLAYERS);
 		menuState.currentMenuState = 0;
 		
-		//instantiate player on current connection
-		SpawnPlayer();
-		addPlayerToGame(Network.player.ToString());
-		//tell everybody else that i'm there.
-		networkView.RPC("addPlayerToGame", RPCMode.OthersBuffered, Network.player.ToString());
+		for(int i=0; i<gameState.botsCount; i++){
+			string playerName = "bot-"+i;
+			SpawnPlayer(playerName, true);
+			
+		}
+		//instantiate player on current connection & tell everybody else that i'm there.
+		SpawnPlayer(Network.player.ToString());
 	}
 	
 	[RPC]
@@ -113,10 +115,17 @@ public class NetworkManagement : MonoBehaviour {
 		Debug.Log("players in game:"+players.Count);
 	}	
 	 
-	private GameObject SpawnPlayer() {
+	private GameObject SpawnPlayer(string belongsToPlayer, bool isAIControlled=false) {
 		GameObject spawnpoints = GameObject.Find("Spawnpoints");
-		Transform spawnpoint = spawnpoints.transform.GetChild(Network.connections.Length);
+		Transform spawnpoint = spawnpoints.transform.GetChild(players.Count);
 	    GameObject bike = Network.Instantiate(playerPrefab, spawnpoint.position, spawnpoint.rotation, 0) as GameObject;
+		BikeInputController bikeCtrl = bike.GetComponent<BikeInputController>();
+		bikeCtrl.isAIControlled = isAIControlled;
+		bikeCtrl.belongsToPlayer = belongsToPlayer;
+		//add immediately locally
+		addPlayerToGame(belongsToPlayer);
+		//but also tell the world
+		networkView.RPC("addPlayerToGame", RPCMode.OthersBuffered, belongsToPlayer);
 		return bike;
 	}
 	

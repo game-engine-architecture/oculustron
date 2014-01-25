@@ -39,13 +39,17 @@ public class bikelogic : MonoBehaviour {
 					//make sure wall is closed in the corners
 					extendWall(lastCreatedWall, lastCornerPos, inputController.getLastCorner());
 				} else {
-					
+				
 				}
 				lastCreatedWall = createWall(inputController.getLastCorner(), inputController.getDirectionIndex());	
 				lastCornerPos = inputController.getLastCorner();
 				lastDirectionIndex = inputController.getDirectionIndex();
 			} else {
-				extendWall(lastCreatedWall, lastCornerPos, currPos);
+				if(lastCreatedWall != null){
+					extendWall(lastCreatedWall, lastCornerPos, currPos);
+				} else {
+					//lastCreatedWall = createWall(currPos, inputController.getDirectionIndex());	
+				}
 			}
 		}
 	}
