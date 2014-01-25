@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 public class ScoreBoardUpater : MonoBehaviour {
 	
-	ScoreManager manager;
+	GameStateManager manager;
 	TextMesh scoreBoardText;
 	
 	// Use this for initialization
 	void Start () {
-		manager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+		manager = GameObject.Find("GameState").GetComponent<GameStateManager>();
 		scoreBoardText = GameObject.Find("ScoreBoardContent").GetComponent<TextMesh>();
 	}
 	

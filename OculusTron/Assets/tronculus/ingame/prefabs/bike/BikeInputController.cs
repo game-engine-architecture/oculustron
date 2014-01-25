@@ -138,7 +138,7 @@ public class BikeInputController : MonoBehaviour {
 	
 	[RPC]
 	void playerLost(string playerid){
-		GameObject.Find ("ScoreManager").GetComponent<ScoreManager>().playerLost(playerid);
+		GameObject.Find ("GameState").GetComponent<GameStateManager>().playerLost(playerid);
 		if(!Network.player.ToString().Equals(playerid)){
 			//update the score board instantly for other players
 			updateScoreBoard();

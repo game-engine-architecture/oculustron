@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameStateManager : MonoBehaviour {
-	
+		
 	public enum GamesState {
 		MENU,
 		WAITING_FOR_PLAYERS,
@@ -15,6 +16,9 @@ public class GameStateManager : MonoBehaviour {
 	private float lastChange;
 	private NetworkManagement networkManagement;
 	public int gameStartsInSeconds = 5;
+	
+	Dictionary<string, int> score = new Dictionary<string, int>();
+	List<string> deadPlayers = new List<string>();
 	
 	private int _botsCount = 3;
 	public int botsCount
@@ -73,5 +77,27 @@ public class GameStateManager : MonoBehaviour {
 	
 	public bool isState(GamesState state){
 		return currentGameState.Equals(state);
+	}
+	
+	public void addPlayer(string playerid){
+		score[playerid] = 0;
+		GameObject.Find ("ScoreBoardContainer").GetComponent<ScoreBoardUpater>().renderScoreBoard();
+	}
+	
+	public void playerLost(string playerid){
+		deadPlayers.Add(playerid);
+		foreach (KeyValuePair<string, int> pair in score){
+			if(deadPlayers.Contains(pair.Key)){
+				//every alive player gets a point
+				continue;
+			}
+			score[pair.Key] += 1;
+		}
+		Debug.Log ("dead players count: "+deadPlayers.Count);
+		Debug.Log ("players still alive: "+(score.Count - deadPlayers.Count));
+	}
+	
+	public Dictionary<string, int> getScores(){
+		return new Dictionary<string, int>(this.score);
 	}
 }

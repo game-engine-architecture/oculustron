@@ -1,11 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/tronculus/menu/MenuElementControll.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/tronculus/ingame/network/NetworkManagement.cs">
     <Files>
-      <File FileName="Assets/tronculus/menu/MenuActionBehaviour.cs" Line="33" Column="39" />
-      <File FileName="Assets/tronculus/menu/MenuElementControll.cs" Line="7" Column="51" />
-      <File FileName="Assets/tronculus/ingame/network/NetworkManagement.cs" Line="127" Column="31" />
-      <File FileName="Assets/tronculus/GameStateManager.cs" Line="30" Column="67" />
+      <File FileName="Assets/tronculus/ingame/network/NetworkManagement.cs" Line="34" Column="1" />
+      <File FileName="Assets/tronculus/ScoreManager.cs" Line="7" Column="2" />
+      <File FileName="Assets/tronculus/GameStateManager.cs" Line="3" Column="1" />
+      <File FileName="Assets/tronculus/ingame/prefabs/bike/BikeInputController.cs" Line="141" Column="62" />
+      <File FileName="Assets/tronculus/ingame/Image Effects/AntialiasingAsPostEffectEditor.js" Line="6" Column="1" />
+      <File FileName="Assets/tronculus/ingame/score/ScoreBoardUpater.cs" Line="7" Column="18" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -14,10 +16,42 @@
             <Node name="Assets" expanded="True">
               <Node name="tronculus" expanded="True">
                 <Node name="ingame" expanded="True">
-                  <Node name="network" expanded="True" />
+                  <Node name="effects" expanded="True" />
+                  <Node name="network" expanded="True">
+                    <Node name="NetworkManagement.cs" selected="True" />
+                  </Node>
+                  <Node name="prefabs" expanded="True">
+                    <Node name="bike" expanded="True" />
+                  </Node>
+                  <Node name="score" expanded="True" />
                 </Node>
-                <Node name="menu" expanded="True">
-                  <Node name="MenuElementControll.cs" selected="True" />
+                <Node name="menu" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+          <Node name="Assembly-CSharp-firstpass" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Standard Assets" expanded="True">
+                <Node name="Scripts" expanded="True">
+                  <Node name="Utility Scripts" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+          <Node name="Assembly-UnityScript" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="tronculus" expanded="True">
+                <Node name="ingame" expanded="True">
+                  <Node name="Image Effects" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+          <Node name="Assembly-UnityScript-firstpass" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Standard Assets" expanded="True">
+                <Node name="Scripts" expanded="True">
+                  <Node name="Camera Scripts" expanded="True" />
                 </Node>
               </Node>
             </Node>

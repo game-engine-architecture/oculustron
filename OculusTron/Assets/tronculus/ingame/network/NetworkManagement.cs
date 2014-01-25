@@ -7,7 +7,6 @@ public class NetworkManagement : MonoBehaviour {
  
 	private MenuState menuState;
 	private GameStateManager gameState;
-	private ScoreManager scoreManager;
 	private const string typeName = "Tronculus";
 	private const string gameName = "DeathMatch";
 	public GameObject playerPrefab;
@@ -22,7 +21,6 @@ public class NetworkManagement : MonoBehaviour {
 		this.menuState = GameObject.Find("MenuState").GetComponent<MenuState>();
 		this.gameState = GameObject.Find("GameState").GetComponent<GameStateManager>();
 		players = new List<string>();
-		scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
 	}
 	
 	//Server
@@ -110,7 +108,7 @@ public class NetworkManagement : MonoBehaviour {
 	
 	[RPC]
 	void addPlayerToGame(string playerid){
-		scoreManager.addPlayer(playerid);	
+		gameState.addPlayer(playerid);	
     	players.Add(playerid);
 		Debug.Log("players in game:"+players.Count);
 	}	
