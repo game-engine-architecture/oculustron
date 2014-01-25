@@ -34,20 +34,26 @@ public class bikelogic : MonoBehaviour {
 		gameState = GameObject.Find("GameState").GetComponent<GameStateManager>();
 	}
 	
-	public void hideWalls(){
+	public void hideWallsAndDestroyBike(){
 		this._hideWalls = true;
 		this._hideWallsTimeSince = Time.time;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(gameState.getGameState().Equals(GameStateManager.GamesState.GAME_RUNNING)){
+		if(gameState.isState(GameStateManager.GamesState.GAME_RUNNING) || gameState.isState(GameStateManager.GamesState.GAME_ENDED)){
 			if(this._hideWalls){
 				//player is dead, hide walls
 				float wallHidePerc = (Time.time - _hideWallsTimeSince) / _hideWallsDuration;
-				if(wallHidePerc < 1.0f){
+				if(wallHidePerc < 1.0f && !gameState.isState(GameStateManager.GamesState.GAME_ENDED)){
 					float MAGIC_CLIPPING_VAL = 1.2f;
 					this.wallcontainer.transform.position = - Vector3.up * wallHidePerc * wallHeight * MAGIC_CLIPPING_VAL;
+				} else {
+					if(networkView.isMine){
+						Debug.Log("Removing GameObject: "+gameObject.name);
+						Network.Destroy(gameObject);
+					}
+					GameObject.Destroy(this.wallcontainer);
 				}
 			} else {
 				//player is alive, update walls

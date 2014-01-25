@@ -12,13 +12,14 @@ public class CameraEffectController : MonoBehaviour {
 	public float iterationChangeSec = 1f;
 	
 	private GlowEffect glowEffect;
-	private float lastIterationChange = Time.time;
+	private float lastIterationChange;
 	
 	private GameStateManager gameState;
 	// Use this for initialization
 	void Start () {
 		gameState = GameObject.Find("GameState").GetComponent<GameStateManager>();
 		glowEffect = this.gameObject.GetComponent<GlowEffect>();
+		lastIterationChange = Time.time;
 	}
 	
 	// Update is called once per frame

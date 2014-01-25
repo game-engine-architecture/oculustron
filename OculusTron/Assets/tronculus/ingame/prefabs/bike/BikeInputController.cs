@@ -30,13 +30,7 @@ public class BikeInputController : MonoBehaviour {
 		directionIndex = (int)(Mathf.Round(this.gameObject.transform.rotation.eulerAngles.y/90f))+3 % 4;
 		rotation = Quaternion.AngleAxis(90 * (directionIndex), Vector3.up) * rotation;
 		lastCorner = this.gameObject.transform.position;
-		if (networkView.isMine) {
-			GameObject cam = GameObject.Find("Main Camera");
-			if(cam != null){
-				SmoothFollow follow = cam.GetComponent<SmoothFollow>();
-				follow.target = this.gameObject.transform;
-			}
-		}
+
 		this.modelTransform = this.GetComponent<Transform>();
 		gameState = GameObject.Find("GameState").GetComponent<GameStateManager>();
 	}
@@ -86,7 +80,7 @@ public class BikeInputController : MonoBehaviour {
 				//deltaT*movementSpeed
 				characterController.Move(movement);
 			} else if(gameState.isState(GameStateManager.GamesState.GAME_ENDED)){
-				
+				die ();
 			}
 		}
 	}
@@ -131,18 +125,24 @@ public class BikeInputController : MonoBehaviour {
 			hit.gameObject.name.StartsWith("wall") || 
 			"Wall".Equals(hit.gameObject.name))
 		{
-			this.gameObject.GetComponent<CharacterController>().enabled = false;
-			this.gameObject.GetComponent<BikeInputController>().enabled = false;
-			this.gameObject.GetComponent<ParticleSystem>().loop = false;
-			wallLogic.hideWalls();
-			networkView.RPC("playerLost", RPCMode.OthersBuffered, belongsToPlayer);
-			playerLost(belongsToPlayer);
-			networkView.RPC("createExplosion", RPCMode.All, this.gameObject.transform.position);
-			if(!isAIControlled){
-				GameObject.Find ("MainCamera").GetComponent<CameraInstructor>().showScoreBoardLater();
-			}
-			Network.Destroy(gameObject);
+			this.die();
 		}
+	}
+	
+	void die(){
+		this.gameObject.GetComponent<CharacterController>().enabled = false;
+		this.gameObject.GetComponent<BikeInputController>().enabled = false;
+		this.gameObject.GetComponent<ParticleSystem>().loop = false;
+		
+		networkView.RPC("playerLost", RPCMode.AllBuffered, belongsToPlayer);
+		
+		networkView.RPC("createExplosion", RPCMode.All, this.gameObject.transform.position);
+		
+		if(!isAIControlled){
+			GameObject.Find ("Main Camera").GetComponent<CameraInstructor>().showScoreBoardLater();
+		}
+		
+		wallLogic.hideWallsAndDestroyBike();
 	}
 	
 	[RPC]
@@ -156,6 +156,7 @@ public class BikeInputController : MonoBehaviour {
 	
 	[RPC]
 	void createExplosion(Vector3 pos){
+		Debug.Log ("creating explosion");
 		Network.Instantiate(explosionPrefab, pos, Quaternion.identity, 0);
 	}
 }

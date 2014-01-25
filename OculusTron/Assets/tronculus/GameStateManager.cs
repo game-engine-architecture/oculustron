@@ -13,9 +13,11 @@ public class GameStateManager : MonoBehaviour {
 		GAME_WAITING,
 	}
 	
+	
 	private GamesState currentGameState;
 	private float lastChange;
 	private NetworkManagement networkManagement;
+	private MenuState menuState;
 	public int gameStartsInSeconds = 5;
 	public int gameEndedWait = 5;
 	
@@ -46,6 +48,7 @@ public class GameStateManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		setState(GamesState.MENU);
+		this.menuState = GameObject.Find("MenuState").GetComponent<MenuState>();
 		networkManagement = GameObject.Find("NetworkManager").GetComponent<NetworkManagement>();
 	}
 	
@@ -62,7 +65,9 @@ public class GameStateManager : MonoBehaviour {
 				setState(GamesState.GAME_RUNNING);
 			}
 		} else if(isState(GamesState.GAME_ENDED)){
-			
+			if(lastChangedLongerThan(gameEndedWait)){
+				setState(GamesState.GAME_STARTING);
+			}
 		}
 	}
 	
@@ -71,9 +76,11 @@ public class GameStateManager : MonoBehaviour {
 		lastChange = Time.fixedTime;
 		Debug.Log("GAME STATE: "+currentGameState.ToString());
 		if(isState (GamesState.GAME_ENDED)){
-			Debug.Log("TODO: REMOVE OLD BIKES");
 			deadPlayers.Clear();
-			networkManagement.initializeGame();
+		} else if(isState (GamesState.GAME_STARTING)){
+			deadPlayers.Clear();
+			menuState.currentMenuState = 0;
+			networkManagement.respawnPlayers();
 		}
 	}
 	
@@ -102,15 +109,18 @@ public class GameStateManager : MonoBehaviour {
 		deadPlayers.Add(playerid);
 		Debug.Log ("dead players count: "+deadPlayers.Count);
 		Debug.Log ("players still alive: "+(score.Count - deadPlayers.Count));
-		foreach (KeyValuePair<string, int> pair in score){
+		Dictionary<string, int> currentScore = new Dictionary<string, int>(score);
+		foreach (KeyValuePair<string, int> pair in currentScore){
 			if(deadPlayers.Contains(pair.Key)){
 				//every alive player gets a point
 				continue;
 			}
 			score[pair.Key] += 1;
 		}
-		if(score.Count - deadPlayers.Count <= 1){
-			setState(GamesState.GAME_ENDED);
+		if(isState(GamesState.GAME_RUNNING)){
+			if(score.Count - deadPlayers.Count == 1){
+				setState(GamesState.GAME_ENDED);
+			}
 		}
 	}
 	
