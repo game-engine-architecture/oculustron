@@ -15,12 +15,18 @@ public class GameStateManager : MonoBehaviour {
 	private float lastChange;
 	private NetworkManagement networkManagement;
 	public int gameStartsInSeconds = 5;
+	public int botsCount = 3;
 	
+<<<<<<< HEAD
 	private int _playersNeededForGame = 1;
 	public int playersNeededForGame
+=======
+	public int playersNeededForGame = 1;
+	private int _playersNeededForGame
+>>>>>>> 305eaff33fdac09418c851cb31a85c7ca8e1538e
 	{
-    	get { return this._playersNeededForGame; }
-    	set { if ((value>0)&&(value<9)) this._playersNeededForGame = value; }
+    	get { return this.playersNeededForGame; }
+    	set { if ((value>0)&&(value<9)) this.playersNeededForGame = value; }
 	}
 	
 	private int _arenaSizeMultiplicator=8;
