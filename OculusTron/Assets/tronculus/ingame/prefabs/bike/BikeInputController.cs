@@ -14,7 +14,7 @@ public class BikeInputController : MonoBehaviour {
 	GameStateManager gameState;
 	
 	public string belongsToPlayer;
-	
+	private bikelogic wallLogic;
 	public GameObject explosionPrefab;
 	
 	float aiLastTurn = -1f;
@@ -26,7 +26,9 @@ public class BikeInputController : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		directionIndex = (int)Mathf.Round(this.gameObject.transform.rotation.eulerAngles.y/90f);
+		wallLogic = this.GetComponent<bikelogic>();
+		directionIndex = (int)(Mathf.Round(this.gameObject.transform.rotation.eulerAngles.y/90f))+3 % 4;
+		rotation = Quaternion.AngleAxis(90 * (directionIndex), Vector3.up) * rotation;
 		lastCorner = this.gameObject.transform.position;
 		if (networkView.isMine) {
 			GameObject cam = GameObject.Find("Main Camera");
@@ -157,7 +159,8 @@ public class BikeInputController : MonoBehaviour {
 	void die(){
 		this.gameObject.GetComponent<CharacterController>().enabled = false;
 		this.gameObject.GetComponent<BikeInputController>().enabled = false;
-		this.gameObject.GetComponent<ParticleSystem>().loop = false; 
+		this.gameObject.GetComponent<ParticleSystem>().loop = false;
+		wallLogic.hideWalls();
 	}
 	
 	void showScoreBoard(){

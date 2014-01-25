@@ -16,6 +16,10 @@ public class bikelogic : MonoBehaviour {
 	float wallWidth = 0.05f;
 	int wallnumber = 0;
 	
+	private bool _hideWalls = false;
+	private float _hideWallsTimeSince;
+	private float _hideWallsDuration = 1.0f;
+	
 	GameStateManager gameState;
 	
 	// Use this for initialization
@@ -24,31 +28,47 @@ public class bikelogic : MonoBehaviour {
 		inputController = bike1.GetComponent<BikeInputController>();
 		lastCornerPos = currentBikePos();
 		wallcontainer = new GameObject();
+		wallcontainer.transform.position = Vector3.zero;
 		wallcontainer.name = "bike_wall_container";
 		lastDirectionIndex = inputController.getDirectionIndex();
 		gameState = GameObject.Find("GameState").GetComponent<GameStateManager>();
 	}
 	
+	public void hideWalls(){
+		this._hideWalls = true;
+		this._hideWallsTimeSince = Time.time;
+	}
+	
 	// Update is called once per frame
 	void Update () {
 		if(gameState.getGameState().Equals(GameStateManager.GamesState.GAME_RUNNING)){
-			Vector3 currPos = currentBikePos();
-			//check if bike was rotated
-			if(lastDirectionIndex != inputController.getDirectionIndex()){
-				if(lastCreatedWall != null){
-					//make sure wall is closed in the corners
-					extendWall(lastCreatedWall, lastCornerPos, inputController.getLastCorner());
-				} else {
-				
+			if(this._hideWalls){
+				//player is dead, hide walls
+				float wallHidePerc = (Time.time - _hideWallsTimeSince) / _hideWallsDuration;
+				if(wallHidePerc < 1.0f){
+					float MAGIC_CLIPPING_VAL = 1.2f;
+					this.wallcontainer.transform.position = - Vector3.up * wallHidePerc * wallHeight * MAGIC_CLIPPING_VAL;
 				}
-				lastCreatedWall = createWall(inputController.getLastCorner(), inputController.getDirectionIndex());	
-				lastCornerPos = inputController.getLastCorner();
-				lastDirectionIndex = inputController.getDirectionIndex();
 			} else {
-				if(lastCreatedWall != null){
-					extendWall(lastCreatedWall, lastCornerPos, currPos);
+				//player is alive, update walls
+				Vector3 currPos = currentBikePos();
+				//check if bike was rotated
+				if(lastDirectionIndex != inputController.getDirectionIndex()){
+					if(lastCreatedWall != null){
+						//make sure wall is closed in the corners
+						extendWall(lastCreatedWall, lastCornerPos, inputController.getLastCorner());
+					} else {
+					
+					}
+					lastCreatedWall = createWall(inputController.getLastCorner(), inputController.getDirectionIndex());	
+					lastCornerPos = inputController.getLastCorner();
+					lastDirectionIndex = inputController.getDirectionIndex();
 				} else {
-					//lastCreatedWall = createWall(currPos, inputController.getDirectionIndex());	
+					if(lastCreatedWall != null){
+						extendWall(lastCreatedWall, lastCornerPos, currPos);
+					} else {
+						lastCreatedWall = createWall(currPos, lastDirectionIndex);	
+					}
 				}
 			}
 		}
