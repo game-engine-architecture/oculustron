@@ -12,10 +12,13 @@ public class BikeInputController : MonoBehaviour {
 	Vector3 lastCorner;
 	public bool isAIControlled = false;
 	GameStateManager gameState;
+	int playerNumber = 0;
 	
 	public string belongsToPlayer;
 	private bikelogic wallLogic;
 	public GameObject explosionPrefab;
+	
+	AudioSource motorSound;
 	
 	float aiLastTurn = -1f;
 	float aiMinimumTurnWaitTime = 1f;
@@ -33,12 +36,16 @@ public class BikeInputController : MonoBehaviour {
 
 		this.modelTransform = this.GetComponent<Transform>();
 		gameState = GameObject.Find("GameState").GetComponent<GameStateManager>();
+		this.motorSound = this.gameObject.GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (networkView.isMine){
 			if(gameState.isState(GameStateManager.GamesState.GAME_RUNNING)) {
+				if(!this.motorSound.isPlaying){
+					this.motorSound.Play();
+				}
 				if(aiLastTurn < 0){
 					aiLastTurn = Time.time - aiMinimumTurnWaitTime;
 					//initialize on game start, so that bots can turn immediately
@@ -83,6 +90,13 @@ public class BikeInputController : MonoBehaviour {
 				die ();
 			}
 		}
+	}
+	
+	public void setPlayerNumber(int num){
+		this.playerNumber = num;
+	}
+	public int getPlayerNumber(){
+		return this.playerNumber;
 	}
 	
 	private Direction calculateAIMovement(){

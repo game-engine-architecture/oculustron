@@ -90,7 +90,7 @@ public class bikelogic : MonoBehaviour {
 		GameObject wall = Network.Instantiate(wallPrefab, start, Quaternion.Euler(new Vector3(0, direction*90, 0)), 0) as GameObject;
 		//set matrial
 		MeshRenderer renderer = wall.GetComponent<MeshRenderer>();
-		Material wallmaterial = wall.GetComponent<WallMaterials>().wallMaterials[int.Parse(Network.player.ToString())];
+		Material wallmaterial = wall.GetComponent<WallMaterials>().wallMaterials[inputController.getPlayerNumber()];
 		renderer.material = wallmaterial;
 		
 		//add wall to bike wall container

@@ -25,6 +25,9 @@ public class CountDownActivator : MonoBehaviour {
 			int currsec = (int)(gameState.gameStartsInSeconds-(Time.fixedTime - gameState.getLastChanged())+1);
 			if(lastsecond != currsec){
 				lastsecond = currsec;
+				if(currsec == 3){
+					this.gameObject.GetComponent<AudioSource>().Play();
+				}
 				//countDownTextAni.Stop();
 				//countDownTextAni.Play("CountDownAnimation");
 			}

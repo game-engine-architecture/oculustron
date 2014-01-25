@@ -14,4 +14,8 @@ public class MenuState : MonoBehaviour {
 	void Update () {
 	
 	}
+	
+	public void playClickSound(){
+		this.gameObject.GetComponent<AudioSource>().Play();
+	}
 }

@@ -19,7 +19,7 @@ public class StateFullMenuElement : MonoBehaviour {
 			Application.Quit();
 			return;
 		}
-
+		state.playClickSound();
 		state.currentMenuState = thisMenuState;
 	}
 }

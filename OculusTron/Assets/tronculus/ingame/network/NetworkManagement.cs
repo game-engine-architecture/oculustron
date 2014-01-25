@@ -124,6 +124,7 @@ public class NetworkManagement : MonoBehaviour {
 		Transform spawnpoint = spawnpoints.transform.GetChild(player.id);
 	    GameObject bike = Network.Instantiate(playerPrefab, spawnpoint.position, spawnpoint.rotation, 0) as GameObject;
 		BikeInputController bikeCtrl = bike.GetComponent<BikeInputController>();
+		bikeCtrl.setPlayerNumber(player.id);
 		bikeCtrl.isAIControlled = isAIControlled;
 		bikeCtrl.belongsToPlayer = belongsToPlayer;
 		return bike;

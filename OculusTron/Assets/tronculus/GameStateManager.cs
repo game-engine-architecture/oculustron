@@ -78,6 +78,8 @@ public class GameStateManager : MonoBehaviour {
 		if(isState (GamesState.GAME_ENDED)){
 			deadPlayers.Clear();
 		} else if(isState (GamesState.GAME_STARTING)){
+			AudioSource startSound = this.gameObject.GetComponent<AudioSource>();
+			startSound.Play();
 			deadPlayers.Clear();
 			menuState.currentMenuState = 0;
 			networkManagement.respawnPlayers();
