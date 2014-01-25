@@ -6,6 +6,10 @@
 *.csproj
 *.unityproj
 
+tronculus.linux*
+tronculus.mac*
+tronculus.windows*
+
 # =============== #
 # Unity generated #
 # =============== #

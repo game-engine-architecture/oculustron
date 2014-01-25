@@ -10,12 +10,14 @@ public class GameStateManager : MonoBehaviour {
 		GAME_STARTING,
 		GAME_RUNNING,
 		GAME_ENDED,
+		GAME_WAITING,
 	}
 	
 	private GamesState currentGameState;
 	private float lastChange;
 	private NetworkManagement networkManagement;
 	public int gameStartsInSeconds = 5;
+	public int gameEndedWait = 5;
 	
 	Dictionary<string, int> score = new Dictionary<string, int>();
 	List<string> deadPlayers = new List<string>();
@@ -51,24 +53,36 @@ public class GameStateManager : MonoBehaviour {
 	void Update () {
 		if(isState(GamesState.WAITING_FOR_PLAYERS)){
 			//check if enough players have joined
-			if(networkManagement.currentPlayerCount() >= _playersNeededForGame){
+			if(networkManagement.currentPlayerCount() >= _playersNeededForGame + _botsCount){
 				setState(GamesState.GAME_STARTING);
 			}
 		} else if(isState(GamesState.GAME_STARTING)){
 			// once enough there are enough players, start game after some seconds
-			if(Time.fixedTime - lastChange > gameStartsInSeconds){
+			if(lastChangedLongerThan(gameStartsInSeconds)){
 				setState(GamesState.GAME_RUNNING);
 			}
+		} else if(isState(GamesState.GAME_ENDED)){
+			
 		}
 	}
 	
 	public void setState(GamesState state){
 		currentGameState = state;
 		lastChange = Time.fixedTime;
+		Debug.Log("GAME STATE: "+currentGameState.ToString());
+		if(isState (GamesState.GAME_ENDED)){
+			Debug.Log("TODO: REMOVE OLD BIKES");
+			deadPlayers.Clear();
+			networkManagement.initializeGame();
+		}
 	}
 	
 	public GamesState getGameState(){
 		return this.currentGameState;
+	}
+	
+	public bool lastChangedLongerThan(float delaySec){
+		return Time.fixedTime - lastChange > delaySec;
 	}
 	
 	public float getLastChanged(){
@@ -86,6 +100,8 @@ public class GameStateManager : MonoBehaviour {
 	
 	public void playerLost(string playerid){
 		deadPlayers.Add(playerid);
+		Debug.Log ("dead players count: "+deadPlayers.Count);
+		Debug.Log ("players still alive: "+(score.Count - deadPlayers.Count));
 		foreach (KeyValuePair<string, int> pair in score){
 			if(deadPlayers.Contains(pair.Key)){
 				//every alive player gets a point
@@ -93,8 +109,9 @@ public class GameStateManager : MonoBehaviour {
 			}
 			score[pair.Key] += 1;
 		}
-		Debug.Log ("dead players count: "+deadPlayers.Count);
-		Debug.Log ("players still alive: "+(score.Count - deadPlayers.Count));
+		if(score.Count - deadPlayers.Count <= 1){
+			setState(GamesState.GAME_ENDED);
+		}
 	}
 	
 	public Dictionary<string, int> getScores(){

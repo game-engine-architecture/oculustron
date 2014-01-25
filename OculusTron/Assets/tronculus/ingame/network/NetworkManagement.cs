@@ -93,10 +93,10 @@ public class NetworkManagement : MonoBehaviour {
 		initializeGame();
 	}
 	
-	void initializeGame(){
+	public void initializeGame(){
 		gameState.setState(GameStateManager.GamesState.WAITING_FOR_PLAYERS);
 		menuState.currentMenuState = 0;
-		
+		players.Clear();
 		for(int i=0; i<gameState.botsCount; i++){
 			string playerName = "bot-"+i;
 			SpawnPlayer(playerName, true);

@@ -43,47 +43,51 @@ public class BikeInputController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (networkView.isMine && gameState.getGameState().Equals(GameStateManager.GamesState.GAME_RUNNING)) {
-			if(aiLastTurn < 0){
-				aiLastTurn = Time.time - aiMinimumTurnWaitTime;
-				//initialize on game start, so that bots can turn immediately
-			}
-			float deltaT = Time.deltaTime;
-			Direction bikeDirection = Direction.FORWARD;
-			if(isAIControlled){
-				bikeDirection = calculateAIMovement();
-			} else {
-				if(Input.GetKeyDown ("left")){
-					bikeDirection = Direction.LEFT;
-				} else if(Input.GetKeyDown ("right")){
-					bikeDirection = Direction.RIGHT;
+		if (networkView.isMine){
+			if(gameState.isState(GameStateManager.GamesState.GAME_RUNNING)) {
+				if(aiLastTurn < 0){
+					aiLastTurn = Time.time - aiMinimumTurnWaitTime;
+					//initialize on game start, so that bots can turn immediately
 				}
+				float deltaT = Time.deltaTime;
+				Direction bikeDirection = Direction.FORWARD;
+				if(isAIControlled){
+					bikeDirection = calculateAIMovement();
+				} else {
+					if(Input.GetKeyDown ("left")){
+						bikeDirection = Direction.LEFT;
+					} else if(Input.GetKeyDown ("right")){
+						bikeDirection = Direction.RIGHT;
+					}
+				}
+				if (bikeDirection.Equals(Direction.LEFT)){
+					rotation = Quaternion.AngleAxis(-90, Vector3.up) * rotation;
+					directionIndex += 1;
+					directionIndex %= 4;
+					lastCorner = this.gameObject.transform.position;
+				} else if(bikeDirection.Equals(Direction.RIGHT)){
+					rotation = Quaternion.AngleAxis(90, Vector3.up) * rotation;
+					directionIndex += 3;
+					directionIndex %= 4;
+					lastCorner = this.gameObject.transform.position;
+				}
+				
+				float rotadiff = Vector3.Dot(rotation.normalized, this.modelTransform.right.normalized);
+				rotadiff *= deltaT * rotationSpeed;
+				this.modelTransform.rotation *= Quaternion.AngleAxis(rotadiff * 180, Vector3.up);
+				Vector3 pos = this.modelTransform.position;
+				pos.y = 0;
+				this.modelTransform.position = pos;
+				
+				//bikes always move forward
+				float vert = 1f; //Input.GetAxis("Vertical");
+				Vector3 movement = new Vector3(0,0,0);
+				movement += rotation * vert * movementSpeed;
+				//deltaT*movementSpeed
+				characterController.Move(movement);
+			} else if(gameState.isState(GameStateManager.GamesState.GAME_ENDED)){
+				
 			}
-			if (bikeDirection.Equals(Direction.LEFT)){
-				rotation = Quaternion.AngleAxis(-90, Vector3.up) * rotation;
-				directionIndex += 1;
-				directionIndex %= 4;
-				lastCorner = this.gameObject.transform.position;
-			} else if(bikeDirection.Equals(Direction.RIGHT)){
-				rotation = Quaternion.AngleAxis(90, Vector3.up) * rotation;
-				directionIndex += 3;
-				directionIndex %= 4;
-				lastCorner = this.gameObject.transform.position;
-			}
-			
-			float rotadiff = Vector3.Dot(rotation.normalized, this.modelTransform.right.normalized);
-			rotadiff *= deltaT * rotationSpeed;
-			this.modelTransform.rotation *= Quaternion.AngleAxis(rotadiff * 180, Vector3.up);
-			Vector3 pos = this.modelTransform.position;
-			pos.y = 0;
-			this.modelTransform.position = pos;
-			
-			//bikes always move forward
-			float vert = 1f; //Input.GetAxis("Vertical");
-			Vector3 movement = new Vector3(0,0,0);
-			movement += rotation * vert * movementSpeed;
-			//deltaT*movementSpeed
-			characterController.Move(movement);
 		}
 	}
 	
@@ -127,12 +131,17 @@ public class BikeInputController : MonoBehaviour {
 			hit.gameObject.name.StartsWith("wall") || 
 			"Wall".Equals(hit.gameObject.name))
 		{
-			die();	
-			networkView.RPC("playerLost", RPCMode.AllBuffered, belongsToPlayer);
+			this.gameObject.GetComponent<CharacterController>().enabled = false;
+			this.gameObject.GetComponent<BikeInputController>().enabled = false;
+			this.gameObject.GetComponent<ParticleSystem>().loop = false;
+			wallLogic.hideWalls();
+			networkView.RPC("playerLost", RPCMode.OthersBuffered, belongsToPlayer);
+			playerLost(belongsToPlayer);
 			networkView.RPC("createExplosion", RPCMode.All, this.gameObject.transform.position);
 			if(!isAIControlled){
-				Invoke ("showScoreBoard", 2);
+				GameObject.Find ("MainCamera").GetComponent<CameraInstructor>().showScoreBoardLater();
 			}
+			Network.Destroy(gameObject);
 		}
 	}
 	
@@ -141,41 +150,12 @@ public class BikeInputController : MonoBehaviour {
 		GameObject.Find ("GameState").GetComponent<GameStateManager>().playerLost(playerid);
 		if(!Network.player.ToString().Equals(playerid)){
 			//update the score board instantly for other players
-			updateScoreBoard();
+			GameObject.Find ("ScoreBoardContainer").GetComponent<ScoreBoardUpater>().renderScoreBoard();
 		}
 	}
 	
 	[RPC]
 	void createExplosion(Vector3 pos){
 		Network.Instantiate(explosionPrefab, pos, Quaternion.identity, 0);
-	}
-	
-	void cameraFollow(GameObject go){
-		GameObject maincam = GameObject.Find("Main Camera");
-		SmoothFollow follower = maincam.GetComponent<SmoothFollow>();
-		follower.target = go.transform;
-	}
-
-	void die(){
-		this.gameObject.GetComponent<CharacterController>().enabled = false;
-		this.gameObject.GetComponent<BikeInputController>().enabled = false;
-		this.gameObject.GetComponent<ParticleSystem>().loop = false;
-		wallLogic.hideWalls();
-	}
-	
-	void showScoreBoard(){
-		cameraFollow(GameObject.Find ("ScoreBoardContainer"));
-		//update score board after board was shown
-		Invoke ("updateScoreBoard", 1);
-		Invoke ("showPlayfield", 3);
-	}
-	
-	void showPlayfield(){
-		cameraFollow(GameObject.Find ("LevelOverviewPoint"));
-	}
-	
-	void updateScoreBoard(){
-		ScoreBoardUpater updater = GameObject.Find ("ScoreBoardContainer").GetComponent<ScoreBoardUpater>();
-		updater.renderScoreBoard();
 	}
 }
