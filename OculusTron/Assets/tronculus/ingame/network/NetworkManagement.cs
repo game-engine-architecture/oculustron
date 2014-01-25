@@ -127,8 +127,7 @@ public class NetworkManagement : MonoBehaviour {
 		return bike;
 	}
 	
-	//Client
-	
+	//Client	
 	private HostData[] hostList;
  
 	public void RefreshHostList() {

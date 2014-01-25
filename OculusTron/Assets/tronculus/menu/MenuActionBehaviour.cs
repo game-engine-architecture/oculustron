@@ -11,9 +11,12 @@ public class MenuActionBehaviour : MonoBehaviour {
 	private NetworkManagement networkManagement; 
 	private GameStateManager gameState;
 	private GameObject GameList; 
+	private ArrayList games;
+	
 	private TextMesh playercountText;
 	private TextMesh botscountText;
 	private TextMesh arenasizeText;
+	
 	
 	void Start () {
 		networkManagement = GameObject.Find("NetworkManager").GetComponent<NetworkManagement>();
@@ -22,6 +25,7 @@ public class MenuActionBehaviour : MonoBehaviour {
 		botscountText = GameObject.Find("botscount_Text").GetComponent<TextMesh>();
 		arenasizeText = GameObject.Find("arenasize_Text").GetComponent<TextMesh>();	
 		GameList = GameObject.Find("AvailableGamesList");
+		games = new ArrayList();
 	}
 	
 	void Update () {}
@@ -32,8 +36,17 @@ public class MenuActionBehaviour : MonoBehaviour {
         		networkManagement.StartServer();
         	break;
     		case MenuActionType.REFRESHHOSTS:
-				GameObject obj = GameObject.Instantiate(hostPrefab) as GameObject;
-				obj.transform.parent = GameList.transform;
+				networkManagement.RefreshHostList();
+				foreach (GameObject go in games){
+					Destroy(go);
+				}
+				for (int i=0;i<3;i++){
+					GameObject obj = GameObject.Instantiate(hostPrefab, new Vector3(0,0,0), Quaternion.identity) as GameObject;
+					obj.transform.parent = GameList.transform;
+					obj.transform.localPosition = new Vector3(0.0f,i*(-0.2f),0.0f);
+					games.Add(obj);
+				}
+				
 			break;
 			case MenuActionType.INCPLAYER:
 				gameState.playersNeededForGame++;
