@@ -9,5 +9,5 @@ EditorBuildSettings:
     path: Assets/tronculusmenu.unity
   - enabled: 0
     path: Assets/Menu.unity
-  - enabled: 0
-    path: Assets/testscene.unity
+  - enabled: 1
+    path: Assets/tronculus.unity

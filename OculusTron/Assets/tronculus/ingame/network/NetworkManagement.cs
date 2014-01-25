@@ -26,7 +26,7 @@ public class NetworkManagement : MonoBehaviour {
 	}
 	
 	//Server
-	private void StartServer() {
+	public void StartServer() {
 	    Network.InitializeServer(4, 25000, !Network.HavePublicAddress());
 	    MasterServer.RegisterHost(typeName, gameName);
 	}
@@ -41,7 +41,7 @@ public class NetworkManagement : MonoBehaviour {
 	//setup
 	private string playerCountEditStr = "2";
 	
-	void OnGUI() {
+/*	void OnGUI() {
 		
 		
 		int screenWidth = Screen.width;
@@ -83,7 +83,7 @@ public class NetworkManagement : MonoBehaviour {
 			
 			//gameState.playersNeededForGame = Convert.ToInt32(playerCountEditStr);
 		}
-	}
+	}*/
 	
 	void OnServerInitialized() {
 		Debug.Log("Server Initialized");

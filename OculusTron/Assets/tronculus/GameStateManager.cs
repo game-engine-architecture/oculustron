@@ -15,9 +15,13 @@ public class GameStateManager : MonoBehaviour {
 	private float lastChange;
 	private NetworkManagement networkManagement;
 	public int playersNeededForGame = 1;
-	public int botsCount = 1;
 	public int gameStartsInSeconds = 5;
 	
+	public int playersNeededForGame
+	{
+    	get { return this._playersNeededForGame; }
+    	set { if ((value>0)&&(value<9)) this._playersNeededForGame = value; }
+	}
 	
 	// Use this for initialization
 	void Start () {
@@ -29,7 +33,7 @@ public class GameStateManager : MonoBehaviour {
 	void Update () {
 		if(isState(GamesState.WAITING_FOR_PLAYERS)){
 			//check if enough players have joined
-			if(networkManagement.currentPlayerCount() >= playersNeededForGame){
+			if(networkManagement.currentPlayerCount() >= _playersNeededForGame){
 				setState(GamesState.GAME_STARTING);
 			}
 		} else if(isState(GamesState.GAME_STARTING)){
