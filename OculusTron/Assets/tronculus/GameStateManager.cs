@@ -18,11 +18,11 @@ public class GameStateManager : MonoBehaviour {
 	public int botsCount = 3;
 	
 
-	private			 int playersNeededForGame = 1;
-	public int _playersNeededForGame
+	private int _playersNeededForGame = 1;
+	public int playersNeededForGame
 	{
-    	get { return this.playersNeededForGame; }
-    	set { if ((value>0)&&(value<9)) this.playersNeededForGame = value; }
+    	get { return this._playersNeededForGame; }
+    	set { if ((value>0)&&(value<9)) this._playersNeededForGame = value; }
 	}
 	
 	private int _arenaSizeMultiplicator=8;
