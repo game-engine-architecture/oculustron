@@ -3,23 +3,32 @@ using System.Collections;
 
 public class GameListElement : MonoBehaviour {
 	
-	public string contentString;
-	private TextMesh text;
+	private HostData _hostData;
+	public HostData hostData
+	{
+    	get { return this._hostData;}
+		set { this._hostData = value; 
+			  updateFameNameText("  "); }
+	}
 	
+	private TextMesh text;
 	
 	void Start () {
 		text = gameObject.GetComponent<TextMesh>();
-		contentString = "Open game - 4 Player - 32 ";
+		updateFameNameText("  ");
+	}
+	
+	private void updateFameNameText(string pretex){
+		if ((text!=null)&&(_hostData!=null)) text.text = pretex+_hostData.gameName;
 	}
 	
 	void Update () {}
 	
 	void OnMouseEnter() {
-		text.text = "< "+contentString;
+		updateFameNameText("<  ");
     }
 	
 	void OnMouseExit() {
-		text.text = "  "+contentString;
-		
+		updateFameNameText("  ");	
     }	
 }

@@ -4,7 +4,7 @@ using System;
 
 public class MenuActionBehaviour : MonoBehaviour {
 
-	public enum MenuActionType {STARTGAME, REFRESHHOSTS, INCPLAYER, DECPLAYER, INCBOTS, DECBOTS, INCMAPSIZE, DECMAPSIZE,};
+	public enum MenuActionType {STARTGAME, REFRESHHOSTS, INCPLAYER, DECPLAYER, INCBOTS, DECBOTS, INCMAPSIZE, DECMAPSIZE, CONNECTHOST};
 	public MenuActionType menuActionType;
 	public GameObject hostPrefab;
 	
@@ -36,14 +36,20 @@ public class MenuActionBehaviour : MonoBehaviour {
         		networkManagement.StartServer();
         	break;
     		case MenuActionType.REFRESHHOSTS:
-				networkManagement.RefreshHostList();
+				HostData[] hostList = networkManagement.hostList;
+				
 				foreach (GameObject go in games){
-					Destroy(go);
+					DestroyImmediate(go);
 				}
-				for (int i=0;i<3;i++){
+				for (int i=0;i<hostList.Length;i++){
 					GameObject obj = GameObject.Instantiate(hostPrefab, new Vector3(0,0,0), Quaternion.identity) as GameObject;
 					obj.transform.parent = GameList.transform;
 					obj.transform.localPosition = new Vector3(0.0f,i*(-0.2f),0.0f);
+					
+					GameListElement gle = obj.GetComponent<GameListElement>();
+					gle.hostData = hostList[i];
+					//gle.contentString = hostList[i].gameName;
+					
 					games.Add(obj);
 				}
 				
@@ -71,6 +77,9 @@ public class MenuActionBehaviour : MonoBehaviour {
 			case MenuActionType.DECMAPSIZE:
 				gameState.arenaSizeMultiplicator/=2;
 				arenasizeText.text = Convert.ToString(gameState.arenaSizeMultiplicator);
+			break;
+			case MenuActionType.CONNECTHOST:
+				networkManagement.JoinServer(gameObject.GetComponent<GameListElement>().hostData);
 			break;
 		}
 		

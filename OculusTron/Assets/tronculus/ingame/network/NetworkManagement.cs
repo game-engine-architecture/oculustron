@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+//using UnityEditor;
 
 public class NetworkManagement : MonoBehaviour {
  
@@ -21,12 +22,15 @@ public class NetworkManagement : MonoBehaviour {
 		this.menuState = GameObject.Find("MenuState").GetComponent<MenuState>();
 		this.gameState = GameObject.Find("GameState").GetComponent<GameStateManager>();
 		players = new List<string>();
+		
+		RefreshHostList();
+		InvokeRepeating("RefreshHostList", 2.0f, 5.0f);
 	}
 	
 	//Server
 	public void StartServer() {
 	    Network.InitializeServer(4, 25000, !Network.HavePublicAddress());
-	    MasterServer.RegisterHost(typeName, gameName);
+	    MasterServer.RegisterHost(typeName, "  DeathMatch - "+gameState.playersNeededForGame+" Player - Arena "+gameState.arenaSizeMultiplicator);
 	}
 	
 	private int top = 100;
@@ -127,20 +131,25 @@ public class NetworkManagement : MonoBehaviour {
 		return bike;
 	}
 	
-	//Client	
-	private HostData[] hostList;
- 
-	public void RefreshHostList() {
+	//Clients	
+	private HostData[] _hostList;
+	public HostData[] hostList
+	{
+    	get { return this._hostList; }
+	}
+	
+	private void RefreshHostList() {
 	    MasterServer.RequestHostList(typeName);
+		//EditorApplication.Beep();
 	}
 	 
 	void OnMasterServerEvent(MasterServerEvent msEvent) {
 	    if (msEvent == MasterServerEvent.HostListReceived) {
-			hostList = MasterServer.PollHostList();
+			_hostList = MasterServer.PollHostList();
 		}
 	}
 	
-	private void JoinServer(HostData hostData) {
+	public void JoinServer(HostData hostData) {
 	    Network.Connect(hostData);
 	}
 }
