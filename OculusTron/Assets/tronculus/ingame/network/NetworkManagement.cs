@@ -101,10 +101,12 @@ public class NetworkManagement : MonoBehaviour {
 		gameState.setState(GameStateManager.GamesState.WAITING_FOR_PLAYERS);
 		menuState.currentMenuState = 0;
 		players.Clear();
-		for(int i=0; i<gameState.botsCount; i++){
-			string playerName = "bot-"+i;
-			SpawnPlayer(playerName, true);
-			
+		if(Network.isServer){
+			// only the server controls the bots
+			for(int i=0; i<gameState.botsCount; i++){
+				string playerName = "bot-"+i;
+				SpawnPlayer(playerName, true);
+			}
 		}
 		//instantiate player on current connection & tell everybody else that i'm there.
 		SpawnPlayer(Network.player.ToString());
