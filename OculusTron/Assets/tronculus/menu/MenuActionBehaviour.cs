@@ -5,11 +5,12 @@ using System;
 public class MenuActionBehaviour : MonoBehaviour {
 
 	public enum MenuActionType {STARTGAME, REFRESHHOSTS, INCPLAYER, DECPLAYER, INCBOTS, DECBOTS, INCMAPSIZE, DECMAPSIZE,};
-	
 	public MenuActionType menuActionType;
+	public GameObject hostPrefab;
 	
 	private NetworkManagement networkManagement; 
 	private GameStateManager gameState;
+	private GameObject GameList; 
 	private TextMesh playercountText;
 	private TextMesh botscountText;
 	private TextMesh arenasizeText;
@@ -19,8 +20,8 @@ public class MenuActionBehaviour : MonoBehaviour {
 		gameState = GameObject.Find("GameState").GetComponent<GameStateManager>();
 		playercountText = GameObject.Find("playercount_Text").GetComponent<TextMesh>();
 		botscountText = GameObject.Find("botscount_Text").GetComponent<TextMesh>();
-		
-		arenasizeText = GameObject.Find("arenasize_Text").GetComponent<TextMesh>();		
+		arenasizeText = GameObject.Find("arenasize_Text").GetComponent<TextMesh>();	
+		GameList = GameObject.Find("AvailableGamesList");
 	}
 	
 	void Update () {}
@@ -31,7 +32,8 @@ public class MenuActionBehaviour : MonoBehaviour {
         		networkManagement.StartServer();
         	break;
     		case MenuActionType.REFRESHHOSTS:
-				networkManagement.RefreshHostList();
+				GameObject obj = GameObject.Instantiate(hostPrefab) as GameObject;
+				obj.transform.parent = GameList.transform;
 			break;
 			case MenuActionType.INCPLAYER:
 				gameState.playersNeededForGame++;
@@ -42,12 +44,12 @@ public class MenuActionBehaviour : MonoBehaviour {
 				playercountText.text = Convert.ToString(gameState.playersNeededForGame);
 			break;
 			case MenuActionType.INCBOTS:
-				//gameState.playersNeededForGame++;
-				//playercountText.text = Convert.ToString(gameState.playersNeededForGame);
+				gameState.botsCount++;
+				botscountText.text = Convert.ToString(gameState.botsCount);
 			break;
 			case MenuActionType.DECBOTS:
-				//gameState.playersNeededForGame--;
-				//playercountText.text = Convert.ToString(gameState.playersNeededForGame);
+				gameState.botsCount--;
+				botscountText.text = Convert.ToString(gameState.botsCount);
 			break;
 			case MenuActionType.INCMAPSIZE:
 				gameState.arenaSizeMultiplicator*=2;

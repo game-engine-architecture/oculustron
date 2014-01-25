@@ -15,8 +15,13 @@ public class GameStateManager : MonoBehaviour {
 	private float lastChange;
 	private NetworkManagement networkManagement;
 	public int gameStartsInSeconds = 5;
-	public int botsCount = 3;
 	
+	private int _botsCount = 3;
+	public int botsCount
+	{
+    	get { return this._botsCount; }
+    	set { if ((value>0)&&(value<9)) this._botsCount = value; }
+	}
 
 	private int _playersNeededForGame = 1;
 	public int playersNeededForGame
