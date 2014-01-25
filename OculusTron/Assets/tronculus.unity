@@ -317,7 +317,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameStartsInSeconds: 5
-  botsCount: 3
 --- !u!1 &208253654
 GameObject:
   m_ObjectHideFlags: 0
@@ -2373,6 +2372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EditorClassIdentifier: 
   m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1186679465
 Transform:
   m_ObjectHideFlags: 0
@@ -2917,6 +2917,10 @@ Prefab:
     - target: {fileID: 100050, guid: 9353a73b6095040118b448264e853149, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 10200040, guid: 9353a73b6095040118b448264e853149, type: 2}
+      propertyPath: m_Text
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9353a73b6095040118b448264e853149, type: 2}
@@ -3986,7 +3990,7 @@ TextMesh:
     type: 2}
   m_PrefabInternal: {fileID: 1596425404}
   m_GameObject: {fileID: 1824272631}
-  m_Text: 1
+  m_Text: 3
   m_OffsetZ: 0
   m_CharacterSize: .0799999982
   m_LineSpacing: 1
