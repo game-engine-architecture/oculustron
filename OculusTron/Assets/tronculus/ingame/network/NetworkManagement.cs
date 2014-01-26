@@ -24,9 +24,19 @@ public class NetworkManagement : MonoBehaviour {
 	private GameStateManager gameState;
 	private const string typeName = "Tronculus";
 	private const string gameName = "DeathMatch";
+	
 	public GameObject playerPrefab;
 	private Player thisPlayer; //myself
 	private List<Player> players;
+	
+	private bool _useCustomMasterServer;
+	public bool useCustomMasterServer
+	{
+    	get { return this._useCustomMasterServer; }
+    	set { this._useCustomMasterServer = value; 
+			  MasterServer.ipAddress = (value) ? "192.168.1.6":"72.52.207.14";
+		}
+	}
 	
 	public int currentPlayerCount(){
 		return players.Count;
@@ -38,6 +48,8 @@ public class NetworkManagement : MonoBehaviour {
 		this.gameState = GameObject.Find("GameState").GetComponent<GameStateManager>();
 		players = new List<Player>();
 		
+		_useCustomMasterServer = false;
+		
 		RefreshHostList();
 		InvokeRepeating("RefreshHostList", 2.0f, 5.0f);
 	}
@@ -45,7 +57,7 @@ public class NetworkManagement : MonoBehaviour {
 	//Server
 	public void StartServer() {
 	    Network.InitializeServer(4, 25000, !Network.HavePublicAddress());
-	    MasterServer.RegisterHost(typeName, "  DeathMatch - "+gameState.playersNeededForGame+" Player - Arena "+gameState.arenaSizeMultiplicator);
+		MasterServer.RegisterHost(typeName, "  DeathMatch - "+gameState.playersNeededForGame+" Player - Arena "+gameState.arenaSizeMultiplicator);
 	}
 	
 	private int top = 100;
