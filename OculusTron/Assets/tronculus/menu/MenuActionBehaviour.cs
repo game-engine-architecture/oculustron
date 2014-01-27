@@ -85,6 +85,13 @@ public class MenuActionBehaviour : MonoBehaviour {
 			case MenuActionType.CONNECTHOST:
 				networkManagement.JoinServer(gameObject.GetComponent<GameListElement>().hostData);
 			break;
+			
+			case MenuActionType.CUSTOMSERVERCHECK:
+				gameObject.GetComponent<TextMesh>().text = "-";
+			break;
+			case MenuActionType.OCULUSVIEWCHECK:
+				gameObject.GetComponent<TextMesh>().text = "-";
+			break;
 		}
 		
 	}

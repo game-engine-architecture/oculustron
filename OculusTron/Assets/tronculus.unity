@@ -1079,7 +1079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 055a2d7f9d74a41a5af3a56df51e52c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuActionType: 7
+  menuActionType: 10
   hostPrefab: {fileID: 0}
 --- !u!65 &382634974
 BoxCollider:
@@ -3239,7 +3239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 055a2d7f9d74a41a5af3a56df51e52c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuActionType: 7
+  menuActionType: 9
   hostPrefab: {fileID: 0}
 --- !u!65 &1299729037
 BoxCollider:
