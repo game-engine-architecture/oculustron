@@ -87,10 +87,12 @@ public class MenuActionBehaviour : MonoBehaviour {
 			break;
 			
 			case MenuActionType.CUSTOMSERVERCHECK:
-				gameObject.GetComponent<TextMesh>().text = "-";
+				bool newVal = !networkManagement.useCustomMasterServer;
+				networkManagement.useCustomMasterServer = newVal;
+				gameObject.GetComponent<TextMesh>().text = (newVal)?"√":"Δ";
 			break;
 			case MenuActionType.OCULUSVIEWCHECK:
-				gameObject.GetComponent<TextMesh>().text = "-";
+				gameObject.GetComponent<TextMesh>().text = "Δ";
 			break;
 		}
 		
