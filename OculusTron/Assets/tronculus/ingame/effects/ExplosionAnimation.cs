@@ -48,6 +48,7 @@ public class ExplosionAnimation : MonoBehaviour {
 	}
 	
 	public ExplosionAnimation reset(){
+		GameObject.Destroy(this.gameObject);
 		lightobj.color = origColor;
 		this.isExploding = false;
 		this.explodingSince = 0;

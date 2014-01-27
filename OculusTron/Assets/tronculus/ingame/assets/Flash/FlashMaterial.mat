@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: MG_Player_Disc_EMSS
+  m_Name: FlashMaterial
   m_Shader: {fileID: 4, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
   m_SavedProperties:
@@ -16,16 +16,16 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 5c116919cfff14af0b54f484bf5834b9, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _BumpMap
         second:
-          m_Texture: {fileID: 2800000, guid: 2a50bfbb049284cd58062f9d7449add8, type: 3}
-          m_Scale: {x: 3, y: 3}
-          m_Offset: {x: 1, y: 1}
+          m_Texture: {fileID: 2800000, guid: c0eef0ef809364167908d27546441096, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -35,7 +35,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: .0457395799, g: .530929983, b: .691176474, a: 1}
       data:
         first:
           name: _SpecColor

@@ -22,7 +22,7 @@ public class BikeInputController : MonoBehaviour {
 	
 	float aiLastTurn = -1f;
 	float aiMinimumTurnWaitTime = 1f;
-	float aiRandomTurnPropabilityPerSec = 0.975f;
+	float aiRandomTurnPropabilityPerSec = 0.976f;
 	public bool aiObjectInFront = false;
 	
 	enum Direction {FORWARD, LEFT, RIGHT};
@@ -140,6 +140,10 @@ public class BikeInputController : MonoBehaviour {
 			"Wall".Equals(hit.gameObject.name))
 		{
 			this.die();
+		} else if(hit.gameObject.name.Equals("FlashPickup")){
+			Debug.Log("FLASH PICKUP!");
+		} else if(hit.gameObject.name.Equals("TronDisc")){
+			Debug.Log("TRON DISC!");
 		}
 	}
 	
