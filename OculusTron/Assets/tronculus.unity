@@ -1115,7 +1115,7 @@ TextMesh:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 382634971}
-  m_Text: "\u221A"
+  m_Text: "\u0394"
   m_OffsetZ: 0
   m_CharacterSize: .0799999982
   m_LineSpacing: 1
@@ -1123,7 +1123,7 @@ TextMesh:
   m_Alignment: 0
   m_TabSize: 4
   m_FontSize: 0
-  m_FontStyle: 0
+  m_FontStyle: 1
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: 4f68f3c9e1c6d4693be525e3c9ab4437, type: 3}
   m_Color:
@@ -3102,6 +3102,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EditorClassIdentifier: 
   m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1186679465
 Transform:
   m_ObjectHideFlags: 0
@@ -3275,7 +3284,7 @@ TextMesh:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1299729034}
-  m_Text: "\u221A"
+  m_Text: "\u0394"
   m_OffsetZ: 0
   m_CharacterSize: .0799999982
   m_LineSpacing: 1
@@ -3283,7 +3292,7 @@ TextMesh:
   m_Alignment: 0
   m_TabSize: 4
   m_FontSize: 0
-  m_FontStyle: 0
+  m_FontStyle: 1
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: 4f68f3c9e1c6d4693be525e3c9ab4437, type: 3}
   m_Color:
