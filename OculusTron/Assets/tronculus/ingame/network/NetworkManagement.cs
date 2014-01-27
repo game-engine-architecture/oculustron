@@ -34,7 +34,7 @@ public class NetworkManagement : MonoBehaviour {
 	{
     	get { return this._useCustomMasterServer; }
     	set { this._useCustomMasterServer = value; 
-			  MasterServer.ipAddress = (value) ? "192.168.1.6":"72.52.207.14";
+			  MasterServer.ipAddress = (value) ? "192.168.1.7":"72.52.207.14";
 		}
 	}
 	

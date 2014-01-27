@@ -3,7 +3,15 @@ using System.Collections;
 
 public class BikeHotkeyController : MonoBehaviour {
 	
-	public bool ovr = false;
+	private bool _ovr = false;
+	public bool ovr
+	{
+    	get { return this._ovr; }
+    	set { this._ovr = value; 
+			 setOVR(ovr);	
+		}
+	}
+		
 	GameObject[] oculusCams;
 	SmoothFollow mainCameraOculusController;
 	void Start () {	
@@ -28,8 +36,7 @@ public class BikeHotkeyController : MonoBehaviour {
 	
 	void checkHotKey(){
 		if(Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.O)){
-			ovr = !ovr;
-			setOVR(ovr);
+			this.ovr = !this.ovr;
 		}	
 	}
 }
