@@ -4,7 +4,11 @@ using System;
 
 public class MenuActionBehaviour : MonoBehaviour {
 
-	public enum MenuActionType {STARTGAME, REFRESHHOSTS, INCPLAYER, DECPLAYER, INCBOTS, DECBOTS, INCMAPSIZE, DECMAPSIZE, CONNECTHOST};
+	public enum MenuActionType {STARTGAME, REFRESHHOSTS, INCPLAYER, DECPLAYER, INCBOTS, 
+								DECBOTS, INCMAPSIZE, DECMAPSIZE, CONNECTHOST, 
+		                        CUSTOMSERVERCHECK, OCULUSVIEWCHECK};
+	
+	
 	public MenuActionType menuActionType;
 	public GameObject hostPrefab;
 	
@@ -80,6 +84,13 @@ public class MenuActionBehaviour : MonoBehaviour {
 			break;
 			case MenuActionType.CONNECTHOST:
 				networkManagement.JoinServer(gameObject.GetComponent<GameListElement>().hostData);
+			break;
+			
+			case MenuActionType.CUSTOMSERVERCHECK:
+				gameObject.GetComponent<TextMesh>().text = "-";
+			break;
+			case MenuActionType.OCULUSVIEWCHECK:
+				gameObject.GetComponent<TextMesh>().text = "-";
 			break;
 		}
 		
