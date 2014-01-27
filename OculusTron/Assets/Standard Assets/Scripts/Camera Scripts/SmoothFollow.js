@@ -19,8 +19,6 @@ var height = 5.0;
 var heightDamping = 2.0;
 var rotationDamping = 3.0;
 
-var targetOffsetX = 0.0;
-var targetOffsetY = 0.0;
 var targetOffsetZ = 0.0;
 
 var lookForward = true;
@@ -36,7 +34,7 @@ function LateUpdate () {
 	
 	// Calculate the current rotation angles
 	var wantedRotationAngle = target.eulerAngles.y;
-	var wantedHeight = target.position.y + height + targetOffsetY;
+	var wantedHeight = target.position.y + height;
 		
 	var currentRotationAngle = transform.eulerAngles.y;
 	var currentHeight = transform.position.y;
@@ -59,11 +57,13 @@ function LateUpdate () {
 	transform.position.y = currentHeight;
 	
 	if(lookForward){
-		transform.LookAt (currentRotation * Vector3.forward);
+		transform.rotation = Quaternion.Euler(0, currentRotationAngle, 0);
 	} else {
 		// Always look at the target
 		transform.LookAt (target);
 	}
+	
+	transform.position = transform.position + (transform.rotation * Vector3.forward) * targetOffsetZ;
 }
 
 function setFollowCam(){
@@ -71,6 +71,7 @@ function setFollowCam(){
 	height = 2.14;
 	heightDamping = 2;
 	rotationDamping = 6.06;
+	targetOffsetZ = 0;
 	lookForward = false;
 }
 
@@ -79,5 +80,6 @@ function setEgoCam(){
 	height = 0.1;
 	heightDamping = 50;
 	rotationDamping = 50;
+	targetOffsetZ = 1;
 	lookForward = true;
 }
