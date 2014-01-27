@@ -3,34 +3,17 @@ using System.Collections;
 
 public class BikeHotkeyController : MonoBehaviour {
 	
-	GameObject[] oculusCamElements = null;
-	//GameObject oculusCam = null;
-	GameObject normalCam = null;
-	bool ovr = false;
+	public bool ovr = false;
+	GameObject[] oculusCams;
 	
 	void Start () {	
-		
-		oculusCamElements = GameObject.FindGameObjectsWithTag("Respawn");
-		//oculusCam = GameObject.FindWithTag("Respawn");
-		normalCam = GameObject.FindWithTag("MainCamera");
-		
-		//Debug.Log(oculusCamElements.Length);
-		setOVR(ovr);
-		
-		/*if (OVRDevice.SensorCount > 0)
-        {
-            normalCamera.SetActive(false);
-            riftCamera.SetActive(true); // OVRCameraController
-        }*/
+		oculusCams = GameObject.FindGameObjectsWithTag("OculusCam");
 	}
 	
-	void setOVR (bool on){
-		//oculusCam.SetActive(on);
-		foreach(GameObject go in oculusCamElements){
-			go.SetActive(on);
+	void setOVR (bool ovrEnable){
+		foreach(GameObject cam in oculusCams){
+			cam.SetActive(ovrEnable);
 		}
-		
-		normalCam.SetActive(!on);
 	} 
 	
 	void Update () {
