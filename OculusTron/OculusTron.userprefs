@@ -1,28 +1,39 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/tronculus/ingame/prefabs/bike/BikeInputController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/oculus rift/OVR/Scripts/OVRDevice.cs">
     <Files>
-      <File FileName="Assets/tronculus/ingame/network/NetworkManagement.cs" Line="107" Column="27" />
-      <File FileName="Assets/tronculus/GameStateManager.cs" Line="76" Column="13" />
-      <File FileName="Assets/tronculus/ingame/prefabs/bike/BikeInputController.cs" Line="136" Column="28" />
+      <File FileName="Assets/tronculus/ingame/network/NetworkManagement.cs" Line="127" Column="39" />
+      <File FileName="Assets/tronculus/GameStateManager.cs" Line="82" Column="22" />
+      <File FileName="Assets/tronculus/ingame/prefabs/bike/BikeInputController.cs" Line="47" Column="29" />
       <File FileName="Assets/tronculus/ingame/score/ScoreBoardUpater.cs" Line="7" Column="18" />
       <File FileName="Assets/tronculus/ingame/camera/CameraEffectController.cs" Line="22" Column="35" />
-      <File FileName="Assets/tronculus/ingame/prefabs/bike/bikelogic.cs" Line="1" Column="1" />
+      <File FileName="Assets/tronculus/ingame/prefabs/bike/bikelogic.cs" Line="93" Column="109" />
+      <File FileName="Assets/tronculus/ingame/camera/CameraInstructor.cs" Line="14" Column="29" />
+      <File FileName="Assets/tronculus/menu/StateFullMenuElement.cs" Line="22" Column="26" />
+      <File FileName="Assets/tronculus/menu/MenuState.cs" Line="19" Column="54" />
+      <File FileName="Assets/tronculus/menu/MenuElementControll.cs" Line="1" Column="1" />
+      <File FileName="Assets/tronculus/ingame/effects/CountDownActivator.cs" Line="28" Column="20" />
+      <File FileName="Assets/tronculus/ingame/prefabs/bike/BikeHotkeyController.cs" Line="15" Column="52" />
+      <File FileName="Assets/oculus rift/OVR/Scripts/OVRDevice.cs" Line="75" Column="65" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Assets" expanded="True">
+              <Node name="oculus rift" expanded="True">
+                <Node name="OVR" expanded="True">
+                  <Node name="OVRImageEffects" expanded="True" />
+                  <Node name="Scripts" expanded="True" selected="True" />
+                </Node>
+              </Node>
               <Node name="tronculus" expanded="True">
                 <Node name="ingame" expanded="True">
                   <Node name="camera" expanded="True" />
                   <Node name="effects" expanded="True" />
                   <Node name="network" expanded="True" />
                   <Node name="prefabs" expanded="True">
-                    <Node name="bike" expanded="True">
-                      <Node name="BikeInputController.cs" selected="True" />
-                    </Node>
+                    <Node name="bike" expanded="True" />
                   </Node>
                   <Node name="score" expanded="True" />
                 </Node>

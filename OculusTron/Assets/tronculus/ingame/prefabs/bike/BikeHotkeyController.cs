@@ -5,14 +5,20 @@ public class BikeHotkeyController : MonoBehaviour {
 	
 	public bool ovr = false;
 	GameObject[] oculusCams;
-	
+	SmoothFollow mainCameraOculusController;
 	void Start () {	
 		oculusCams = GameObject.FindGameObjectsWithTag("OculusCam");
+		mainCameraOculusController = GameObject.Find("Main Camera").GetComponent<SmoothFollow>();
 	}
 	
 	void setOVR (bool ovrEnable){
 		foreach(GameObject cam in oculusCams){
 			cam.SetActive(ovrEnable);
+		}
+		if(ovrEnable){
+			mainCameraOculusController.setEgoCam();
+		} else {
+			mainCameraOculusController.setFollowCam();
 		}
 	} 
 	

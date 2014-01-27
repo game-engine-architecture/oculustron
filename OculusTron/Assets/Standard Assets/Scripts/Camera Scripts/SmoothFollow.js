@@ -19,6 +19,12 @@ var height = 5.0;
 var heightDamping = 2.0;
 var rotationDamping = 3.0;
 
+var targetOffsetX = 0.0;
+var targetOffsetY = 0.0;
+var targetOffsetZ = 0.0;
+
+var lookForward = true;
+
 // Place the script in the Camera-Control group in the component menu
 @script AddComponentMenu("Camera-Control/Smooth Follow")
 
@@ -30,7 +36,7 @@ function LateUpdate () {
 	
 	// Calculate the current rotation angles
 	var wantedRotationAngle = target.eulerAngles.y;
-	var wantedHeight = target.position.y + height;
+	var wantedHeight = target.position.y + height + targetOffsetY;
 		
 	var currentRotationAngle = transform.eulerAngles.y;
 	var currentHeight = transform.position.y;
@@ -52,6 +58,26 @@ function LateUpdate () {
 	// Set the height of the camera
 	transform.position.y = currentHeight;
 	
-	// Always look at the target
-	transform.LookAt (target);
+	if(lookForward){
+		transform.LookAt (currentRotation * Vector3.forward);
+	} else {
+		// Always look at the target
+		transform.LookAt (target);
+	}
+}
+
+function setFollowCam(){
+	distance = 10;
+	height = 2.14;
+	heightDamping = 2;
+	rotationDamping = 6.06;
+	lookForward = false;
+}
+
+function setEgoCam(){
+	distance = 0.1;
+	height = 0.1;
+	heightDamping = 50;
+	rotationDamping = 50;
+	lookForward = true;
 }
