@@ -14,6 +14,7 @@ public class MenuActionBehaviour : MonoBehaviour {
 	
 	private NetworkManagement networkManagement; 
 	private GameStateManager gameState;
+	private BikeHotkeyController oculusEnabler;
 	private GameObject GameList; 
 	private ArrayList games;
 	
@@ -22,14 +23,17 @@ public class MenuActionBehaviour : MonoBehaviour {
 	private TextMesh arenasizeText;
 	
 	
+	
 	void Start () {
 		networkManagement = GameObject.Find("NetworkManager").GetComponent<NetworkManagement>();
-		gameState = GameObject.Find("GameState").GetComponent<GameStateManager>();
+		GameObject gameObj = GameObject.Find("GameState");
+		gameState = gameObj.GetComponent<GameStateManager>();
+		oculusEnabler = gameObj.GetComponent<BikeHotkeyController>();
 		playercountText = GameObject.Find("playercount_Text").GetComponent<TextMesh>();
 		botscountText = GameObject.Find("botscount_Text").GetComponent<TextMesh>();
 		arenasizeText = GameObject.Find("arenasize_Text").GetComponent<TextMesh>();	
 		GameList = GameObject.Find("AvailableGamesList");
-		games = new ArrayList();
+		games = new ArrayList();	
 	}
 	
 	void Update () {}
@@ -87,12 +91,14 @@ public class MenuActionBehaviour : MonoBehaviour {
 			break;
 			
 			case MenuActionType.CUSTOMSERVERCHECK:
-				bool newVal = !networkManagement.useCustomMasterServer;
-				networkManagement.useCustomMasterServer = newVal;
-				gameObject.GetComponent<TextMesh>().text = (newVal)?"√":"Δ";
+				bool newServerVal = !networkManagement.useCustomMasterServer;
+				networkManagement.useCustomMasterServer = newServerVal;
+				gameObject.GetComponent<TextMesh>().text = (newServerVal)?"√":"Δ";
 			break;
 			case MenuActionType.OCULUSVIEWCHECK:
-				gameObject.GetComponent<TextMesh>().text = "Δ";
+				bool newOculusVal = !oculusEnabler.ovr;
+				oculusEnabler.ovr = newOculusVal;
+				gameObject.GetComponent<TextMesh>().text = (newOculusVal)?"√":"Δ";
 			break;
 		}
 		
