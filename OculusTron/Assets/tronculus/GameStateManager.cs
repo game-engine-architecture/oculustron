@@ -18,6 +18,7 @@ public class GameStateManager : MonoBehaviour {
 	private float lastChange;
 	private NetworkManagement networkManagement;
 	private MenuState menuState;
+	private GameObject level;
 	public int gameStartsInSeconds = 5;
 	public int gameEndedWait = 5;
 	
@@ -42,14 +43,18 @@ public class GameStateManager : MonoBehaviour {
 	public int arenaSizeMultiplicator
 	{
     	get { return this._arenaSizeMultiplicator; }
-    	set { if ((value>0)&&(value<33)) this._arenaSizeMultiplicator = value; }
+    	set { if ((value>0)&&(value<33)) this._arenaSizeMultiplicator = value; 
+			level.transform.localScale = new Vector3(value,value/2,value);
+		}
 	}
 	
 	// Use this for initialization
 	void Start () {
 		setState(GamesState.MENU);
 		this.menuState = GameObject.Find("MenuState").GetComponent<MenuState>();
+		
 		networkManagement = GameObject.Find("NetworkManager").GetComponent<NetworkManagement>();
+		level = GameObject.Find("Level");
 	}
 	
 	// Update is called once per frame
