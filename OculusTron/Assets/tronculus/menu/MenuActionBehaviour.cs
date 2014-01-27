@@ -4,7 +4,11 @@ using System;
 
 public class MenuActionBehaviour : MonoBehaviour {
 
-	public enum MenuActionType {STARTGAME, REFRESHHOSTS, INCPLAYER, DECPLAYER, INCBOTS, DECBOTS, INCMAPSIZE, DECMAPSIZE, CONNECTHOST};
+	public enum MenuActionType {STARTGAME, REFRESHHOSTS, INCPLAYER, DECPLAYER, INCBOTS, 
+								DECBOTS, INCMAPSIZE, DECMAPSIZE, CONNECTHOST, 
+		                        CUSTOMSERVERCHECK, OCULUSVIEWCHECK};
+	
+	
 	public MenuActionType menuActionType;
 	public GameObject hostPrefab;
 	
