@@ -153,14 +153,33 @@ public class BikeInputController : MonoBehaviour {
 		return this.lastCorner;
 	}
 	
+	
+	enum GameEvent {
+		POWERUP_WALL = 0,	
+		POWERUP_FAST = 1,
+		DIE = 2
+	}
+	
+	[RPC]
+	public void actionEvent(string playerid, int instrution ){
+		GameEvent currEvent = (GameEvent) instrution;
+		if(this.belongsToPlayer.Equals(playerid)){
+			if(currEvent.Equals(GameEvent.POWERUP_WALL)){
+				this.lastSpeedPowerUp = Time.time;
+			} else if(currEvent.Equals(GameEvent.POWERUP_WALL)){
+				this.lastThroughWallPowerUp = Time.time;
+			}
+		}
+	}
+	
 	void OnControllerColliderHit(ControllerColliderHit hit) {
 		if(Network.isServer){
 			if(hit.gameObject.name.Equals("FlashPickup")){
 				hit.gameObject.SetActive(false);
-				lastSpeedPowerUp = Time.time;
+				networkView.RPC("actionEvent", RPCMode.All, (int) GameEvent.POWERUP_FAST);
 			} else if(hit.gameObject.name.Equals("TronDisc")){
 				hit.gameObject.SetActive(false);
-				lastThroughWallPowerUp = Time.time;
+				networkView.RPC("actionEvent", RPCMode.All, (int) GameEvent.POWERUP_WALL);
 			}
 			bool hasWallPowerUp = (lastThroughWallPowerUp + powerUpThroughWallDuration > Time.time);
 			if(!hasWallPowerUp){

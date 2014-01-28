@@ -20,7 +20,6 @@ public class Player{
 
 public class NetworkManagement : MonoBehaviour {
  
-	private MenuState menuState;
 	private GameStateManager gameState;
 	private const string typeName = "Tronculus";
 	private const string gameName = "DeathMatch";
@@ -44,7 +43,6 @@ public class NetworkManagement : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		this.menuState = GameObject.Find("MenuState").GetComponent<MenuState>();
 		this.gameState = GameObject.Find("GameState").GetComponent<GameStateManager>();
 		players = new List<Player>();
 		
@@ -59,16 +57,6 @@ public class NetworkManagement : MonoBehaviour {
 	    Network.InitializeServer(4, 25000, !Network.HavePublicAddress());
 		MasterServer.RegisterHost(typeName, "  DeathMatch - "+gameState.playersNeededForGame+" Player - Arena "+gameState.arenaSizeMultiplicator);
 	}
-	
-	private int top = 100;
-	//private int start_refresh_left = 250;
-	private int start_refresh_width = 150;
-	private int start_refresh_height = 100;
-	private int padding = 10;
-	private int game_room_height = 50;
-	
-	//setup
-	private string playerCountEditStr = "2";
 	
 	void OnServerInitialized() {
 		Debug.Log("Server Initialized");
@@ -124,8 +112,8 @@ public class NetworkManagement : MonoBehaviour {
 		gameState.addPlayer(playerid);	
 		Player player = new Player(playerid, isBot);
     	players.Add(player);
-		return player;
 		Debug.Log("players in game:"+players.Count);
+		return player;
 	}	
 	 
 	private GameObject SpawnPlayer(Player player){

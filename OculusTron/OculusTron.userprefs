@@ -1,21 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/tronculus/menu/MenuActionBehaviour.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/tronculus/ingame/prefabs/bike/BikeInputController.cs">
     <Files>
-      <File FileName="Assets/tronculus/ingame/network/NetworkManagement.cs" Line="1" Column="1" />
-      <File FileName="Assets/tronculus/GameStateManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/tronculus/ingame/prefabs/bike/BikeInputController.cs" Line="1" Column="1" />
-      <File FileName="Assets/tronculus/ingame/score/ScoreBoardUpater.cs" Line="1" Column="1" />
-      <File FileName="Assets/tronculus/ingame/camera/CameraEffectController.cs" Line="1" Column="1" />
-      <File FileName="Assets/tronculus/ingame/prefabs/bike/bikelogic.cs" Line="1" Column="1" />
-      <File FileName="Assets/tronculus/ingame/camera/CameraInstructor.cs" Line="1" Column="1" />
-      <File FileName="Assets/tronculus/menu/StateFullMenuElement.cs" Line="1" Column="1" />
-      <File FileName="Assets/tronculus/menu/MenuState.cs" Line="1" Column="1" />
-      <File FileName="Assets/tronculus/menu/MenuElementControll.cs" Line="1" Column="1" />
-      <File FileName="Assets/tronculus/ingame/effects/CountDownActivator.cs" Line="1" Column="1" />
-      <File FileName="Assets/tronculus/ingame/prefabs/bike/BikeHotkeyController.cs" Line="1" Column="1" />
-      <File FileName="Assets/oculus rift/OVR/Scripts/OVRDevice.cs" Line="1" Column="1" />
-      <File FileName="Assets/tronculus/menu/MenuActionBehaviour.cs" Line="1" Column="1" />
+      <File FileName="Assets/tronculus/ingame/network/NetworkManagement.cs" Line="127" Column="17" />
+      <File FileName="Assets/tronculus/GameStateManager.cs" Line="67" Column="2" />
+      <File FileName="Assets/tronculus/ingame/prefabs/bike/BikeHotkeyController.cs" Line="18" Column="60" />
+      <File FileName="Assets/oculus rift/OVR/Scripts/OVRDevice.cs" Line="75" Column="65" />
+      <File FileName="Assets/oculus rift/OVR/Scripts/OVRCameraController.cs" Line="246" Column="1" />
+      <File FileName="Assets/Standard Assets/Scripts/Camera Scripts/SmoothFollow.js" Line="83" Column="23" />
+      <File FileName="Assets/tronculus/ingame/prefabs/bike/BikeInputController.cs" Line="172" Column="4" />
+      <File FileName="Assets/tronculus/ingame/effects/ExplosionAnimation.cs" Line="51" Column="39" />
+      <File FileName="Assets/TurnSoundPlayer.cs" Line="21" Column="27" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -34,13 +29,13 @@
                   <Node name="effects" expanded="True" />
                   <Node name="network" expanded="True" />
                   <Node name="prefabs" expanded="True">
-                    <Node name="bike" expanded="True" />
+                    <Node name="bike" expanded="True">
+                      <Node name="BikeInputController.cs" selected="True" />
+                    </Node>
                   </Node>
                   <Node name="score" expanded="True" />
                 </Node>
-                <Node name="menu" expanded="True">
-                  <Node name="MenuActionBehaviour.cs" selected="True" />
-                </Node>
+                <Node name="menu" expanded="True" />
               </Node>
             </Node>
           </Node>
