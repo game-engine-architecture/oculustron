@@ -22,6 +22,7 @@ public class GameStateManager : MonoBehaviour {
 	private Material floorMaterial;
 	public int gameStartsInSeconds = 5;
 	public int gameEndedWait = 5;
+	public bool debugMode;
 	
 	Dictionary<string, int> score = new Dictionary<string, int>();
 	List<string> deadPlayers = new List<string>();

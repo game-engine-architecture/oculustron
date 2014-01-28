@@ -90,8 +90,13 @@ public class BikeInputController : MonoBehaviour {
 				pos.y = 0;
 				this.modelTransform.position = pos;
 				
+				float vert;
 				//bikes always move forward
-				float vert = 1f; //Input.GetAxis("Vertical");
+				if(gameState.debugMode){
+					vert = Input.GetAxis("Vertical");
+				} else {
+					vert = 1f;
+				}
 				Vector3 movement = new Vector3(0,0,0);
 				float currentMovementSpeed = movementSpeed;
 				

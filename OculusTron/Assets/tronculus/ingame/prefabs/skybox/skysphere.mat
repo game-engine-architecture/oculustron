@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: skybox_mat
-  m_Shader: {fileID: 10700, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: skysphere
+  m_Shader: {fileID: 104, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
   m_SavedProperties:
     serializedVersion: 2
@@ -16,50 +16,50 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: 54a07a3101874499a80c794b82ec4f84, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _FrontTex
         second:
-          m_Texture: {fileID: 2800000, guid: 0787eaf366a0e4a7a9833f57419b2854, type: 3}
+          m_Texture: {fileID: 2800000, guid: 54a07a3101874499a80c794b82ec4f84, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _BackTex
         second:
-          m_Texture: {fileID: 2800000, guid: 6f1f6ce6f5811425593cebac5618a816, type: 3}
+          m_Texture: {fileID: 2800000, guid: 54a07a3101874499a80c794b82ec4f84, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _LeftTex
         second:
-          m_Texture: {fileID: 2800000, guid: cfcd59e3bb3db44c89ad83a0f8211d42, type: 3}
+          m_Texture: {fileID: 2800000, guid: 54a07a3101874499a80c794b82ec4f84, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _RightTex
         second:
-          m_Texture: {fileID: 2800000, guid: f47575a4aaa9b45f6ae7ba5bb8ac3f38, type: 3}
-          m_Scale: {x: 1, y: 1}
+          m_Texture: {fileID: 2800000, guid: 54a07a3101874499a80c794b82ec4f84, type: 3}
+          m_Scale: {x: 2, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _UpTex
         second:
-          m_Texture: {fileID: 2800000, guid: 53b98c8328a554f64ac1b1b75552c758, type: 3}
-          m_Scale: {x: 1, y: 1}
+          m_Texture: {fileID: 2800000, guid: 54a07a3101874499a80c794b82ec4f84, type: 3}
+          m_Scale: {x: 2, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _DownTex
         second:
-          m_Texture: {fileID: 2800000, guid: 0863095d1bee445afa0e9799f262c56b, type: 3}
-          m_Scale: {x: 1, y: 1}
+          m_Texture: {fileID: 2800000, guid: 54a07a3101874499a80c794b82ec4f84, type: 3}
+          m_Scale: {x: 2, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats: {}
     m_Colors:
@@ -70,4 +70,4 @@ Material:
       data:
         first:
           name: _Tint
-        second: {r: .5, g: .5, b: .5, a: .5}
+        second: {r: .235294104, g: .235294104, b: .235294104, a: .501960814}
