@@ -13,11 +13,11 @@ public class GameStateManager : MonoBehaviour {
 		GAME_WAITING = 5,
 	}
 	
-	
 	private GamesState currentGameState;
 	private float lastChange;
 	private NetworkManagement networkManagement;
 	private MenuState menuState;
+	private GameObject menu;
 	private GameObject level;
 	private Material floorMaterial;
 	public int gameStartsInSeconds = 5;
@@ -48,19 +48,20 @@ public class GameStateManager : MonoBehaviour {
     	set { if ((value>0)&&(value<33)) {
 				this._arenaSizeMultiplicator = value; 
 				level.transform.localScale = new Vector3(value,value/2,value);
-				floorMaterial.mainTextureScale = new Vector2 (value*20, value*20);
+				floorMaterial.mainTextureScale = new Vector2 (value*30, value*30);
 			}
 		}
 	}
 	
 	// Use this for initialization
 	void Start () {
+		level = GameObject.Find("Level");
+		this.menu = GameObject.Find("Menu");
 		setState(GamesState.MENU);
 		this.menuState = GameObject.Find("MenuState").GetComponent<MenuState>();
-		
 		networkManagement = GameObject.Find("NetworkManager").GetComponent<NetworkManagement>();
-		level = GameObject.Find("Level");
 		floorMaterial = GameObject.Find("Floor").GetComponent<MeshRenderer>().material;
+		this.arenaSizeMultiplicator = 16;
 	}
 	
 	// Update is called once per frame
@@ -96,6 +97,18 @@ public class GameStateManager : MonoBehaviour {
 		currentGameState = state;
 		lastChange = Time.fixedTime;
 		Debug.Log("GAME STATE: "+currentGameState.ToString());
+		
+		bool showMenu = isState(GamesState.MENU);
+		Renderer[] lvlRenderers = level.GetComponentsInChildren<Renderer>();
+		foreach (Renderer lvlRenderer in lvlRenderers){
+			lvlRenderer.enabled = !showMenu;
+		}
+		Renderer[] menuRenderers = menu.GetComponentsInChildren<Renderer>();
+		foreach (Renderer menuRenderer in menuRenderers){
+			menuRenderer.enabled = showMenu;
+		}
+		
+		
 		if(isState (GamesState.GAME_ENDED)){
 			deadPlayers.Clear();
 			//cleanUpArena();

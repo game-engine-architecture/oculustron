@@ -1,17 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/tronculus/ingame/prefabs/bike/BikeInputController.cs">
-    <Files>
-      <File FileName="Assets/tronculus/ingame/network/NetworkManagement.cs" Line="127" Column="17" />
-      <File FileName="Assets/tronculus/GameStateManager.cs" Line="67" Column="2" />
-      <File FileName="Assets/tronculus/ingame/prefabs/bike/BikeHotkeyController.cs" Line="18" Column="60" />
-      <File FileName="Assets/oculus rift/OVR/Scripts/OVRDevice.cs" Line="75" Column="65" />
-      <File FileName="Assets/oculus rift/OVR/Scripts/OVRCameraController.cs" Line="246" Column="1" />
-      <File FileName="Assets/Standard Assets/Scripts/Camera Scripts/SmoothFollow.js" Line="83" Column="23" />
-      <File FileName="Assets/tronculus/ingame/prefabs/bike/BikeInputController.cs" Line="172" Column="4" />
-      <File FileName="Assets/tronculus/ingame/effects/ExplosionAnimation.cs" Line="51" Column="39" />
-      <File FileName="Assets/TurnSoundPlayer.cs" Line="21" Column="27" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
@@ -27,11 +16,11 @@
                 <Node name="ingame" expanded="True">
                   <Node name="camera" expanded="True" />
                   <Node name="effects" expanded="True" />
-                  <Node name="network" expanded="True" />
+                  <Node name="network" expanded="True">
+                    <Node name="NetworkManagement.cs" selected="True" />
+                  </Node>
                   <Node name="prefabs" expanded="True">
-                    <Node name="bike" expanded="True">
-                      <Node name="BikeInputController.cs" selected="True" />
-                    </Node>
+                    <Node name="bike" expanded="True" />
                   </Node>
                   <Node name="score" expanded="True" />
                 </Node>
