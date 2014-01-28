@@ -16,6 +16,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400002}
+  - 82: {fileID: 8200002}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: TurnSoundContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &100004
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,6 +119,17 @@ Transform:
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 400004}
+--- !u!4 &400002
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_Children: []
+  m_Father: {fileID: 400004}
 --- !u!4 &400004
 Transform:
   m_ObjectHideFlags: 1
@@ -109,9 +137,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -72.3682556, y: -.0184321888, z: 65.1633301}
+  m_LocalPosition: {x: 49.2006302, y: -.0184321888, z: -55.5894127}
   m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
   m_Children:
+  - {fileID: 400002}
   - {fileID: 400020}
   - {fileID: 400012}
   - {fileID: 400000}
@@ -295,6 +324,64 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!82 &8200002
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: fa9e50072d9664c1cbda9683238848fe, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!95 &9500000
 Animator:
   m_ObjectHideFlags: 1
@@ -354,6 +441,26 @@ Light:
   m_ShadowAngle: 0
   m_IndirectIntensity: 1
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d858db788a83483cb840093707d4ff9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnsounds:
+  - {fileID: 8300000, guid: fa9e50072d9664c1cbda9683238848fe, type: 3}
+  - {fileID: 8300000, guid: 676db2d1d10e64dea8675d65975621b4, type: 3}
+  - {fileID: 8300000, guid: 8fb9b39a4be914b84b41666815dc7bee, type: 3}
+  - {fileID: 8300000, guid: ce2ae920cdfcd46fc9d23ab5988f923d, type: 3}
+  - {fileID: 8300000, guid: 20ea9561f261d43e1a7ac0d63ad5c14e, type: 3}
+  - {fileID: 8300000, guid: 1763c32a936434128b5efdae0f3b03c0, type: 3}
+  - {fileID: 8300000, guid: 4849a4d4796ca42e09506fb3bf0c1f12, type: 3}
+  - {fileID: 8300000, guid: 5dfe19c63470d4b2d911226e460b7ae5, type: 3}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -371,6 +478,9 @@ MonoBehaviour:
   isAIControlled: 0
   belongsToPlayer: 
   explosionPrefab: {fileID: 100000, guid: 57fe74e5fbe3945ee9ec91a1bee6b15b, type: 2}
+  powerUpSpeedMultiplicator: 1.97000003
+  powerUpSpeedDuration: 9.51000023
+  powerUpThroughWallDuration: 9.51000023
   aiObjectInFront: 0
 --- !u!114 &11400008
 MonoBehaviour:

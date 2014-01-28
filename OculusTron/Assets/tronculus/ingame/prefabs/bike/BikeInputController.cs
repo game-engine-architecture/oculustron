@@ -19,6 +19,13 @@ public class BikeInputController : MonoBehaviour {
 	public GameObject explosionPrefab;
 	
 	AudioSource motorSound;
+	TurnSoundPlayer turnSoundPlayer;
+	
+	float lastSpeedPowerUp = -100000f; //never
+	public float powerUpSpeedMultiplicator;
+	public float powerUpSpeedDuration;
+	float lastThroughWallPowerUp = -100000f; //never
+	public float powerUpThroughWallDuration;
 	
 	float aiLastTurn = -1f;
 	float aiMinimumTurnWaitTime = 1f;
@@ -37,6 +44,7 @@ public class BikeInputController : MonoBehaviour {
 		this.modelTransform = this.GetComponent<Transform>();
 		gameState = GameObject.Find("GameState").GetComponent<GameStateManager>();
 		this.motorSound = this.gameObject.GetComponent<AudioSource>();
+		this.turnSoundPlayer = this.gameObject.GetComponentInChildren<TurnSoundPlayer>();
 	}
 	
 	// Update is called once per frame
@@ -66,11 +74,13 @@ public class BikeInputController : MonoBehaviour {
 					directionIndex += 1;
 					directionIndex %= 4;
 					lastCorner = this.gameObject.transform.position;
+					this.turnSoundPlayer.playTurnSound();
 				} else if(bikeDirection.Equals(Direction.RIGHT)){
 					rotation = Quaternion.AngleAxis(90, Vector3.up) * rotation;
 					directionIndex += 3;
 					directionIndex %= 4;
 					lastCorner = this.gameObject.transform.position;
+					this.turnSoundPlayer.playTurnSound();
 				}
 				
 				float rotadiff = Vector3.Dot(rotation.normalized, this.modelTransform.right.normalized);
@@ -83,8 +93,13 @@ public class BikeInputController : MonoBehaviour {
 				//bikes always move forward
 				float vert = 1f; //Input.GetAxis("Vertical");
 				Vector3 movement = new Vector3(0,0,0);
-				movement += rotation * vert * movementSpeed;
-				//deltaT*movementSpeed
+				float currentMovementSpeed = movementSpeed;
+				
+				// increase speed with powerup
+				if(Time.time < lastSpeedPowerUp + powerUpSpeedDuration){
+					currentMovementSpeed *= powerUpSpeedMultiplicator;
+				}
+				movement += rotation * vert * currentMovementSpeed;
 				characterController.Move(movement);
 			} else if(gameState.isState(GameStateManager.GamesState.GAME_ENDED)){
 				die ();
@@ -133,18 +148,27 @@ public class BikeInputController : MonoBehaviour {
 		return this.lastCorner;
 	}
 	
-	void OnControllerColliderHit(ControllerColliderHit hit) {		
-		//if collision with own wall or collision with outer wall, we lose.
-		if(hit.gameObject.name.StartsWith("bike_wall") || 
-			hit.gameObject.name.StartsWith("wall") || 
-			"Wall".Equals(hit.gameObject.name))
-		{
-			this.die();
-		} else if(hit.gameObject.name.Equals("FlashPickup")){
-			Debug.Log("FLASH PICKUP!");
+	void OnControllerColliderHit(ControllerColliderHit hit) {
+		if(hit.gameObject.name.Equals("FlashPickup")){
+			hit.gameObject.SetActive(false);
+			lastSpeedPowerUp = Time.time;
 		} else if(hit.gameObject.name.Equals("TronDisc")){
-			Debug.Log("TRON DISC!");
+			hit.gameObject.SetActive(false);
+			lastThroughWallPowerUp = Time.time;
 		}
+		bool hasWallPowerUp = (lastThroughWallPowerUp + powerUpThroughWallDuration > Time.time);
+		if(!hasWallPowerUp){
+			//if collision with own wall or collision with outer wall, we lose.
+			if(hit.gameObject.name.StartsWith("bike_wall") || 
+				hit.gameObject.name.StartsWith("wall")){
+				this.die();
+			}
+		}
+		if("Wall".Equals(hit.gameObject.name)){
+			//if we hit the level wall we die as well.
+			this.die();
+		}
+		
 	}
 	
 	void die(){
