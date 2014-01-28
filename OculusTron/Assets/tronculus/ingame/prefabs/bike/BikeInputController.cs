@@ -174,12 +174,13 @@ public class BikeInputController : MonoBehaviour {
 	
 	void OnControllerColliderHit(ControllerColliderHit hit) {
 		if(Network.isServer){
+			string playerid = this.gameObject.GetComponent<BikeInputController>().belongsToPlayer;
 			if(hit.gameObject.name.Equals("FlashPickup")){
 				hit.gameObject.SetActive(false);
-				networkView.RPC("actionEvent", RPCMode.All, (int) GameEvent.POWERUP_FAST);
+				networkView.RPC("actionEvent", RPCMode.All, playerid, (int) GameEvent.POWERUP_FAST);
 			} else if(hit.gameObject.name.Equals("TronDisc")){
 				hit.gameObject.SetActive(false);
-				networkView.RPC("actionEvent", RPCMode.All, (int) GameEvent.POWERUP_WALL);
+				networkView.RPC("actionEvent", RPCMode.All, playerid, (int) GameEvent.POWERUP_WALL);
 			}
 			bool hasWallPowerUp = (lastThroughWallPowerUp + powerUpThroughWallDuration > Time.time);
 			if(!hasWallPowerUp){
@@ -196,7 +197,7 @@ public class BikeInputController : MonoBehaviour {
 		}
 	}
 	
-	void die(){
+	public void die(){
 		this.gameObject.GetComponent<CharacterController>().enabled = false;
 		this.gameObject.GetComponent<BikeInputController>().enabled = false;
 		this.gameObject.GetComponent<ParticleSystem>().loop = false;

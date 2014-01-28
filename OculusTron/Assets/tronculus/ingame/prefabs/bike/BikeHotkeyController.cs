@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class BikeHotkeyController : MonoBehaviour {
@@ -31,6 +31,15 @@ public class BikeHotkeyController : MonoBehaviour {
 		}
 	} 
 	
+	void killAllBots(){
+		foreach(GameObject bike in GameObject.FindGameObjectsWithTag("PlayerBike")){
+			BikeInputController controller = bike.GetComponent<BikeInputController>();
+			if(controller.isAIControlled){
+				controller.die();
+			}
+		}
+	}
+	
 	void Update () {
 		checkHotKey();
 	}
@@ -38,6 +47,11 @@ public class BikeHotkeyController : MonoBehaviour {
 	void checkHotKey(){
 		if(Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.O)){
 			this.ovr = !this.ovr;
-		}	
+		}
+		if(Network.isServer){
+			if(Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.K)){
+				killAllBots();
+			}
+		}
 	}
 }

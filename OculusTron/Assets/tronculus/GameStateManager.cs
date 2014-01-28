@@ -174,7 +174,7 @@ public class GameStateManager : MonoBehaviour {
 			score[pair.Key] += 1;
 		}
 		if(isState(GamesState.GAME_RUNNING)){
-			if(score.Count - deadPlayers.Count == 1){
+			if(score.Count - deadPlayers.Count <= 1){
 				setState(GamesState.GAME_ENDED);
 			}
 		}
