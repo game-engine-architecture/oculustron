@@ -48,7 +48,8 @@ public class GameStateManager : MonoBehaviour {
     	set { if ((value>0)&&(value<33)) {
 				this._arenaSizeMultiplicator = value; 
 				level.transform.localScale = new Vector3(value,value/2,value);
-				floorMaterial.mainTextureScale = new Vector2 (value*30, value*30);
+				floorMaterial.SetTextureScale("_MainTex", new Vector2 (value*30, value*30));
+				floorMaterial.SetTextureScale("_BumpMap", new Vector2 (value*30, value*30));
 			}
 		}
 	}
