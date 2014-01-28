@@ -115,7 +115,11 @@ public class NetworkManagement : MonoBehaviour {
 		Debug.Log("players in game:"+players.Count);
 		return player;
 	}	
-	 
+	
+	public void leaveGame(){
+		Network.Disconnect();	
+	}
+	
 	private GameObject SpawnPlayer(Player player){
 		string belongsToPlayer = player.name;
 		bool isAIControlled = player.isBot;

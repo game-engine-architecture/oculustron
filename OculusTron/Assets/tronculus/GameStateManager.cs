@@ -89,6 +89,11 @@ public class GameStateManager : MonoBehaviour {
 		}
 	}
 	
+	public void leaveGame(){
+		networkManagement.leaveGame();
+		setState(GamesState.MENU);
+	}
+	
 	[RPC]
 	public void dictateState(int gameState){
 		this.setState((GamesState) gameState);
