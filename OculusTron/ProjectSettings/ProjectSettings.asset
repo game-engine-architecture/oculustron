@@ -148,10 +148,10 @@ PlayerSettings:
   scriptingDefineSymbols:
     data:
       first: 1
-      second: Init
+      second: 
     data:
       first: 2
-      second: Init
+      second: 
     data:
       first: 11
       second: Init

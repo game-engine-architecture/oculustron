@@ -49,6 +49,8 @@ public class GameStateManager : MonoBehaviour {
 				this._arenaSizeMultiplicator = value; 
 				level.transform.localScale = new Vector3(value,value/2,value);
 				floorMaterial.mainTextureScale = new Vector2 (value*30, value*30);
+				floorMaterial.shader = new Vector2 (value*30, value*30);
+				
 			}
 		}
 	}
