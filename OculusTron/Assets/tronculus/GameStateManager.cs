@@ -5,12 +5,12 @@ using System.Collections.Generic;
 public class GameStateManager : MonoBehaviour {
 		
 	public enum GamesState {
-		MENU,
-		WAITING_FOR_PLAYERS,
-		GAME_STARTING,
-		GAME_RUNNING,
-		GAME_ENDED,
-		GAME_WAITING,
+		MENU = 0,
+		WAITING_FOR_PLAYERS = 1,
+		GAME_STARTING = 2,
+		GAME_RUNNING = 3,
+		GAME_ENDED = 4,
+		GAME_WAITING = 5,
 	}
 	
 	
@@ -59,21 +59,31 @@ public class GameStateManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(isState(GamesState.WAITING_FOR_PLAYERS)){
-			//check if enough players have joined
-			if(networkManagement.currentPlayerCount() >= _playersNeededForGame + _botsCount){
-				setState(GamesState.GAME_STARTING);
-			}
-		} else if(isState(GamesState.GAME_STARTING)){
-			// once enough there are enough players, start game after some seconds
-			if(lastChangedLongerThan(gameStartsInSeconds)){
-				setState(GamesState.GAME_RUNNING);
-			}
-		} else if(isState(GamesState.GAME_ENDED)){
-			if(lastChangedLongerThan(gameEndedWait)){
-				setState(GamesState.GAME_STARTING);
+		if(Network.isServer){
+			if(isState(GamesState.WAITING_FOR_PLAYERS)){
+				//check if enough players have joined
+				if(networkManagement.currentPlayerCount() >= _playersNeededForGame + _botsCount){
+					networkView.RPC("dictateState", RPCMode.All, (int) GamesState.GAME_STARTING);
+					//setState(GamesState.GAME_STARTING);
+				}
+			} else if(isState(GamesState.GAME_STARTING)){
+				// once enough there are enough players, start game after some seconds
+				if(lastChangedLongerThan(gameStartsInSeconds)){
+					networkView.RPC("dictateState", RPCMode.All, (int) GamesState.GAME_RUNNING);
+					//setState(GamesState.GAME_RUNNING);
+				}
+			} else if(isState(GamesState.GAME_ENDED)){
+				if(lastChangedLongerThan(gameEndedWait)){
+					networkView.RPC("dictateState", RPCMode.All, (int) GamesState.GAME_STARTING);
+					//setState(GamesState.GAME_STARTING);
+				}
 			}
 		}
+	}
+	
+	[RPC]
+	public void dictateState(int gameState){
+		this.setState((GamesState) gameState);
 	}
 	
 	public void setState(GamesState state){
@@ -82,12 +92,32 @@ public class GameStateManager : MonoBehaviour {
 		Debug.Log("GAME STATE: "+currentGameState.ToString());
 		if(isState (GamesState.GAME_ENDED)){
 			deadPlayers.Clear();
+			//cleanUpArena();
 		} else if(isState (GamesState.GAME_STARTING)){
 			AudioSource startSound = this.gameObject.GetComponent<AudioSource>();
 			startSound.Play();
 			deadPlayers.Clear();
 			menuState.currentMenuState = 0;
 			networkManagement.respawnPlayers();
+		}
+	}
+	
+	public void cleanUpArena(){
+		//this is quite a hack, but should work out in the end
+		GameObject gowallcontainer = GameObject.Find("bike_wall_container");
+		while(gowallcontainer != null){
+			GameObject.Destroy(gowallcontainer);
+			gowallcontainer = GameObject.Find("bike_wall_container");
+		}
+		GameObject gobike = GameObject.Find("bike(Clone)");
+		while(gobike != null){
+			GameObject.Destroy(gobike);
+			gobike = GameObject.Find("bike(Clone)");
+		}
+		GameObject gowalls = GameObject.Find("wall(Clone)");
+		while(gowalls != null){
+			GameObject.Destroy(gowalls);
+			gowalls = GameObject.Find("wall(Clone)");
 		}
 	}
 	

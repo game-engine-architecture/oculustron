@@ -149,26 +149,27 @@ public class BikeInputController : MonoBehaviour {
 	}
 	
 	void OnControllerColliderHit(ControllerColliderHit hit) {
-		if(hit.gameObject.name.Equals("FlashPickup")){
-			hit.gameObject.SetActive(false);
-			lastSpeedPowerUp = Time.time;
-		} else if(hit.gameObject.name.Equals("TronDisc")){
-			hit.gameObject.SetActive(false);
-			lastThroughWallPowerUp = Time.time;
-		}
-		bool hasWallPowerUp = (lastThroughWallPowerUp + powerUpThroughWallDuration > Time.time);
-		if(!hasWallPowerUp){
-			//if collision with own wall or collision with outer wall, we lose.
-			if(hit.gameObject.name.StartsWith("bike_wall") || 
-				hit.gameObject.name.StartsWith("wall")){
+		if(Network.isServer){
+			if(hit.gameObject.name.Equals("FlashPickup")){
+				hit.gameObject.SetActive(false);
+				lastSpeedPowerUp = Time.time;
+			} else if(hit.gameObject.name.Equals("TronDisc")){
+				hit.gameObject.SetActive(false);
+				lastThroughWallPowerUp = Time.time;
+			}
+			bool hasWallPowerUp = (lastThroughWallPowerUp + powerUpThroughWallDuration > Time.time);
+			if(!hasWallPowerUp){
+				//if collision with own wall or collision with outer wall, we lose.
+				if(hit.gameObject.name.StartsWith("bike_wall") || 
+					hit.gameObject.name.StartsWith("wall")){
+					this.die();
+				}
+			}
+			if("Wall".Equals(hit.gameObject.name)){
+				//if we hit the level wall we die as well.
 				this.die();
 			}
 		}
-		if("Wall".Equals(hit.gameObject.name)){
-			//if we hit the level wall we die as well.
-			this.die();
-		}
-		
 	}
 	
 	void die(){

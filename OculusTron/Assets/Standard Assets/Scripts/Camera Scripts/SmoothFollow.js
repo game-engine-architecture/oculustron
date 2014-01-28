@@ -77,9 +77,9 @@ function setFollowCam(){
 
 function setEgoCam(){
 	distance = 0.1;
-	height = 0.5;
+	height = 0.98;
 	heightDamping = 50;
 	rotationDamping = 50;
-	targetOffsetZ = 1;
+	targetOffsetZ = -0.14;
 	lookForward = true;
 }
