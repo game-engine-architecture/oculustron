@@ -56,8 +56,7 @@ public class MenuActionBehaviour : MonoBehaviour {
 					
 					GameListElement gle = obj.GetComponent<GameListElement>();
 					gle.hostData = hostList[i];
-					//gle.contentString = hostList[i].gameName;
-					
+					//gle.contentString = hostList[i].gameName;	
 					games.Add(obj);
 				}
 				
@@ -89,7 +88,6 @@ public class MenuActionBehaviour : MonoBehaviour {
 			case MenuActionType.CONNECTHOST:
 				networkManagement.JoinServer(gameObject.GetComponent<GameListElement>().hostData);
 			break;
-			
 			case MenuActionType.CUSTOMSERVERCHECK:
 				bool newServerVal = !networkManagement.useCustomMasterServer;
 				networkManagement.useCustomMasterServer = newServerVal;

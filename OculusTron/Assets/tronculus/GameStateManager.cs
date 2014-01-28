@@ -19,6 +19,7 @@ public class GameStateManager : MonoBehaviour {
 	private NetworkManagement networkManagement;
 	private MenuState menuState;
 	private GameObject level;
+	private Material floorMaterial;
 	public int gameStartsInSeconds = 5;
 	public int gameEndedWait = 5;
 	
@@ -29,7 +30,7 @@ public class GameStateManager : MonoBehaviour {
 	public int botsCount
 	{
     	get { return this._botsCount; }
-    	set { if ((value>0)&&(value<9)) this._botsCount = value; }
+    	set { if ((value>=0)&&(value<9)) this._botsCount = value; }
 	}
 
 	private int _playersNeededForGame = 1;
@@ -43,8 +44,11 @@ public class GameStateManager : MonoBehaviour {
 	public int arenaSizeMultiplicator
 	{
     	get { return this._arenaSizeMultiplicator; }
-    	set { if ((value>0)&&(value<33)) this._arenaSizeMultiplicator = value; 
-			level.transform.localScale = new Vector3(value,value/2,value);
+    	set { if ((value>0)&&(value<33)) {
+				this._arenaSizeMultiplicator = value; 
+				level.transform.localScale = new Vector3(value,value/2,value);
+				floorMaterial.mainTextureScale = new Vector2 (value*20, value*20);
+			}
 		}
 	}
 	
@@ -55,6 +59,7 @@ public class GameStateManager : MonoBehaviour {
 		
 		networkManagement = GameObject.Find("NetworkManager").GetComponent<NetworkManagement>();
 		level = GameObject.Find("Level");
+		floorMaterial = GameObject.Find("Floor").GetComponent<MeshRenderer>().material;
 	}
 	
 	// Update is called once per frame
