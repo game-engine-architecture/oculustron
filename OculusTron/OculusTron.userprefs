@@ -1,55 +1,28 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/tronculus/menu/MenuElementControll.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/tronculus/ingame/prefabs/bike/bikelogic.cs">
     <Files>
-      <File FileName="Assets/tronculus/menu/MenuActionBehaviour.cs" Line="1" Column="1" />
-      <File FileName="Assets/tronculus/GameStateManager.cs" Line="51" Column="71" />
-      <File FileName="Assets/tronculus/ingame/prefabs/bike/BikeInputController.cs" Line="176" Column="34" />
-      <File FileName="Assets/tronculus/menu/MenuElementControll.cs" Line="1" Column="1" />
+      <File FileName="Assets/tronculus/ingame/network/NetworkManagement.cs" Line="37" Column="38" />
+      <File FileName="Assets/tronculus/menu/MenuInputScript.cs" Line="110" Column="5" />
+      <File FileName="Assets/tronculus/menu/MenuActionBehaviour.cs" Line="93" Column="5" />
+      <File FileName="Assets/tronculus/ingame/prefabs/bike/bikelogic.cs" Line="75" Column="68" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Assets" expanded="True">
-              <Node name="oculus rift" expanded="True">
-                <Node name="OVR" expanded="True">
-                  <Node name="OVRImageEffects" expanded="True" />
-                  <Node name="Scripts" expanded="True" />
-                </Node>
-              </Node>
               <Node name="tronculus" expanded="True">
                 <Node name="ingame" expanded="True">
                   <Node name="camera" expanded="True" />
-                  <Node name="effects" expanded="True" />
                   <Node name="network" expanded="True" />
                   <Node name="prefabs" expanded="True">
-                    <Node name="bike" expanded="True" />
+                    <Node name="bike" expanded="True">
+                      <Node name="bikelogic.cs" selected="True" />
+                    </Node>
                   </Node>
-                  <Node name="score" expanded="True" />
                 </Node>
-                <Node name="menu" expanded="True">
-                  <Node name="MenuElementControll.cs" selected="True" />
-                </Node>
-              </Node>
-            </Node>
-          </Node>
-          <Node name="Assembly-CSharp-firstpass" expanded="True">
-            <Node name="Assets" expanded="True">
-              <Node name="Standard Assets" expanded="True">
-                <Node name="Image Effects (Pro Only)" expanded="True" />
-                <Node name="Scripts" expanded="True">
-                  <Node name="Utility Scripts" expanded="True" />
-                </Node>
-              </Node>
-            </Node>
-          </Node>
-          <Node name="Assembly-UnityScript-firstpass" expanded="True">
-            <Node name="Assets" expanded="True">
-              <Node name="Standard Assets" expanded="True">
-                <Node name="Scripts" expanded="True">
-                  <Node name="Camera Scripts" expanded="True" />
-                </Node>
+                <Node name="menu" expanded="True" />
               </Node>
             </Node>
           </Node>

@@ -45,13 +45,22 @@ public class GameStateManager : MonoBehaviour {
 	public int arenaSizeMultiplicator
 	{
     	get { return this._arenaSizeMultiplicator; }
-    	set { if ((value>0)&&(value<33)) {
+    	set { if ((value>1)&&(value<33)) {
 				this._arenaSizeMultiplicator = value; 
 				level.transform.localScale = new Vector3(value,value/2,value);
 				floorMaterial.SetTextureScale("_MainTex", new Vector2 (value*30, value*30));
 				floorMaterial.SetTextureScale("_BumpMap", new Vector2 (value*30, value*30));
 			}
 		}
+	}
+	
+	public void setArenaSizeForClients(int arenaSizeMultiplicator){
+		networkView.RPC("setArenaSize", RPCMode.AllBuffered, arenaSizeMultiplicator);
+	}
+	
+	[RPC]
+	public void setArenaSize(int multiplicator){
+		this.arenaSizeMultiplicator = multiplicator;
 	}
 	
 	// Use this for initialization
@@ -94,6 +103,7 @@ public class GameStateManager : MonoBehaviour {
 		networkManagement.leaveGame();
 		setState(GamesState.MENU);
 		cleanUpArena();
+		score.Clear();
 	}
 	
 	[RPC]

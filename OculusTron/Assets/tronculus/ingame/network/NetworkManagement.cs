@@ -62,6 +62,7 @@ public class NetworkManagement : MonoBehaviour {
 	public void StartServer() {
 	    Network.InitializeServer(4, 25000, !Network.HavePublicAddress());
 		MasterServer.RegisterHost(typeName, "  DeathMatch - "+gameState.playersNeededForGame+" Player - Arena "+gameState.arenaSizeMultiplicator);
+		gameState.setArenaSizeForClients(gameState.arenaSizeMultiplicator);
 	}
 	
 	void OnServerInitialized() {
