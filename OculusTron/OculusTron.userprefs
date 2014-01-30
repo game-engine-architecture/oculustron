@@ -1,6 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/tronculus/menu/MenuActionBehaviour.cs">
+    <Files>
+      <File FileName="Assets/tronculus/menu/MenuActionBehaviour.cs" Line="1" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
@@ -16,15 +19,15 @@
                 <Node name="ingame" expanded="True">
                   <Node name="camera" expanded="True" />
                   <Node name="effects" expanded="True" />
-                  <Node name="network" expanded="True">
-                    <Node name="NetworkManagement.cs" selected="True" />
-                  </Node>
+                  <Node name="network" expanded="True" />
                   <Node name="prefabs" expanded="True">
                     <Node name="bike" expanded="True" />
                   </Node>
                   <Node name="score" expanded="True" />
                 </Node>
-                <Node name="menu" expanded="True" />
+                <Node name="menu" expanded="True">
+                  <Node name="MenuActionBehaviour.cs" selected="True" />
+                </Node>
               </Node>
             </Node>
           </Node>
