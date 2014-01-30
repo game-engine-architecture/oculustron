@@ -74,15 +74,14 @@ public class bikelogic : MonoBehaviour {
 						}
 						Vector3 lastCornerPosition = inputController.getLastCorner();
 						int directionIndexInt = inputController.getDirectionIndex();
-						networkView.RPC("createWall", RPCMode.OthersBuffered, lastCornerPosition, directionIndexInt);
-						lastCreatedWall = createWall(lastCornerPosition, directionIndexInt);	
+						lastCreatedWall = createWall(lastCornerPosition, directionIndexInt,inputController.getPlayerNumber(),inputController.belongsToPlayer);	
 						lastCornerPos = inputController.getLastCorner();
 						lastDirectionIndex = inputController.getDirectionIndex();
 					} else {
 						if(lastCreatedWall != null){
 							extendWall(lastCreatedWall, lastCornerPos, currPos);
 						} else {
-							lastCreatedWall = createWall(currPos, lastDirectionIndex);	
+							lastCreatedWall = createWall(currPos, lastDirectionIndex,inputController.getPlayerNumber(),inputController.belongsToPlayer);	
 						}
 					}
 				}
@@ -95,23 +94,27 @@ public class bikelogic : MonoBehaviour {
 		return b1Trans.position;
 	}
 	
-	//[RPC]
-	GameObject createWall(Vector3 start, int direction){
+	GameObject createWall(Vector3 start, int direction, int material, string playerid){
 		GameObject wall = Network.Instantiate(wallPrefab, start, Quaternion.Euler(new Vector3(0, direction*90, 0)), 0) as GameObject;
-		//set matrial
+		NetworkViewID viewId = wall.GetComponent<NetworkView>().networkView.viewID;
+		networkView.RPC("setWallProperties", RPCMode.AllBuffered, viewId, material, playerid);
+		return wall;
+	}
+	
+	[RPC]
+	void setWallProperties(NetworkViewID networkViewId, int material, string belongsToPlayer){
+		GameObject wall = NetworkView.Find(networkViewId).gameObject;
 		MeshRenderer renderer = wall.GetComponent<MeshRenderer>();
-		Material wallmaterial = wall.GetComponent<WallMaterials>().wallMaterials[inputController.getPlayerNumber()];
+		Material wallmaterial = wall.GetComponent<WallMaterials>().wallMaterials[material];
 		renderer.material = wallmaterial;
-		
-		wall.GetComponent<WallOwner>().setOwner(inputController.belongsToPlayer);
+		wall.GetComponent<WallOwner>().setOwner(belongsToPlayer, material);
 		
 		//add wall to bike wall container
 		wall.transform.parent = wallcontainer.transform;
-		wall.name = "bike_wall"+wallnumber;
-		wallnumber++;
-		return wall;
-	}
+		wall.name = "bike_wall";
 
+	}
+	
 	GameObject extendWall(GameObject wall, Vector3 start, Vector3 end){
 		float length = Vector3.Distance(start, end);
 		Vector3 wallpos = ((start+end)/2.0f);

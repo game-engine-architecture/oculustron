@@ -6,9 +6,7 @@ public class WallOwner : MonoBehaviour {
 	public string playerid;
 	
 	// Use this for initialization
-	void Start () {
-	
-	}
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -19,7 +17,7 @@ public class WallOwner : MonoBehaviour {
 		return playerid;
 	}
 	
-	public void setOwner(string playerid){
+	public void setOwner(string playerid, int playernumber){
 		this.playerid = playerid;
 	}
 }
