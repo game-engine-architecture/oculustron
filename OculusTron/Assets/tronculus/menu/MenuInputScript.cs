@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class MenuInputScript : MonoBehaviour {
 	
@@ -12,11 +13,13 @@ public class MenuInputScript : MonoBehaviour {
 	
 	private float current = 1f;
 	TextMesh ipeditfield;
+	TextMesh useCustomServerCheck;
 	NetworkManagement networkmanager;
 	
 	void Start () {
 		networkmanager = GameObject.Find ("NetworkManager").GetComponent<NetworkManagement>();
 		ipeditfield = GameObject.Find("customserverip_Edit").GetComponent<TextMesh>();
+		useCustomServerCheck = GameObject.Find("customserver_Check").GetComponent<TextMesh>();
 	}
 	
 	// Update is called once per frame
@@ -113,8 +116,13 @@ public class MenuInputScript : MonoBehaviour {
 	}
 	
 	private void updateMasterIp(){
-		networkmanager.customMasterServerIp = ipeditfield.text;
-		networkmanager.useCustomMasterServer = true;	
+		string myIpString = ipeditfield.text;
+		System.Net.IPAddress ipAddress = null;
+		bool isValidIp = System.Net.IPAddress.TryParse(myIpString, out ipAddress);
+		
+		if (isValidIp) networkmanager.customMasterServerIp = ipeditfield.text;
+		networkmanager.useCustomMasterServer = isValidIp;	
+		useCustomServerCheck.text = (isValidIp)?"√":"Δ";
 	}
 	
 	private enum MoveDirection { left, right, up, down };
