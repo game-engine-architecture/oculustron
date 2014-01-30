@@ -22,10 +22,10 @@ public class BikeInputController : MonoBehaviour {
 	AudioSource motorSound;
 	TurnSoundPlayer turnSoundPlayer;
 	
-	float lastSpeedPowerUp = -100000f; //never
+	public float lastSpeedPowerUp = -100000f; //never
 	public float powerUpSpeedMultiplicator;
 	public float powerUpSpeedDuration;
-	float lastThroughWallPowerUp = -100000f; //never
+	public float lastThroughWallPowerUp = -100000f; //never
 	public float powerUpThroughWallDuration;
 	
 	float aiLastTurn = -1f;
@@ -169,43 +169,46 @@ public class BikeInputController : MonoBehaviour {
 	}
 	
 	[RPC]
-	public void actionEvent(string playerid, int instrution ){
+	public void actionEvent(NetworkViewID playerid, int instrution ){
 		GameEvent currEvent = (GameEvent) instrution;
+		GameObject bike = NetworkView.Find(playerid).gameObject;
+		BikeInputController controller = bike.GetComponent<BikeInputController>();
 		if(this.belongsToPlayer.Equals(playerid)){
 			if(currEvent.Equals(GameEvent.POWERUP_WALL)){
-				this.lastSpeedPowerUp = Time.time;
+				controller.lastSpeedPowerUp = Time.time;
 			} else if(currEvent.Equals(GameEvent.POWERUP_WALL)){
-				this.lastThroughWallPowerUp = Time.time;
+				controller.lastThroughWallPowerUp = Time.time;
 			}
 		}
 	}
 	
 	void OnControllerColliderHit(ControllerColliderHit hit) {
-		if(Network.isServer){
-			string playerid = this.gameObject.GetComponent<BikeInputController>().belongsToPlayer;
-			if(hit.gameObject.name.Equals("FlashPickup")){
-				hit.gameObject.SetActive(false);
-				networkView.RPC("actionEvent", RPCMode.All, playerid, (int) GameEvent.POWERUP_FAST);
-			} else if(hit.gameObject.name.Equals("TronDisc")){
-				hit.gameObject.SetActive(false);
-				networkView.RPC("actionEvent", RPCMode.All, playerid, (int) GameEvent.POWERUP_WALL);
-			}
-			bool hasWallPowerUp = (lastThroughWallPowerUp + powerUpThroughWallDuration > Time.time);
-			if(!hasWallPowerUp){
-				//if collision with own wall or collision with outer wall, we lose.
-				if(hit.gameObject.name.StartsWith("bike_wall")
-					//|| hit.gameObject.name.StartsWith("wall")
-					){
-					string wallowner = hit.gameObject.GetComponent<WallOwner>().getOwner();
-					GameObject.Find("GameState").GetComponent<GameStateManager>().notifyPlayerFragged(wallowner, playerid);
-					this.die();
-				}
-			}
-			if("Wall".Equals(hit.gameObject.name)){
-				//if we hit the level wall we die as well.
+		
+		string playerid = this.gameObject.GetComponent<BikeInputController>().belongsToPlayer;
+		NetworkViewID netviewid = this.gameObject.networkView.viewID;
+		if(hit.gameObject.name.Equals("FlashPickup")){
+			hit.gameObject.SetActive(false);
+			networkView.RPC("actionEvent", RPCMode.All, netviewid, (int) GameEvent.POWERUP_FAST);
+		} else if(hit.gameObject.name.Equals("TronDisc")){
+			hit.gameObject.SetActive(false);
+			networkView.RPC("actionEvent", RPCMode.All, netviewid, (int) GameEvent.POWERUP_WALL);
+		}
+		bool hasWallPowerUp = (lastThroughWallPowerUp + powerUpThroughWallDuration > Time.time);
+		if(!hasWallPowerUp){
+			//if collision with own wall or collision with outer wall, we lose.
+			if(hit.gameObject.name.StartsWith("bike_wall")
+				|| hit.gameObject.name.StartsWith("wall")
+				){
+				string wallowner = hit.gameObject.GetComponent<WallOwner>().getOwner();
+				GameObject.Find("GameState").GetComponent<GameStateManager>().notifyPlayerFragged(wallowner, playerid);
 				this.die();
 			}
 		}
+		if("Wall".Equals(hit.gameObject.name)){
+			//if we hit the level wall we die as well.
+			this.die();
+		}
+		
 	}
 	
 	public void die(){

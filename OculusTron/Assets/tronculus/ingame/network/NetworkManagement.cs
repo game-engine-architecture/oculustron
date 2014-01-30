@@ -70,6 +70,7 @@ public class NetworkManagement : MonoBehaviour {
 	}
 	 
 	void OnConnectedToServer() {
+		Debug.Log("players already on server: "+players.Count);
 		Debug.Log("Server Joined");
 		initializeGame();
 	}
@@ -132,7 +133,13 @@ public class NetworkManagement : MonoBehaviour {
 		bool isAIControlled = player.isBot;
 			
 		GameObject spawnpoints = GameObject.Find("Spawnpoints");
-		Transform spawnpoint = spawnpoints.transform.GetChild(player.id);
+		Transform spawnpoint;
+		if(isAIControlled){
+			//bots are continously numbered
+			spawnpoint = spawnpoints.transform.GetChild(player.id);
+		} else {
+			spawnpoint = spawnpoints.transform.GetChild(int.Parse(Network.player.ToString())+gameState.botsCount);
+		}
 	    GameObject bike = Network.Instantiate(playerPrefab, spawnpoint.position, spawnpoint.rotation, 0) as GameObject;
 		BikeInputController bikeCtrl = bike.GetComponent<BikeInputController>();
 		bikeCtrl.setPlayerNumber(player.id);

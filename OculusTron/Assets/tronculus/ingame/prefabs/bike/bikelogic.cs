@@ -57,7 +57,9 @@ public class bikelogic : MonoBehaviour {
 					float wallHidePerc = (Time.time - _hideWallsTimeSince) / _hideWallsDuration;
 					if(wallHidePerc < 1.0f){
 						float MAGIC_CLIPPING_VAL = 1.2f;
-						this.wallcontainer.transform.position = - Vector3.up * wallHidePerc * wallHeight * MAGIC_CLIPPING_VAL;
+						foreach(Transform childwall in this.wallcontainer.GetComponentsInChildren<Transform>()){
+							childwall.position = childwall.position - Vector3.up * wallHeight * (Time.deltaTime/_hideWallsDuration) * MAGIC_CLIPPING_VAL;
+						}
 					}
 				}
 			} else {
@@ -74,14 +76,14 @@ public class bikelogic : MonoBehaviour {
 						}
 						Vector3 lastCornerPosition = inputController.getLastCorner();
 						int directionIndexInt = inputController.getDirectionIndex();
-						lastCreatedWall = createWall(lastCornerPosition, directionIndexInt,inputController.getPlayerNumber(),inputController.belongsToPlayer);	
+						lastCreatedWall = createWall(lastCornerPosition, directionIndexInt, inputController.getPlayerNumber(), inputController.belongsToPlayer);	
 						lastCornerPos = inputController.getLastCorner();
 						lastDirectionIndex = inputController.getDirectionIndex();
 					} else {
 						if(lastCreatedWall != null){
 							extendWall(lastCreatedWall, lastCornerPos, currPos);
 						} else {
-							lastCreatedWall = createWall(currPos, lastDirectionIndex,inputController.getPlayerNumber(),inputController.belongsToPlayer);	
+							lastCreatedWall = createWall(currPos, lastDirectionIndex, inputController.getPlayerNumber(), inputController.belongsToPlayer);	
 						}
 					}
 				}
@@ -97,7 +99,7 @@ public class bikelogic : MonoBehaviour {
 	GameObject createWall(Vector3 start, int direction, int material, string playerid){
 		GameObject wall = Network.Instantiate(wallPrefab, start, Quaternion.Euler(new Vector3(0, direction*90, 0)), 0) as GameObject;
 		NetworkViewID viewId = wall.GetComponent<NetworkView>().networkView.viewID;
-		networkView.RPC("setWallProperties", RPCMode.AllBuffered, viewId, material, playerid);
+		networkView.RPC("setWallProperties", RPCMode.AllBuffered, viewId, int.Parse(Network.player.ToString()), playerid);
 		return wall;
 	}
 	
