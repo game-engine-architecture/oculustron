@@ -168,18 +168,22 @@ public class GameStateManager : MonoBehaviour {
 		GameObject.Find ("ScoreBoardContainer").GetComponent<ScoreBoardUpater>().renderScoreBoard();
 	}
 	
+	public void notifyPlayerFragged(string wallowner, string killedplayer){
+		networkView.RPC("playerFragged", RPCMode.AllBuffered, wallowner, killedplayer);
+	}
+	
+	[RPC]
+	public void playerFragged(string wallowner, string killedplayer){
+		Debug.Log (wallowner+" killed "+killedplayer);
+		if(wallowner.Equals(killedplayer)){
+			score[wallowner] -= 1;
+		} else {
+			score[wallowner] += 1;
+		}
+	}
+	
 	public void playerLost(string playerid){
 		deadPlayers.Add(playerid);
-		Debug.Log ("dead players count: "+deadPlayers.Count);
-		Debug.Log ("players still alive: "+(score.Count - deadPlayers.Count));
-		Dictionary<string, int> currentScore = new Dictionary<string, int>(score);
-		foreach (KeyValuePair<string, int> pair in currentScore){
-			if(deadPlayers.Contains(pair.Key)){
-				//every alive player gets a point
-				continue;
-			}
-			score[pair.Key] += 1;
-		}
 		if(isState(GamesState.GAME_RUNNING)){
 			if(score.Count - deadPlayers.Count <= 1){
 				setState(GamesState.GAME_ENDED);

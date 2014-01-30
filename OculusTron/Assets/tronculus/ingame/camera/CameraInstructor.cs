@@ -11,7 +11,7 @@ public class CameraInstructor : MonoBehaviour {
 		cameraFollow(GameObject.Find ("ScoreBoardContainer"));
 		//update score board after board was shown
 		Invoke ("updateScoreBoard", 1);
-		Invoke ("showPlayfield", 2);
+		Invoke ("showPlayfield", 3);
 	}
 	
 	void showPlayfield(){

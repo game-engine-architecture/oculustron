@@ -96,11 +96,10 @@ public class bikelogic : MonoBehaviour {
 		Material wallmaterial = wall.GetComponent<WallMaterials>().wallMaterials[inputController.getPlayerNumber()];
 		renderer.material = wallmaterial;
 		
+		wall.GetComponent<WallOwner>().setOwner(inputController.belongsToPlayer);
+		
 		//add wall to bike wall container
 		wall.transform.parent = wallcontainer.transform;
-		//MeshCollider collider = wall.AddComponent<MeshCollider>();
-		//collider.isTrigger = true;
-		
 		wall.name = "bike_wall"+wallnumber;
 		wallnumber++;
 		return wall;

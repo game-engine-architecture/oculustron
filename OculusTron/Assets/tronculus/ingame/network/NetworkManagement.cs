@@ -32,12 +32,14 @@ public class NetworkManagement : MonoBehaviour {
 	private Player thisPlayer; //myself
 	private List<Player> players;
 	
+	public string customMasterServerIp = "192.168.1.1";
+	
 	private bool _useCustomMasterServer;
 	public bool useCustomMasterServer
 	{
     	get { return this._useCustomMasterServer; }
     	set { this._useCustomMasterServer = value; 
-			  MasterServer.ipAddress = (value) ? "192.168.1.7":"72.52.207.14";
+			  MasterServer.ipAddress = (value) ? customMasterServerIp: "72.52.207.14";
 		}
 	}
 	

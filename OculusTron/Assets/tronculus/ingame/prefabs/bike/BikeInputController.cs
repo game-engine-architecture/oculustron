@@ -30,6 +30,7 @@ public class BikeInputController : MonoBehaviour {
 	
 	float aiLastTurn = -1f;
 	float aiMinimumTurnWaitTime = 1f;
+	//float aiRandomTurnPropabilityPerSec = 0.976f;
 	float aiRandomTurnPropabilityPerSec = 0.976f;
 	public bool aiObjectInFront = false;
 	
@@ -192,8 +193,11 @@ public class BikeInputController : MonoBehaviour {
 			bool hasWallPowerUp = (lastThroughWallPowerUp + powerUpThroughWallDuration > Time.time);
 			if(!hasWallPowerUp){
 				//if collision with own wall or collision with outer wall, we lose.
-				if(hit.gameObject.name.StartsWith("bike_wall") || 
-					hit.gameObject.name.StartsWith("wall")){
+				if(hit.gameObject.name.StartsWith("bike_wall")
+					//|| hit.gameObject.name.StartsWith("wall")
+					){
+					string wallowner = hit.gameObject.GetComponent<WallOwner>().getOwner();
+					GameObject.Find("GameState").GetComponent<GameStateManager>().notifyPlayerFragged(wallowner, playerid);
 					this.die();
 				}
 			}

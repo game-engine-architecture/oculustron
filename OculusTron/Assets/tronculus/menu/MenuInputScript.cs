@@ -11,9 +11,12 @@ public class MenuInputScript : MonoBehaviour {
 	public float rotation_speed;
 	
 	private float current = 1f;
+	TextMesh ipeditfield;
+	NetworkManagement networkmanager;
 	
 	void Start () {
-	
+		networkmanager = GameObject.Find ("NetworkManager").GetComponent<NetworkManagement>();
+		ipeditfield = GameObject.Find("customserverip_Edit").GetComponent<TextMesh>();
 	}
 	
 	// Update is called once per frame
@@ -51,6 +54,67 @@ public class MenuInputScript : MonoBehaviour {
 			break;
 		}
 		
+		//enter ip
+		if(goal == 2){
+			if(ipeditfield.text.Length < 15){
+				if(Input.GetKeyDown(KeyCode.Alpha0)){
+					ipeditfield.text += "0";
+					updateMasterIp();
+				}
+				if(Input.GetKeyDown(KeyCode.Alpha1)){
+					ipeditfield.text += "1";
+					updateMasterIp();
+				}
+				if(Input.GetKeyDown(KeyCode.Alpha2)){
+					ipeditfield.text += "2";
+					updateMasterIp();
+				}
+				if(Input.GetKeyDown(KeyCode.Alpha3)){
+					ipeditfield.text += "3";
+					updateMasterIp();
+				}
+				if(Input.GetKeyDown(KeyCode.Alpha4)){
+					ipeditfield.text += "4";
+					updateMasterIp();
+				}
+				if(Input.GetKeyDown(KeyCode.Alpha5)){
+					ipeditfield.text += "5";
+					updateMasterIp();
+				}
+				if(Input.GetKeyDown(KeyCode.Alpha6)){
+					ipeditfield.text += "6";
+					updateMasterIp();
+				}
+				if(Input.GetKeyDown(KeyCode.Alpha7)){
+					ipeditfield.text += "7";
+					updateMasterIp();
+				}
+				if(Input.GetKeyDown(KeyCode.Alpha8)){
+					ipeditfield.text += "8";
+					updateMasterIp();
+				}
+				if(Input.GetKeyDown(KeyCode.Alpha9)){
+					ipeditfield.text += "9";
+					updateMasterIp();
+				}
+				if(Input.GetKeyDown(KeyCode.Period)){
+					ipeditfield.text += ".";
+					updateMasterIp();
+				}
+			}
+			if(Input.GetKeyDown(KeyCode.Backspace)){
+				if(ipeditfield.text.Length > 0){
+					ipeditfield.text = ipeditfield.text.Remove(ipeditfield.text.Length-1);
+					updateMasterIp();
+				}
+			}
+		}
+		
+	}
+	
+	private void updateMasterIp(){
+		networkmanager.customMasterServerIp = ipeditfield.text;
+		networkmanager.useCustomMasterServer = true;	
 	}
 	
 	private enum MoveDirection { left, right, up, down };
