@@ -44,7 +44,9 @@ public class bikelogic : MonoBehaviour {
 	void Update () {
 		if(gameState.isState(GameStateManager.GamesState.GAME_RUNNING) || gameState.isState(GameStateManager.GamesState.GAME_ENDED)){
 			if(this._hideWalls){
+				// remove Walls if the player is dead
 				if(gameState.isState(GameStateManager.GamesState.GAME_ENDED)){
+					// game ended, remove all containers and game objects from game
 					GameObject.Destroy(this.wallcontainer);
 					if(networkView.isMine){
 						Debug.Log("Removing GameObject: "+gameObject.name);
@@ -59,24 +61,29 @@ public class bikelogic : MonoBehaviour {
 					}
 				}
 			} else {
-				//player is alive, update walls
-				Vector3 currPos = currentBikePos();
-				//check if bike was rotated
-				if(lastDirectionIndex != inputController.getDirectionIndex()){
-					if(lastCreatedWall != null){
-						//make sure wall is closed in the corners
-						extendWall(lastCreatedWall, lastCornerPos, inputController.getLastCorner());
+				if(networkView.isMine){
+					//player is alive, update walls
+					Vector3 currPos = currentBikePos();
+					//check if bike was rotated
+					if(lastDirectionIndex != inputController.getDirectionIndex()){
+						if(lastCreatedWall != null){
+							//make sure wall is closed in the corners
+							extendWall(lastCreatedWall, lastCornerPos, inputController.getLastCorner());
+						} else {
+						
+						}
+						Vector3 lastCornerPosition = inputController.getLastCorner();
+						int directionIndexInt = inputController.getDirectionIndex();
+						networkView.RPC("createWall", RPCMode.OthersBuffered, lastCornerPosition, directionIndexInt);
+						lastCreatedWall = createWall(lastCornerPosition, directionIndexInt);	
+						lastCornerPos = inputController.getLastCorner();
+						lastDirectionIndex = inputController.getDirectionIndex();
 					} else {
-					
-					}
-					lastCreatedWall = createWall(inputController.getLastCorner(), inputController.getDirectionIndex());	
-					lastCornerPos = inputController.getLastCorner();
-					lastDirectionIndex = inputController.getDirectionIndex();
-				} else {
-					if(lastCreatedWall != null){
-						extendWall(lastCreatedWall, lastCornerPos, currPos);
-					} else {
-						lastCreatedWall = createWall(currPos, lastDirectionIndex);	
+						if(lastCreatedWall != null){
+							extendWall(lastCreatedWall, lastCornerPos, currPos);
+						} else {
+							lastCreatedWall = createWall(currPos, lastDirectionIndex);	
+						}
 					}
 				}
 			}
@@ -88,7 +95,7 @@ public class bikelogic : MonoBehaviour {
 		return b1Trans.position;
 	}
 	
-	[RPC]
+	//[RPC]
 	GameObject createWall(Vector3 start, int direction){
 		GameObject wall = Network.Instantiate(wallPrefab, start, Quaternion.Euler(new Vector3(0, direction*90, 0)), 0) as GameObject;
 		//set matrial
@@ -104,11 +111,7 @@ public class bikelogic : MonoBehaviour {
 		wallnumber++;
 		return wall;
 	}
-	
-	void OnNetworkInstantiate(NetworkMessageInfo info) {
-        Debug.Log("New object instantiated by " + info.sender);
-    }
-	
+
 	GameObject extendWall(GameObject wall, Vector3 start, Vector3 end){
 		float length = Vector3.Distance(start, end);
 		Vector3 wallpos = ((start+end)/2.0f);
