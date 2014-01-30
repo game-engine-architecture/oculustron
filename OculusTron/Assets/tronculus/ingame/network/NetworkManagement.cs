@@ -16,6 +16,10 @@ public class Player{
 		this.isBot = isBot;
 		this.id = Player.uid++;
 	}
+	
+	public static void reset(){
+		Player.uid = 0;
+	}
 }
 
 public class NetworkManagement : MonoBehaviour {
@@ -102,8 +106,7 @@ public class NetworkManagement : MonoBehaviour {
 		GameObject thisPlayersBike = SpawnPlayer(thisPlayer);
 		GameObject cam = GameObject.Find("Main Camera");
 		if(cam != null){
-			SmoothFollow follow = cam.GetComponent<SmoothFollow>();
-			follow.target = thisPlayersBike.transform;
+			cam.GetComponent<CameraInstructor>().cameraFollow(thisPlayersBike);
 		}
 	}
 	
@@ -117,7 +120,9 @@ public class NetworkManagement : MonoBehaviour {
 	}	
 	
 	public void leaveGame(){
-		Network.Disconnect();	
+		Network.Disconnect();
+		players.Clear();
+		Player.reset();
 	}
 	
 	private GameObject SpawnPlayer(Player player){

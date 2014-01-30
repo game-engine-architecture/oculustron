@@ -43,7 +43,7 @@ public class BikeHotkeyController : MonoBehaviour {
 	void leaveGame(){
 		GameStateManager gameStateManager = this.GetComponent<GameStateManager>();
 		bool inGame = gameStateManager.isState(GameStateManager.GamesState.MENU);
-		if(inGame){
+		if(!inGame){
 			gameStateManager.leaveGame();
 		}
 	}
@@ -61,7 +61,7 @@ public class BikeHotkeyController : MonoBehaviour {
 				killAllBots();
 			}
 		}
-		if(Input.GetKey(KeyCode.Escape)){
+		if(Input.GetKey(KeyCode.Escape) || Input.GetKey(KeyCode.Q)){
 			leaveGame();
 		}
 	}

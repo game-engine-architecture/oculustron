@@ -30,6 +30,7 @@ public class bikelogic : MonoBehaviour {
 		wallcontainer = new GameObject();
 		wallcontainer.transform.position = Vector3.zero;
 		wallcontainer.name = "bike_wall_container";
+		wallcontainer.tag = "LevelWallContainer";
 		lastDirectionIndex = inputController.getDirectionIndex();
 		gameState = GameObject.Find("GameState").GetComponent<GameStateManager>();
 	}
@@ -43,17 +44,19 @@ public class bikelogic : MonoBehaviour {
 	void Update () {
 		if(gameState.isState(GameStateManager.GamesState.GAME_RUNNING) || gameState.isState(GameStateManager.GamesState.GAME_ENDED)){
 			if(this._hideWalls){
-				//player is dead, hide walls
-				float wallHidePerc = (Time.time - _hideWallsTimeSince) / _hideWallsDuration;
-				if(wallHidePerc < 1.0f && !gameState.isState(GameStateManager.GamesState.GAME_ENDED)){
-					float MAGIC_CLIPPING_VAL = 1.2f;
-					this.wallcontainer.transform.position = - Vector3.up * wallHidePerc * wallHeight * MAGIC_CLIPPING_VAL;
-				} else {
+				if(gameState.isState(GameStateManager.GamesState.GAME_ENDED)){
+					GameObject.Destroy(this.wallcontainer);
 					if(networkView.isMine){
 						Debug.Log("Removing GameObject: "+gameObject.name);
 						Network.Destroy(gameObject);
 					}
-					GameObject.Destroy(this.wallcontainer);
+				} else {
+					//player is dead, hide walls
+					float wallHidePerc = (Time.time - _hideWallsTimeSince) / _hideWallsDuration;
+					if(wallHidePerc < 1.0f){
+						float MAGIC_CLIPPING_VAL = 1.2f;
+						this.wallcontainer.transform.position = - Vector3.up * wallHidePerc * wallHeight * MAGIC_CLIPPING_VAL;
+					}
 				}
 			} else {
 				//player is alive, update walls

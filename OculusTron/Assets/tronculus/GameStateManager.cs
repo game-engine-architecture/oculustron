@@ -90,8 +90,10 @@ public class GameStateManager : MonoBehaviour {
 	}
 	
 	public void leaveGame(){
+		Debug.Log("Leaving Game!");
 		networkManagement.leaveGame();
 		setState(GamesState.MENU);
+		cleanUpArena();
 	}
 	
 	[RPC]
@@ -114,10 +116,16 @@ public class GameStateManager : MonoBehaviour {
 			menuRenderer.enabled = showMenu;
 		}
 		
+		if(isState (GamesState.MENU)){
+			GameObject cam = GameObject.Find("Main Camera");
+			if(cam != null){
+				cam.GetComponent<CameraInstructor>().cameraFollow(GameObject.Find("MenuCamPos"));
+			}	
+		}
 		
 		if(isState (GamesState.GAME_ENDED)){
 			deadPlayers.Clear();
-			//cleanUpArena();
+			cleanUpArena();
 		} else if(isState (GamesState.GAME_STARTING)){
 			AudioSource startSound = this.gameObject.GetComponent<AudioSource>();
 			startSound.Play();
@@ -129,20 +137,13 @@ public class GameStateManager : MonoBehaviour {
 	
 	public void cleanUpArena(){
 		//this is quite a hack, but should work out in the end
-		GameObject gowallcontainer = GameObject.Find("bike_wall_container");
-		while(gowallcontainer != null){
-			GameObject.Destroy(gowallcontainer);
-			gowallcontainer = GameObject.Find("bike_wall_container");
+		GameObject[] bikes = GameObject.FindGameObjectsWithTag("PlayerBike");
+		foreach(GameObject bike in bikes){
+			GameObject.Destroy(bike);
 		}
-		GameObject gobike = GameObject.Find("bike(Clone)");
-		while(gobike != null){
-			GameObject.Destroy(gobike);
-			gobike = GameObject.Find("bike(Clone)");
-		}
-		GameObject gowalls = GameObject.Find("wall(Clone)");
-		while(gowalls != null){
-			GameObject.Destroy(gowalls);
-			gowalls = GameObject.Find("wall(Clone)");
+		GameObject[] bikewalls = GameObject.FindGameObjectsWithTag("LevelWallContainer");
+		foreach(GameObject wall in bikewalls){
+			GameObject.Destroy(wall);
 		}
 	}
 	

@@ -4,6 +4,7 @@ using System.Collections;
 public class BikeInputController : MonoBehaviour {
 	
 	public CharacterController characterController;
+	private ParticleSystem particles;
 	Transform modelTransform;
 	public float movementSpeed = 1f;
 	public float rotationSpeed = 9.4f;
@@ -36,6 +37,7 @@ public class BikeInputController : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		particles = this.GetComponent<ParticleSystem>();
 		wallLogic = this.GetComponent<bikelogic>();
 		directionIndex = (int)(Mathf.Round(this.gameObject.transform.rotation.eulerAngles.y/90f))+3 % 4;
 		rotation = Quaternion.AngleAxis(90 * (directionIndex), Vector3.up) * rotation;
@@ -49,6 +51,11 @@ public class BikeInputController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(gameState.isState(GameStateManager.GamesState.GAME_RUNNING)) {
+			particles.enableEmission = true;
+		} else {
+			particles.enableEmission = false;
+		}
 		if (networkView.isMine){
 			if(gameState.isState(GameStateManager.GamesState.GAME_RUNNING)) {
 				if(!this.motorSound.isPlaying){

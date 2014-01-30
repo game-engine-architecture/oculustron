@@ -22,7 +22,7 @@ public class CameraInstructor : MonoBehaviour {
 		GameObject.Find ("ScoreBoardContainer").GetComponent<ScoreBoardUpater>().renderScoreBoard();
 	}
 	
-	void cameraFollow(GameObject go){
+	public void cameraFollow(GameObject go){
 		GameObject maincam = GameObject.Find("Main Camera");
 		SmoothFollow follower = maincam.GetComponent<SmoothFollow>();
 		follower.target = go.transform;
