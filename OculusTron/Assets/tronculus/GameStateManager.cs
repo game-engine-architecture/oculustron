@@ -23,15 +23,20 @@ public class GameStateManager : MonoBehaviour {
 	public int gameStartsInSeconds = 5;
 	public int gameEndedWait = 5;
 	public bool debugMode;
+	private int gameRound = 0;
 	
 	Dictionary<string, int> score = new Dictionary<string, int>();
 	List<string> deadPlayers = new List<string>();
+	
+	public int getGameRound(){
+		return gameRound;
+	}
 	
 	private int _botsCount = 3;
 	public int botsCount
 	{
     	get { return this._botsCount; }
-    	set { if ((value>=0)&&(value<9)) this._botsCount = value; }
+    	set { if ((value>=0)&&(value<8)) this._botsCount = value; }
 	}
 
 	private int _playersNeededForGame = 1;
@@ -136,6 +141,7 @@ public class GameStateManager : MonoBehaviour {
 		if(isState (GamesState.GAME_ENDED)){
 			deadPlayers.Clear();
 			cleanUpArena();
+			gameRound++;
 		} else if(isState (GamesState.GAME_STARTING)){
 			AudioSource startSound = this.gameObject.GetComponent<AudioSource>();
 			startSound.Play();
