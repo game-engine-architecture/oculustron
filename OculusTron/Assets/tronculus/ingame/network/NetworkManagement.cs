@@ -39,9 +39,9 @@ public class NetworkManagement : MonoBehaviour {
 	{
     	get { return this._useCustomMasterServer; }
     	set { this._useCustomMasterServer = value; 
-			  MasterServer.ipAddress = (value) ? customMasterServerIp: "72.52.207.14";
+			 /* MasterServer.ipAddress = (value) ? customMasterServerIp: "72.52.207.14";
 			  Network.natFacilitatorIP = MasterServer.ipAddress;
-			  Network.natFacilitatorPort = MasterServer.port;
+			  Network.natFacilitatorPort = MasterServer.port;*/
 		}
 	}
 	
@@ -66,7 +66,7 @@ public class NetworkManagement : MonoBehaviour {
 	
 	//Server
 	public void StartServer() {
-	    Network.InitializeServer(4, 25000, !Network.HavePublicAddress());
+	    Network.InitializeServer(8, 25000, !Network.HavePublicAddress());
 		MasterServer.RegisterHost(typeName, "  DeathMatch - "+gameState.playersNeededForGame+" Player - Arena "+gameState.arenaSizeMultiplicator);
 		gameState.setArenaSizeForClients(gameState.arenaSizeMultiplicator);
 	}
@@ -173,6 +173,10 @@ public class NetworkManagement : MonoBehaviour {
 	}
 	
 	public void JoinServer(HostData hostData) {
-	    Network.Connect(hostData);
+		Debug.Log(String.Join(".", hostData.ip)+":"+hostData.port);
+		Network.Connect(String.Join(".", hostData.ip), hostData.port);
+		
+		//Network.Connect("127.0.0.1", 25000);
+		//Network.Connect(hostData);
 	}
 }

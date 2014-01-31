@@ -21,6 +21,7 @@ public class MenuActionBehaviour : MonoBehaviour {
 	private TextMesh playercountText;
 	private TextMesh botscountText;
 	private TextMesh arenasizeText;
+	private TextMesh ipText;
 	private WiiController wiiController;
 	
 	
@@ -34,7 +35,8 @@ public class MenuActionBehaviour : MonoBehaviour {
 		arenasizeText = GameObject.Find("arenasize_Text").GetComponent<TextMesh>();	
 		GameList = GameObject.Find("AvailableGamesList");
 		games = new ArrayList();	
-		wiiController = GameObject.Find("WIImote").GetComponent<WiiController>();	
+		wiiController = GameObject.Find("WIImote").GetComponent<WiiController>();
+		ipText = GameObject.Find("customserverip_Edit").GetComponent<TextMesh>();	
 	}
 	
 	void Update () {}
@@ -50,15 +52,34 @@ public class MenuActionBehaviour : MonoBehaviour {
 				foreach (GameObject go in games){
 					DestroyImmediate(go);
 				}
-				for (int i=0;i<hostList.Length;i++){
-					GameObject obj = GameObject.Instantiate(hostPrefab, new Vector3(0,0,0), Quaternion.identity) as GameObject;
-					obj.transform.parent = GameList.transform;
-					obj.transform.localPosition = new Vector3(0.0f,i*(-0.2f),0.0f);
+				
+				if (!networkManagement.useCustomMasterServer){
+					for (int i=0;i<hostList.Length;i++){
+						GameObject obj = GameObject.Instantiate(hostPrefab, new Vector3(0,0,0), Quaternion.identity) as GameObject;
+						obj.transform.parent = GameList.transform;
+						obj.transform.localPosition = new Vector3(0.0f,i*(-0.2f),0.0f);
+						
+						GameListElement gle = obj.GetComponent<GameListElement>();
+						gle.hostData = hostList[i];
+						//gle.contentString = hostList[i].gameName;	
+						games.Add(obj);
+					}
+				}else{
+						GameObject obj = GameObject.Instantiate(hostPrefab, new Vector3(0,0,0), Quaternion.identity) as GameObject;
+						obj.transform.parent = GameList.transform;
+						obj.transform.localPosition = new Vector3(0.0f,(0),0.0f);
+						
+						GameListElement gle = obj.GetComponent<GameListElement>();
+						HostData hostData = new HostData();		
+						
+						String ip = ipText.text; //"192.186.0.1";
+						hostData.ip = ip.Split('.');
+						hostData.port = 25000;
+						hostData.gameName = "Custom Server game on "+ip;
 					
-					GameListElement gle = obj.GetComponent<GameListElement>();
-					gle.hostData = hostList[i];
-					//gle.contentString = hostList[i].gameName;	
-					games.Add(obj);
+						gle.hostData = hostData;
+						//gle.contentString = hostList[i].gameName;	
+						games.Add(obj);
 				}
 				
 			break;
