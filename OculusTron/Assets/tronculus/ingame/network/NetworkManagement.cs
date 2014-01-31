@@ -40,6 +40,8 @@ public class NetworkManagement : MonoBehaviour {
     	get { return this._useCustomMasterServer; }
     	set { this._useCustomMasterServer = value; 
 			  MasterServer.ipAddress = (value) ? customMasterServerIp: "72.52.207.14";
+			  Network.natFacilitatorIP = MasterServer.ipAddress;
+			  Network.natFacilitatorPort = MasterServer.port;
 		}
 	}
 	
