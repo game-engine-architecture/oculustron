@@ -17,9 +17,7 @@ public class WiiController : MonoBehaviour {
 	private static extern int wiimote_count();
 	
 	[DllImport ("UniWii")]
-	private static extern float wiimote_getPitch(int which);
-	
-	
+	private static extern float wiimote_getPitch(int which);	
 	
 	public bool wiimoteIsEnabled;
 	private String display;
@@ -56,12 +54,6 @@ public class WiiController : MonoBehaviour {
 	}
 	
 	private NavDirection getDirection(float p){
-		/*rechts -110 (<-90)
-		53
-		mitte  -57 (<-30-&&>-75)
-		94
-		links 37 (>0)
-		*/
 		if (p>0){
 			return NavDirection.LEFT;
 		}else if((p<-30)&&(p>-75)){
@@ -80,7 +72,7 @@ public class WiiController : MonoBehaviour {
 	void Start ()
 	{
 		localNavDirection = NavDirection.MIDDLE;
-		wiimoteIsEnabled = true;
+		//wiimoteIsEnabled = true;
 		wiimote_start();
 	}
  

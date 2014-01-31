@@ -292,6 +292,118 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 72812128}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &88804585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100030, guid: 9353a73b6095040118b448264e853149, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 88804586}
+  - 23: {fileID: 88804591}
+  - 102: {fileID: 88804590}
+  - 114: {fileID: 88804589}
+  - 65: {fileID: 88804588}
+  - 114: {fileID: 88804587}
+  m_Layer: 0
+  m_Name: wiimote_Check
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &88804586
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400030, guid: 9353a73b6095040118b448264e853149, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 88804585}
+  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
+  m_LocalPosition: {x: -.587072372, y: -.451141357, z: -.24861753}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1793584852}
+--- !u!114 &88804587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400042, guid: 9353a73b6095040118b448264e853149,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 88804585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 055a2d7f9d74a41a5af3a56df51e52c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuActionType: 11
+  hostPrefab: {fileID: 0}
+--- !u!65 &88804588
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500024, guid: 9353a73b6095040118b448264e853149,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 88804585}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .300000012, y: .511680007, z: 0}
+  m_Center: {x: .140000001, y: -.255840003, z: 0}
+--- !u!114 &88804589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400048, guid: 9353a73b6095040118b448264e853149,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 88804585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7a75cd3d3b9340cb856aedcbccf1879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  justGrey: 0
+--- !u!102 &88804590
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 10200022, guid: 9353a73b6095040118b448264e853149,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 88804585}
+  m_Text: "\u0394"
+  m_OffsetZ: 0
+  m_CharacterSize: .0799999982
+  m_LineSpacing: 1
+  m_Anchor: 0
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 0
+  m_FontStyle: 1
+  m_RichText: 1
+  m_Font: {fileID: 12800000, guid: 4f68f3c9e1c6d4693be525e3c9ab4437, type: 3}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294947999
+--- !u!23 &88804591
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2300024, guid: 9353a73b6095040118b448264e853149,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 88804585}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: ccf783f40e00b4a24b6a448e6f1df836, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
 --- !u!1 &99079370
 GameObject:
   m_ObjectHideFlags: 0
@@ -1342,7 +1454,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 305868599}
   m_LocalRotation: {x: -.012341002, y: .706999063, z: .012341002, w: .706999063}
-  m_LocalPosition: {x: -.597265959, y: .163803101, z: 2.93155146}
+  m_LocalPosition: {x: -.603318453, y: .337120056, z: 2.93155146}
   m_LocalScale: {x: .800000072, y: .800000072, z: .800000012}
   m_Children: []
   m_Father: {fileID: 1793584852}
@@ -2193,7 +2305,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 382634971}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106709}
-  m_LocalPosition: {x: -.587072849, y: -.347396851, z: -.248617291}
+  m_LocalPosition: {x: -.587072849, y: -.0107345581, z: -.248617291}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1793584852}
@@ -2481,7 +2593,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 435007378}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106709}
-  m_LocalPosition: {x: -.58769083, y: -.428886414, z: 2.91560769}
+  m_LocalPosition: {x: -.58769083, y: -.0922241211, z: 2.91560769}
   m_LocalScale: {x: .800000072, y: .800000072, z: .800000012}
   m_Children: []
   m_Father: {fileID: 1793584852}
@@ -4307,6 +4419,7 @@ GameObject:
   - 114: {fileID: 863864802}
   - 82: {fileID: 863864803}
   - 114: {fileID: 863864804}
+  - 114: {fileID: 863864805}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4584,6 +4697,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15678d9ad5bd04d9894d261392ab3c8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &863864805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 863864790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f24eaeea04424729a2531850d6bbd7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &866145620
@@ -4913,7 +5037,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1072682176}
   m_LocalRotation: {x: -.012341002, y: .706999063, z: .012341002, w: .706999063}
-  m_LocalPosition: {x: -.597123623, y: .16381073, z: 2.37574244}
+  m_LocalPosition: {x: -.603176117, y: .337127686, z: 2.37574244}
   m_LocalScale: {x: .800000072, y: .800000072, z: .800000012}
   m_Children: []
   m_Father: {fileID: 1793584852}
@@ -6538,6 +6662,103 @@ Transform:
   - {fileID: 1990042969}
   - {fileID: 1797077174}
   m_Father: {fileID: 382732557}
+--- !u!1 &1483102583
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100026, guid: 9353a73b6095040118b448264e853149, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1483102584}
+  - 23: {fileID: 1483102588}
+  - 102: {fileID: 1483102587}
+  - 114: {fileID: 1483102586}
+  - 65: {fileID: 1483102585}
+  m_Layer: 0
+  m_Name: wiimote_Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1483102584
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400026, guid: 9353a73b6095040118b448264e853149, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1483102583}
+  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
+  m_LocalPosition: {x: -.587690353, y: -.53263092, z: 2.91560745}
+  m_LocalScale: {x: .800000012, y: .800000012, z: .800000012}
+  m_Children: []
+  m_Father: {fileID: 1793584852}
+--- !u!65 &1483102585
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500020, guid: 9353a73b6095040118b448264e853149,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1483102583}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1.64999998, y: .511680007, z: 0}
+  m_Center: {x: .800000012, y: -.255840003, z: 0}
+--- !u!114 &1483102586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400044, guid: 9353a73b6095040118b448264e853149,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1483102583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7a75cd3d3b9340cb856aedcbccf1879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  justGrey: 0
+--- !u!102 &1483102587
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 10200018, guid: 9353a73b6095040118b448264e853149,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1483102583}
+  m_Text: wiimote support
+  m_OffsetZ: 0
+  m_CharacterSize: .0799999982
+  m_LineSpacing: 1
+  m_Anchor: 0
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 0
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 12800000, guid: 4f68f3c9e1c6d4693be525e3c9ab4437, type: 3}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294947999
+--- !u!23 &1483102588
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2300020, guid: 9353a73b6095040118b448264e853149,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1483102583}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: ccf783f40e00b4a24b6a448e6f1df836, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
 --- !u!1001 &1495717513
 Prefab:
   m_ObjectHideFlags: 0
@@ -6702,6 +6923,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
   m_Name: 
+  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: 
   m_EditorClassIdentifier: 
   m_EditorClassIdentifier: 
   m_EditorClassIdentifier: 
@@ -8487,11 +8712,13 @@ Transform:
   - {fileID: 208253655}
   - {fileID: 305868600}
   - {fileID: 1072682177}
+  - {fileID: 88804586}
   - {fileID: 435007379}
   - {fileID: 1299729035}
   - {fileID: 382634972}
   - {fileID: 1710869479}
   - {fileID: 2138215783}
+  - {fileID: 1483102584}
   - {fileID: 650650208}
   - {fileID: 1838299500}
   - {fileID: 219612702}
