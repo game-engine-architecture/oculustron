@@ -6,7 +6,7 @@ public class MenuActionBehaviour : MonoBehaviour {
 
 	public enum MenuActionType {STARTGAME, REFRESHHOSTS, INCPLAYER, DECPLAYER, INCBOTS, 
 								DECBOTS, INCMAPSIZE, DECMAPSIZE, CONNECTHOST, 
-		                        CUSTOMSERVERCHECK, OCULUSVIEWCHECK};
+		                        CUSTOMSERVERCHECK, OCULUSVIEWCHECK, WIIMOTECHECK};
 	
 	
 	public MenuActionType menuActionType;
@@ -21,7 +21,7 @@ public class MenuActionBehaviour : MonoBehaviour {
 	private TextMesh playercountText;
 	private TextMesh botscountText;
 	private TextMesh arenasizeText;
-	
+	private WiiController wiiController;
 	
 	
 	void Start () {
@@ -34,6 +34,7 @@ public class MenuActionBehaviour : MonoBehaviour {
 		arenasizeText = GameObject.Find("arenasize_Text").GetComponent<TextMesh>();	
 		GameList = GameObject.Find("AvailableGamesList");
 		games = new ArrayList();	
+		wiiController = GameObject.Find("WIImote").GetComponent<WiiController>();	
 	}
 	
 	void Update () {}
@@ -97,6 +98,11 @@ public class MenuActionBehaviour : MonoBehaviour {
 				bool newOculusVal = !oculusEnabler.ovr;
 				oculusEnabler.ovr = newOculusVal;
 				gameObject.GetComponent<TextMesh>().text = (newOculusVal)?"√":"Δ";
+			break;
+			case MenuActionType.WIIMOTECHECK:
+				bool newWIIMoteVal = !wiiController.wiimoteIsEnabled;
+				wiiController.wiimoteIsEnabled= newWIIMoteVal;
+				gameObject.GetComponent<TextMesh>().text = (newWIIMoteVal)?"√":"Δ";
 			break;
 		}
 		

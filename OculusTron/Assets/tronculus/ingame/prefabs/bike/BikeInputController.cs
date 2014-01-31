@@ -35,6 +35,7 @@ public class BikeInputController : MonoBehaviour {
 	public bool aiObjectInFront = false;
 	
 	enum Direction {FORWARD, LEFT, RIGHT};
+	private WiiController wiiController;
 	
 	// Use this for initialization
 	void Start () {
@@ -48,6 +49,7 @@ public class BikeInputController : MonoBehaviour {
 		gameState = GameObject.Find("GameState").GetComponent<GameStateManager>();
 		this.motorSound = this.gameObject.GetComponent<AudioSource>();
 		this.turnSoundPlayer = this.gameObject.GetComponentInChildren<TurnSoundPlayer>();
+		wiiController = GameObject.Find("WIImote").GetComponent<WiiController>();
 	}
 	
 	// Update is called once per frame
@@ -71,10 +73,12 @@ public class BikeInputController : MonoBehaviour {
 				if(isAIControlled){
 					bikeDirection = calculateAIMovement();
 				} else {
-					if(Input.GetKeyDown ("left")){
+					if(Input.GetKeyDown ("left")||wiiController.navDirection==WiiController.NavDirection.LEFT){
 						bikeDirection = Direction.LEFT;
-					} else if(Input.GetKeyDown ("right")){
+						wiiController.navDirection = WiiController.NavDirection.NOTHING;
+					} else if(Input.GetKeyDown ("right")||wiiController.navDirection==WiiController.NavDirection.RIGHT){
 						bikeDirection = Direction.RIGHT;
+						wiiController.navDirection = WiiController.NavDirection.NOTHING;
 					}
 				}
 				if (bikeDirection.Equals(Direction.LEFT)){
