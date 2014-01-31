@@ -173,13 +173,13 @@ public class BikeInputController : MonoBehaviour {
 		GameEvent currEvent = (GameEvent) instrution;
 		GameObject bike = NetworkView.Find(playerid).gameObject;
 		BikeInputController controller = bike.GetComponent<BikeInputController>();
-		if(this.belongsToPlayer.Equals(playerid)){
-			if(currEvent.Equals(GameEvent.POWERUP_WALL)){
-				controller.lastSpeedPowerUp = Time.time;
-			} else if(currEvent.Equals(GameEvent.POWERUP_WALL)){
-				controller.lastThroughWallPowerUp = Time.time;
-			}
+		
+		if(currEvent.Equals(GameEvent.POWERUP_WALL)){
+			controller.lastSpeedPowerUp = Time.time;
+		} else if(currEvent.Equals(GameEvent.POWERUP_WALL)){
+			controller.lastThroughWallPowerUp = Time.time;
 		}
+	
 	}
 	
 	void OnControllerColliderHit(ControllerColliderHit hit) {
