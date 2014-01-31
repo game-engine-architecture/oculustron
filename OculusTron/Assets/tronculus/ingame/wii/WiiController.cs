@@ -24,14 +24,8 @@ public class WiiController : MonoBehaviour {
 	public bool wiimoteIsEnabled;
 	private String display;
 	private NavDirection localNavDirection;
-	private NavDirection _navDirection; 
-	public NavDirection navDirection
-	{
-    	get { NavDirection tempDirection = this._navDirection;
-			  this._navDirection = NavDirection.NOTHING;
-			  return tempDirection; 
-		}
-	}
+	public NavDirection navDirection; 
+	
 	void Update () {	
 		int c = wiimote_count();
 	
@@ -46,10 +40,11 @@ public class WiiController : MonoBehaviour {
 						NavDirection tempDirection = getDirection(p);
 						if (tempDirection!=NavDirection.NOTHING){
 							if ((localNavDirection==NavDirection.MIDDLE)&&(tempDirection!=NavDirection.MIDDLE)){
-								_navDirection = tempDirection;
+								navDirection = tempDirection;
 								localNavDirection = tempDirection;
 							}else if (tempDirection==NavDirection.MIDDLE){
-								localNavDirection = NavDirection.MIDDLE;
+								navDirection = tempDirection;
+								localNavDirection = tempDirection;
 							}
 						}
 						
