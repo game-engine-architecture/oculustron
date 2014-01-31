@@ -138,8 +138,19 @@ public class GameStateManager : MonoBehaviour {
 			}	
 		}
 		
-		if(isState (GamesState.GAME_ENDED)){
-			deadPlayers.Clear();
+		if(isState (GamesState.GAME_ENDED)){		
+			//find out who is still alive
+			string localPlayerName = networkManagement.getLocalPlayer().name;
+			foreach(string playername in score.Keys){
+				//show message for alive local player that is not dead
+				if(playername.Equals(localPlayerName) && !deadPlayers.Contains(playername)){
+					TextMesh testMesh = GameObject.Find ("Main Camera/CountDown/CountDownText").GetComponent<TextMesh>();
+					testMesh.text = "You won!";
+				}
+			}
+			
+			//clean up.
+			deadPlayers.Clear();	
 			cleanUpArena();
 			gameRound++;
 		} else if(isState (GamesState.GAME_STARTING)){

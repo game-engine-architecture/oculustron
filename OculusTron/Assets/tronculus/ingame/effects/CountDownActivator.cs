@@ -32,7 +32,7 @@ public class CountDownActivator : MonoBehaviour {
 				//countDownTextAni.Play("CountDownAnimation");
 			}
 			countDownText.text = ""+currsec;
-		} else {
+		} else if(gameState.isState(GameStateManager.GamesState.GAME_RUNNING)){
 			if(countDownText.text.Length > 0){
 				countDownText.text = "";
 			}

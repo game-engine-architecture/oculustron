@@ -49,6 +49,10 @@ public class NetworkManagement : MonoBehaviour {
 		return players.Count;
 	}
 	
+	public Player getLocalPlayer(){
+		return thisPlayer;
+	}
+	
 	// Use this for initialization
 	void Start () {
 		this.gameState = GameObject.Find("GameState").GetComponent<GameStateManager>();
