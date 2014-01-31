@@ -478,8 +478,10 @@ MonoBehaviour:
   isAIControlled: 0
   belongsToPlayer: 
   explosionPrefab: {fileID: 100000, guid: 57fe74e5fbe3945ee9ec91a1bee6b15b, type: 2}
-  powerUpSpeedMultiplicator: 1.97000003
+  lastSpeedPowerUp: -100000
+  powerUpSpeedMultiplicator: 2.6400001
   powerUpSpeedDuration: 9.51000023
+  lastThroughWallPowerUp: -100000
   powerUpThroughWallDuration: 9.51000023
   aiObjectInFront: 0
 --- !u!114 &11400008
