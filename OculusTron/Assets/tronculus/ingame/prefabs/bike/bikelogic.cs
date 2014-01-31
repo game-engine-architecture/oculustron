@@ -60,6 +60,12 @@ public class bikelogic : MonoBehaviour {
 						foreach(Transform childwall in this.wallcontainer.GetComponentsInChildren<Transform>()){
 							childwall.position = childwall.position - Vector3.up * wallHeight * (Time.deltaTime/_hideWallsDuration) * MAGIC_CLIPPING_VAL;
 						}
+					} else {
+						GameObject.Destroy(this.wallcontainer);
+						if(networkView.isMine){
+							Debug.Log("Removing GameObject: "+gameObject.name);
+							Network.Destroy(gameObject);
+						}	
 					}
 				}
 			} else {
