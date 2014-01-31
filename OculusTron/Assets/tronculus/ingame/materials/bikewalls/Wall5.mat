@@ -61,7 +61,7 @@ Material:
       data:
         first:
           name: _Emission
-        second: {r: .95588237, g: .196799323, b: .934942305, a: 1}
+        second: {r: .635090888, g: 0, b: .911764681, a: 1}
       data:
         first:
           name: _ReflectColor

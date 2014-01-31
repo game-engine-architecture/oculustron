@@ -99,7 +99,7 @@ public class bikelogic : MonoBehaviour {
 	GameObject createWall(Vector3 start, int direction, int material, string playerid){
 		GameObject wall = Network.Instantiate(wallPrefab, start, Quaternion.Euler(new Vector3(0, direction*90, 0)), 0) as GameObject;
 		NetworkViewID viewId = wall.GetComponent<NetworkView>().networkView.viewID;
-		networkView.RPC("setWallProperties", RPCMode.AllBuffered, viewId, int.Parse(Network.player.ToString()), playerid);
+		networkView.RPC("setWallProperties", RPCMode.AllBuffered, viewId, material, playerid);
 		return wall;
 	}
 	
@@ -107,8 +107,8 @@ public class bikelogic : MonoBehaviour {
 	void setWallProperties(NetworkViewID networkViewId, int material, string belongsToPlayer){
 		GameObject wall = NetworkView.Find(networkViewId).gameObject;
 		MeshRenderer renderer = wall.GetComponent<MeshRenderer>();
-		Material wallmaterial = wall.GetComponent<WallMaterials>().wallMaterials[material];
-		renderer.material = wallmaterial;
+		Material[] wallmats = wall.GetComponent<WallMaterials>().wallMaterials;
+		renderer.material =  wallmats[material % wallmats.Length];
 		wall.GetComponent<WallOwner>().setOwner(belongsToPlayer, material);
 		
 		//add wall to bike wall container

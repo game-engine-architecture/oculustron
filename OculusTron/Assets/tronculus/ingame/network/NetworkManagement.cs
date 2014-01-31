@@ -62,6 +62,7 @@ public class NetworkManagement : MonoBehaviour {
 	public void StartServer() {
 	    Network.InitializeServer(4, 25000, !Network.HavePublicAddress());
 		MasterServer.RegisterHost(typeName, "  DeathMatch - "+gameState.playersNeededForGame+" Player - Arena "+gameState.arenaSizeMultiplicator);
+		gameState.setArenaSizeForClients(gameState.arenaSizeMultiplicator);
 	}
 	
 	void OnServerInitialized() {
@@ -125,7 +126,6 @@ public class NetworkManagement : MonoBehaviour {
 	public void leaveGame(){
 		Network.Disconnect();
 		players.Clear();
-		Player.reset();
 	}
 	
 	private GameObject SpawnPlayer(Player player){
@@ -136,9 +136,9 @@ public class NetworkManagement : MonoBehaviour {
 		Transform spawnpoint;
 		if(isAIControlled){
 			//bots are continously numbered
-			spawnpoint = spawnpoints.transform.GetChild(player.id);
+			spawnpoint = spawnpoints.transform.GetChild(player.id%8);
 		} else {
-			spawnpoint = spawnpoints.transform.GetChild(int.Parse(Network.player.ToString())+gameState.botsCount);
+			spawnpoint = spawnpoints.transform.GetChild((int.Parse(Network.player.ToString())+gameState.botsCount+gameState.getGameRound())%8);
 		}
 	    GameObject bike = Network.Instantiate(playerPrefab, spawnpoint.position, spawnpoint.rotation, 0) as GameObject;
 		BikeInputController bikeCtrl = bike.GetComponent<BikeInputController>();

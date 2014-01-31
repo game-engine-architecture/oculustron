@@ -23,15 +23,20 @@ public class GameStateManager : MonoBehaviour {
 	public int gameStartsInSeconds = 5;
 	public int gameEndedWait = 5;
 	public bool debugMode;
+	private int gameRound = 0;
 	
 	Dictionary<string, int> score = new Dictionary<string, int>();
 	List<string> deadPlayers = new List<string>();
+	
+	public int getGameRound(){
+		return gameRound;
+	}
 	
 	private int _botsCount = 3;
 	public int botsCount
 	{
     	get { return this._botsCount; }
-    	set { if ((value>=0)&&(value<9)) this._botsCount = value; }
+    	set { if ((value>=0)&&(value<8)) this._botsCount = value; }
 	}
 
 	private int _playersNeededForGame = 1;
@@ -45,13 +50,22 @@ public class GameStateManager : MonoBehaviour {
 	public int arenaSizeMultiplicator
 	{
     	get { return this._arenaSizeMultiplicator; }
-    	set { if ((value>0)&&(value<33)) {
+    	set { if ((value>1)&&(value<33)) {
 				this._arenaSizeMultiplicator = value; 
 				level.transform.localScale = new Vector3(value,value/2,value);
 				floorMaterial.SetTextureScale("_MainTex", new Vector2 (value*30, value*30));
 				floorMaterial.SetTextureScale("_BumpMap", new Vector2 (value*30, value*30));
 			}
 		}
+	}
+	
+	public void setArenaSizeForClients(int arenaSizeMultiplicator){
+		networkView.RPC("setArenaSize", RPCMode.AllBuffered, arenaSizeMultiplicator);
+	}
+	
+	[RPC]
+	public void setArenaSize(int multiplicator){
+		this.arenaSizeMultiplicator = multiplicator;
 	}
 	
 	// Use this for initialization
@@ -62,7 +76,7 @@ public class GameStateManager : MonoBehaviour {
 		this.menuState = GameObject.Find("MenuState").GetComponent<MenuState>();
 		networkManagement = GameObject.Find("NetworkManager").GetComponent<NetworkManagement>();
 		floorMaterial = GameObject.Find("Floor").GetComponent<MeshRenderer>().material;
-		this.arenaSizeMultiplicator = 16;
+		this.arenaSizeMultiplicator = 8;
 	}
 	
 	// Update is called once per frame
@@ -94,6 +108,7 @@ public class GameStateManager : MonoBehaviour {
 		networkManagement.leaveGame();
 		setState(GamesState.MENU);
 		cleanUpArena();
+		score.Clear();
 	}
 	
 	[RPC]
@@ -126,6 +141,7 @@ public class GameStateManager : MonoBehaviour {
 		if(isState (GamesState.GAME_ENDED)){
 			deadPlayers.Clear();
 			cleanUpArena();
+			gameRound++;
 		} else if(isState (GamesState.GAME_STARTING)){
 			AudioSource startSound = this.gameObject.GetComponent<AudioSource>();
 			startSound.Play();
