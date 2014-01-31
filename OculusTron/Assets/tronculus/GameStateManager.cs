@@ -76,7 +76,7 @@ public class GameStateManager : MonoBehaviour {
 		this.menuState = GameObject.Find("MenuState").GetComponent<MenuState>();
 		networkManagement = GameObject.Find("NetworkManager").GetComponent<NetworkManagement>();
 		floorMaterial = GameObject.Find("Floor").GetComponent<MeshRenderer>().material;
-		this.arenaSizeMultiplicator = 16;
+		this.arenaSizeMultiplicator = 8;
 	}
 	
 	// Update is called once per frame
